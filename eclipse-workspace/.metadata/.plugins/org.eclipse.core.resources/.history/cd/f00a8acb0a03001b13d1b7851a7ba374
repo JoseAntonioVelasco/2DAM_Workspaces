@@ -1,9 +1,0 @@
-
-public class Hijo1 {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ProcessBuilder h1 = new ProcessBuilder("ls","-l").start();
-	}
-
-}

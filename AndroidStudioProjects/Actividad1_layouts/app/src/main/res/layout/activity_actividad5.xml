@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="left |bottom"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="right |bottom"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="right | center"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="left | center"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="left | top"
+        ></FrameLayout>
+    <FrameLayout
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="#0000ff"
+    android:layout_gravity="right | top"
+    ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="center_horizontal | top"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="center"
+        ></FrameLayout>
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#0000ff"
+        android:layout_gravity="center_horizontal | bottom"
+        ></FrameLayout>
+    ></FrameLayout>

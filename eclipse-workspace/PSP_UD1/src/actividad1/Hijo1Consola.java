@@ -1,0 +1,10 @@
+package actividad1;
+
+public class Hijo1Consola {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,239 @@
+<fp>
+	<ciclos>
+		<ciclo siglas="DAM">
+			<nombre>Desarrollo de Aplicaciones Multiplataforma</nombre>
+			<familia>Informatica y Comunicaciones</familia>
+			<duracion unidad="horas">2000</duracion>
+			<nivel>Grado Superior</nivel>
+		</ciclo>
+		<ciclo siglas="ASIR">
+			<nombre>Administracion de Sistemas Informaticos en Red</nombre>
+			<familia>Informatica y Comunicaciones</familia>
+			<duracion unidad="horas">2000</duracion>
+			<nivel>Grado Superior</nivel>
+		</ciclo>
+		<ciclo siglas="DAW">
+			<nombre>Desarrollo de Aplicaciones Web</nombre>
+			<familia>Informatica y Comunicaciones</familia>
+			<duracion unidad="horas">2000</duracion>
+			<nivel>Grado Superior</nivel>
+		</ciclo>
+	</ciclos>
+	<modulos>
+		<modulo codigo="0483">
+			<nombre>Sistemas Informaticos</nombre>
+			<duracion>100</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0484 0372">
+			<nombre>Bases de Datos</nombre>
+			<duracion>105</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0485">
+			<nombre>Programacion</nombre>
+			<duracion>135</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0373">
+			<nombre>Lenguajes de Marcas y Sistemas de Gestion de Informacion</nombre>
+			<duracion>70</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0487">
+			<nombre>Entornos de Desarrollo</nombre>
+			<duracion>50</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0486">
+			<nombre>Acceso a Datos</nombre>
+			<duracion>80</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0488">
+			<nombre>Desarrollo de Interfaces</nombre>
+			<duracion>80</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0489">
+			<nombre>Programacion Multimedia y Dispositivos Moviles</nombre>
+			<duracion>55</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0490">
+			<nombre>Programacion de Servicios y Procesos</nombre>
+			<duracion>40</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0491">
+			<nombre>Sistemas de Gestión Empresarial</nombre>
+			<duracion>55</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0492 0379 0616">
+			<nombre>Proyecto</nombre>
+			<duracion>25</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0493 0380 0617">
+			<nombre>Formacion y Orientacion Laboral</nombre>
+			<duracion>50</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0494 0381 0618">
+			<nombre>Empresa e Iniciativa Emprendedora</nombre>
+			<duracion>35</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0495 0382 0619">
+			<nombre>Formacion en Centros de Trabajo</nombre>
+			<duracion>220</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAM" />
+				<ciclo siglas="ASIR" />
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0369">
+			<nombre>Implantacion de Sistemas Operativos</nombre>
+			<duracion>140</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0370">
+			<nombre>Planificacion y Administracion de Redes</nombre>
+			<duracion>110</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0371">
+			<nombre>Fundamentos del Hardware</nombre>
+			<duracion>55</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0374">
+			<nombre>Administracion de Sistemas Operativos</nombre>
+			<duracion>75</duracion>
+			<curso>1</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0375">
+			<nombre>Servicios de Red e Internet</nombre>
+			<duracion>75</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0376">
+			<nombre>Implantacion de Aplicaciones Web</nombre>
+			<duracion>55</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0377">
+			<nombre>Administracion de Sistemas Gestores de BBDD</nombre>
+			<duracion>30</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0378">
+			<nombre>Seguridad y Alta disponibilidad</nombre>
+			<duracion>55</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="ASIR" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0612">
+			<nombre>Desarrollo Web en entorno Cliente</nombre>
+			<duracion>80</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0613">
+			<nombre>Desarrollo Web en entorno Servidor</nombre>
+			<duracion>100</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+		<modulo codigo="0614">
+			<nombre>Despliegue de Aplicaciones Web</nombre>
+			<duracion>50</duracion>
+			<curso>2</curso>
+			<ciclos>
+				<ciclo siglas="DAW" />
+			</ciclos>
+		</modulo>
+	</modulos>
+</fp>

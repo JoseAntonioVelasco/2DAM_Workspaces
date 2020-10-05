@@ -1,0 +1,30 @@
+<equipo>
+	<jugador>
+		<nombre>
+			papotemalote
+		</nombre>
+		<estatura>
+			1,00
+		</estatura>
+		<peso>
+			1,00
+		</peso>
+		<edad>
+			2,00
+		</edad>
+	</jugador>
+	<jugador>
+		<nombre>
+			jaja
+		</nombre>
+		<estatura>
+			2,00
+		</estatura>
+		<peso>
+			3,00
+		</peso>
+		<edad>
+			4,00
+		</edad>
+	</jugador>
+</equipo>

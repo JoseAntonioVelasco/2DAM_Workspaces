@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ciclo id="DAM" nombre="Desarrollo de Aplicaciones Multiplataforma">
+  <modulos>
+    <modulo curso="1" id="0373">Lenguaje de Marcas</modulo>
+    <modulo curso="1" id="0483">Sistemas Informaticos</modulo>
+    <modulo curso="1" id="0484">Bases de Datos</modulo>
+    <modulo curso="1" id="0485">Programacion</modulo>
+    <modulo curso="1" id="0486">Acceso a datos</modulo>
+    <modulo curso="1" id="0487">Entornos de Desarrollo</modulo>
+    <modulo curso="2" id="0488">Desarrollo de interfaces</modulo>
+    <modulo curso="2" id="0489">Programacion multimedia</modulo>
+    <modulo curso="2" id="0490">Programacion de Servicios y Procesos</modulo>
+    <modulo curso="2" id="0491">Sistema de Gestión empresarial</modulo>
+    <modulo curso="2" id="0492">Proyecto DAM</modulo>
+    <modulo curso="1" id="0493">Formacion y Orientacion Laboral</modulo>
+    <modulo curso="2" id="0494">Empresa e Iniciativa emprendedora</modulo>
+    <modulo curso="2" id="0495">Formacion en centros de trabajo</modulo>
+  </modulos>
+  
+  <alumnos>
+    <alumno>
+      <nombre>Marcos Romero Garcia</nombre>
+      <calificaciones>
+        <calificacion asignatura="0493">6</calificacion>
+        <calificacion asignatura="0483">6</calificacion>
+        <calificacion asignatura="0485">7</calificacion>
+        <calificacion asignatura="0484">5</calificacion>
+        <calificacion asignatura="0487">8</calificacion>
+        <calificacion asignatura="0373">6</calificacion>
+        <calificacion asignatura="0486">-</calificacion>
+        <calificacion asignatura="0488">-</calificacion>
+        <calificacion asignatura="0489">-</calificacion>
+        <calificacion asignatura="0490">-</calificacion>
+        <calificacion asignatura="0491">-</calificacion>
+        <calificacion asignatura="0494">-</calificacion>
+        <calificacion asignatura="0492">-</calificacion>
+        <calificacion asignatura="0495">-</calificacion>
+      </calificaciones>
+    </alumno>
+    
+    <alumno>
+      <nombre>Ruben Carretero Alvarez</nombre>
+	     <calificaciones>
+        <calificacion asignatura="0373">-</calificacion>
+        <calificacion asignatura="0483">-</calificacion>
+        <calificacion asignatura="0484">-</calificacion>
+        <calificacion asignatura="0485">-</calificacion>
+        <calificacion asignatura="0486">6</calificacion>
+        <calificacion asignatura="0487">-</calificacion>
+	  	  <calificacion asignatura="0488">3</calificacion>
+	  	  <calificacion asignatura="0489">7</calificacion>
+	  	  <calificacion asignatura="0490">8</calificacion>
+	  	  <calificacion asignatura="0491">5</calificacion>
+	  	  <calificacion asignatura="0492">6</calificacion>
+	    	<calificacion asignatura="0493">-</calificacion>
+	    	<calificacion asignatura="0494">5</calificacion>
+	  	  <calificacion asignatura="0495">6</calificacion>
+      </calificaciones>
+    </alumno>
+  </alumnos>
+ 
+</ciclo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libro isbn="9788466794992">
+	<titulo>La isla del tesoro</titulo>
+	<autor>Robert Louis Stevenson</autor>
+	<editorial>ANAYA</editorial>
+	<idioma>Castellano</idioma>
+	<encuadernacion>Tapa Blanda</encuadernacion>
+	<paginas>168</paginas>
+</libro>

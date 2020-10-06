@@ -87,7 +87,7 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void anadirRow(Cliente cli){
-        Object[] columnNames = { "nombre", "apellidos","equipo","fecha alta","pais"};
+        //Object[] columnNames = { "nombre", "apellidos","equipo","fecha alta","pais"};
         Object[][] rowData = {{cli.getNombre(),cli.getApellidos(),
         cli.getEquipo(),cli.getFecha_alta(),cli.getPais()}};
        

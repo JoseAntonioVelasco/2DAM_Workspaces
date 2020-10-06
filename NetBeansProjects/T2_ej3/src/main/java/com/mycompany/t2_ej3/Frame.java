@@ -5,7 +5,11 @@
  */
 package com.mycompany.t2_ej3;
 
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import javax.swing.FocusManager;
 import javax.swing.JInternalFrame;
+import javax.swing.JRootPane;
 import javax.swing.JTextPane;
 
 /**
@@ -19,6 +23,7 @@ public class Frame extends javax.swing.JFrame {
      */
     public Frame() {
         initComponents();
+        this.rootPane.setFocusable(false);
     }
 
     /**
@@ -142,19 +147,20 @@ public class Frame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        JInternalFrame internal = new JInternalFrame("Documento de texto");
-        internal.setIconifiable(true);
-        internal.setResizable(true);
-        internal.add(new JTextPane());
-        
-        //internal.setVisible(true);
+        NewJInternalFrame internal = new NewJInternalFrame();
         jDesktopPane1.add(internal);
         internal.setVisible(true);
-        System.out.println("hue");
+    
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        //JRootPane focused =(JRootPane) this.getFocusOwner();
+        //Component focused = (Component) this.getFocusOwner();
+        Component focused = FocusManager.getCurrentManager().getFocusOwner();
+        JInternalFrame focusedint = (JInternalFrame) focused.getParent().getParent().getParent().getParent().getParent().getParent();
+        focusedint.dispose();
+        //focused.dispatchEvent(evt);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**

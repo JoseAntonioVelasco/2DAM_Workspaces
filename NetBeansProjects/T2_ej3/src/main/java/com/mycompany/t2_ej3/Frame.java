@@ -142,13 +142,13 @@ public class Frame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        JInternalFrame internal = new JInternalFrame();
+        JInternalFrame internal = new JInternalFrame("Documento de texto");
         internal.setIconifiable(true);
         internal.setResizable(true);
         internal.add(new JTextPane());
         
-        
-        jDesktopPane2.add(internal);
+        //internal.setVisible(true);
+        jDesktopPane1.add(internal);
         internal.setVisible(true);
         System.out.println("hue");
     }//GEN-LAST:event_jMenuItem1ActionPerformed

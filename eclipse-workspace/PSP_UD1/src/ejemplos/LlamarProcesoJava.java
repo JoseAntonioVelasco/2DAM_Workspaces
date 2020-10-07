@@ -7,7 +7,7 @@ import java.io.InputStream;
 public class LlamarProcesoJava {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		File directorio = new File("C:\\Users\\USER\\eclipse-workspace\\Comunicacion_entre_procesos\\bin\\comunicacion");
+		File directorio = new File("C:\\Users\\cagan\\Documents\\GitHub\\2DAM_Workspaces\\eclipse-workspace\\PSP_UD1\\bin\\ejemplos");
 		ProcessBuilder pb = new ProcessBuilder("Java","LecturaSalidaProcesos");
 		pb.directory(directorio);
 		

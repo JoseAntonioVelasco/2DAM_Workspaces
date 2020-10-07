@@ -6,7 +6,7 @@ public class Practica_PSP_1_6 {
 
 	public static void main(String[] args) throws IOException,InterruptedException {
 		// TODO Auto-generated method stub
-		File directorio = new File("C:\\Users\\cagan\\eclipse-workspace\\PSP_UD1_Practicas\\bin");
+		File directorio = new File("C:\\Users\\cagan\\Documents\\GitHub\\2DAM_Workspaces\\eclipse-workspace\\PSP_UD1\\bin\\ud1_practicas");
 		ProcessBuilder h1 = new ProcessBuilder("java","GenRandomNum");
 		ProcessBuilder h2 = new ProcessBuilder("java","GenRandomNum");
 		h1.directory(directorio);h2.directory(directorio);

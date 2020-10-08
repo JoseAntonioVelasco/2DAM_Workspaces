@@ -1,4 +1,5 @@
 package ud1_practicas;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,23 +13,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-/**
- * 
- * @author Jose Antonio Velasco
- *
- */
-public class Practica_AD_1_17 {
+
+public class Practica_AD_1_16 {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		// TODO Auto-generated method stub
 		File ficheroXML = new File("C:\\Users\\USER\\Desktop\\Nueva carpeta\\alumnos.xml");
 		//leerXML(ficheroXML);
-		//ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-		/*alumnos = obtenerObjetosAlumno(ficheroXML);
+		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+		alumnos = obtenerObjetosAlumno(ficheroXML);
 		for(int i=0;i<alumnos.size();i++) {
 			System.out.println(alumnos.get(i).getApellidos());
 		}
-		*/
-		leerRecurXML(ficheroXML);
+		
+		//leerRecurXML(ficheroXML);
 	}
 	public static void leerXML(File f) throws ParserConfigurationException, SAXException, IOException {
 		//Creamos DocumentBuilder
@@ -95,7 +92,7 @@ public class Practica_AD_1_17 {
 			if(nodoAlumno.getNodeType() == Node.ELEMENT_NODE) {
 				Element elementoAlumno = (Element) nodoAlumno;
 				//System.out.println("Nombre: "+elementoAlumno.getAttribute("nombre"));
-				
+				//
 				Alumno al = new Alumno(
 				elementoAlumno.getElementsByTagName("nombre").item(0).getTextContent(),
 				elementoAlumno.getElementsByTagName("apellidos").item(0).getTextContent(),
@@ -117,40 +114,7 @@ public class Practica_AD_1_17 {
 		return alumnos;
 		
 	}
-	public static void leerRecurXML(File f) throws ParserConfigurationException, SAXException, IOException {
-		//Creamos DocumentBuilder
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
+
 		
-		Document documento = builder.parse(f);
-		
-		//Paso 1: obtener la raizdel fichero
-		Element raiz = documento.getDocumentElement();
-		System.out.println("El nodo raiz es: "+raiz.getNodeName());
-		
-		//Paso 2: obrengo los nodos de un determinado tipo
-		NodeList listaAlumnos = documento.getElementsByTagName("alumno");
-		
-		compruebaNodo(listaAlumnos,0);
-	}
-	public static void compruebaNodo(NodeList listaAlumnos,int prof) throws ParserConfigurationException, SAXException, IOException {
-		
-		for(int i=0; i<listaAlumnos.getLength();i++) {
-			Node nodoAlumno = listaAlumnos.item(i);
-			if(nodoAlumno.getNodeType() == Node.ELEMENT_NODE) {
-				String tabulaciones="";
-				for(int j=0;j<prof;j++) {
-					tabulaciones=tabulaciones+"\t";
-				}
-				
-				System.out.println(tabulaciones+"nom: "+nodoAlumno.getNodeName()+
-				" val: "+nodoAlumno.getTextContent());
-			}
-			if(nodoAlumno.hasChildNodes()) {
-				compruebaNodo(nodoAlumno.getChildNodes(),prof+1);
-			}
-			
-		}
-				
-	}
+	
 }

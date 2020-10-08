@@ -6,7 +6,7 @@ public class Padre {
 
 	public static void main(String[] args) throws IOException,InterruptedException {
 		// TODO Auto-generated method stub
-		File directorio = new File("C:\\Users\\cagan\\Documents\\GitHub\\2DAM_Workspaces\\eclipse-workspace\\PSP_UD1\\bin\\actividad1");
+		File directorio = new File("C:\\Users\\USER\\Documents\\GitWorkspaces\\2DAM_Workspaces\\eclipse-workspace\\PSP_UD1\\bin\\actividad1");
 		ProcessBuilder pb = new ProcessBuilder("java","Hijos");
 		pb.directory(directorio);
 		

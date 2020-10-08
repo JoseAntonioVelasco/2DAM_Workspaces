@@ -13,7 +13,7 @@ public class Practica_AD_1_15{
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		// TODO Auto-generated method stub
-		File ficheroXML = new File("C:\\Users\\USER\\Desktop\\Nueva carpeta\\alumnos.xml");
+		File ficheroXML = new File("C:\\Users\\USER\\Documents\\GitWorkspaces\\2DAM_Workspaces\\eclipse-workspace\\AD_UD1\\src\\ud1_practicas");
 		leerXML(ficheroXML);
 	}
 	public static void leerXML(File f) throws ParserConfigurationException, SAXException, IOException {

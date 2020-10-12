@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Actividad1_layouts</string>
+    <string name="texto_boton">BOTON SIN PULSAR</string>
+    <string name="texto_boton_act4b"></string>
 </resources>

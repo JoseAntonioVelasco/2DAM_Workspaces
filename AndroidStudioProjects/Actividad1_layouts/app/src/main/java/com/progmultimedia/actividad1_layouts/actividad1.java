@@ -15,10 +15,10 @@ public class actividad1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_actividad1);
+        setContentView(R.layout.activity_actividad1);
         //setContentView(R.layout.textview2);
         //setContentView(R.layout.textview3);
-        setContentView(R.layout.textview4);
+        //setContentView(R.layout.textview4);
 
 
         /*textview2
@@ -39,7 +39,7 @@ public class actividad1 extends AppCompatActivity {
         miTexto.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
         textview3*/
 
-        /*textview4*/
+        /*textview4
         TextView miTexto = (TextView) findViewById(R.id.textView4);
         miTexto.setText("Texto escrito fuente umbrella");
         Typeface miFuente = Typeface.createFromFile("C:\\Users\\USER\\Documents\\GitWorkspaces\\2DAM_Workspaces\\AndroidStudioProjects\\Actividad1_layouts\\app\\src\\fonts\\Umbrella.ttf");
@@ -47,7 +47,7 @@ public class actividad1 extends AppCompatActivity {
         //miTexto.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         miTexto.setTextColor(Color.RED);
         miTexto.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
-       /* textview4*/
+        textview4*/
 
     }
     protected void onDestroy() {

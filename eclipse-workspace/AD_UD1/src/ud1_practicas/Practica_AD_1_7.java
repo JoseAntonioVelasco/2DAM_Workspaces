@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Practica_AD_1_7 {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		File fich1 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich1.txt");
 		File fich2 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich2.txt");
@@ -19,13 +19,18 @@ public class Practica_AD_1_7 {
 		System.out.println(comparaContenidoFicheros(fich1,fich2));
 		
 		File fich3 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich3.txt");
-		fich3.createNewFile();
+		try {
+			fich3.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		copiaContenidoFicheros(fich1,fich3);
 		
 
 	}
 	
-	public static boolean comparaContenidoFicheros(File f1, File f2) throws IOException {
+	public static boolean comparaContenidoFicheros(File f1, File f2)  {
 		boolean iguales = false;
 		
 		try {
@@ -39,40 +44,97 @@ public class Practica_AD_1_7 {
 				int byteF2 = 0;
 				
 				while(iguales) {
-					byteF1 = is_f1.read();
-					byteF2 = is_f2.read();
+					try {
+						byteF1 = is_f1.read();
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					try {
+						byteF2 = is_f2.read();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					/*if(byteF1 != byteF2) {
 						iguales = false;
 					}*/
 					iguales = byteF1 == byteF2;
 					if((byteF1==byteF2)&&(byteF1 == -1)) {
-						is_f1.close();
-						is_f2.close();
+						try {
+							is_f1.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							is_f2.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						return iguales;
 					}
 				}
 				
 			}
-			is_f1.close();
-			is_f2.close();
+			try {
+				is_f1.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				is_f2.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return iguales;
 	}
-	public static void copiaContenidoFicheros(File origen, File destino) throws IOException {
-		FileInputStream fic = new FileInputStream(origen);
-		FileOutputStream foc = new FileOutputStream(destino);
-		int i;
-		while((i = fic.read()) != -1) {
-			//System.out.print((char) i);
-			foc.write(i);
-			
+	public static void copiaContenidoFicheros(File origen, File destino) {
+		FileInputStream fic = null;
+		try {
+			fic = new FileInputStream(origen);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		fic.close();
-		foc.close();
+		FileOutputStream foc = null;
+		try {
+			foc = new FileOutputStream(destino);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int i;
+		try {
+			while((i = fic.read()) != -1) {
+				//System.out.print((char) i);
+				foc.write(i);
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			fic.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			foc.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

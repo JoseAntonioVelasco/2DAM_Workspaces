@@ -7,13 +7,25 @@ import java.io.*;
  */
 public class Practica_AD_1_11 {
 
-	public static void main(String[] args)throws IOException {
+	public static void main(String[] args) {
 		BufferedReader entradaEstandar = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Introduce la ruta absoluta al fichero: ");
-		String ruta = entradaEstandar.readLine();
+		String ruta = null;
+		try {
+			ruta = entradaEstandar.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//System.out.println("Has escrito: \""+ ruta +"\"");
 		System.out.println("Introduce lo que quieres anadir al final del fichero: ");
-		String texto = entradaEstandar.readLine();
+		String texto = null;
+		try {
+			texto = entradaEstandar.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		File fich = new File(ruta);
@@ -29,9 +41,25 @@ public class Practica_AD_1_11 {
 		readFile.close();*/
 		
 		
-		BufferedWriter writeFile = new BufferedWriter(new FileWriter(fich,true));
-		writeFile.append("\n"+texto);
-		writeFile.close();
+		BufferedWriter writeFile = null;
+		try {
+			writeFile = new BufferedWriter(new FileWriter(fich,true));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			writeFile.append("\n"+texto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			writeFile.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

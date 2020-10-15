@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Practica_AD_1_9 {
 
-	public static void main(String[] args)throws FileNotFoundException,IOException,ClassNotFoundException,EOFException{
+	public static void main(String[] args){
 		// TODO Auto-generated method stub
 		Alumno a1 = new Alumno("aa","AA",1,2,3);
 		Alumno a2 = new Alumno("bb","BB",4,5,6);
@@ -27,16 +27,44 @@ public class Practica_AD_1_9 {
 		prueba.escribirObjetos(alumnos);
 		prueba.leerObjetos();
 	}
-	public void escribirObjetos(ArrayList<Alumno> alumnos) throws FileNotFoundException,IOException{
-		ObjectOutputStream objetoOS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+	public void escribirObjetos(ArrayList<Alumno> alumnos) {
+		ObjectOutputStream objetoOS = null;
+		try {
+			objetoOS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		for(int i=0; i<alumnos.size();i++) {
-			objetoOS.writeObject(alumnos.get(i));
+			try {
+				objetoOS.writeObject(alumnos.get(i));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		objetoOS.close();
+		try {
+			objetoOS.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public void leerObjetos()throws FileNotFoundException,IOException,ClassNotFoundException {
-		ObjectInputStream objetoIS = new ObjectInputStream(new FileInputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+	public void leerObjetos(){
+		ObjectInputStream objetoIS = null;
+		try {
+			objetoIS = new ObjectInputStream(new FileInputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Alumno al = new Alumno();
 		
 		try {
@@ -47,9 +75,18 @@ public class Practica_AD_1_9 {
 				System.out.println("nota PSP: "+al.getNotaPSP());
 				System.out.println("nota SGE: "+al.getNotaSGE());
 			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			objetoIS.close();
-		}catch(EOFException e) {
-			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

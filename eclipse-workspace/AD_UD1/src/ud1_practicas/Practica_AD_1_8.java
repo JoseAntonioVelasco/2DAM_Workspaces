@@ -6,7 +6,7 @@ import java.io.*;
  *
  */
 public class Practica_AD_1_8 {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args){
 		// TODO Auto-generated method stub
 		File fich1 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich1.txt");
 		File fich2 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich2.txt");
@@ -14,13 +14,23 @@ public class Practica_AD_1_8 {
 		System.out.println(comparaContenidoFicheros(fich1,fich2));
 		
 		File fich3 = new File("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica7\\src\\fich3.txt");
-		fich3.createNewFile();
-		copiaContenidoFicheros(fich1,fich3);
+		try {
+			fich3.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			copiaContenidoFicheros(fich1,fich3);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
 	}
 	
-	public static boolean comparaContenidoFicheros(File f1, File f2) throws IOException {
+	public static boolean comparaContenidoFicheros(File f1, File f2)  {
 		boolean iguales = false;
 		
 		try {
@@ -34,23 +44,53 @@ public class Practica_AD_1_8 {
 				int byteF2 = 0;
 				
 				while(iguales) {
-					byteF1 = is_f1.read();
-					byteF2 = is_f2.read();
+					try {
+						byteF1 = is_f1.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						byteF2 = is_f2.read();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					/*if(byteF1 != byteF2) {
 						iguales = false;
 					}*/
 					iguales = byteF1 == byteF2;
 					if((byteF1==byteF2)&&(byteF1 == -1)) {
-						is_f1.close();
-						is_f2.close();
+						try {
+							is_f1.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							is_f2.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						return iguales;
 					}
 				}
 				
 			}
-			is_f1.close();
-			is_f2.close();
+			try {
+				is_f1.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				is_f2.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();

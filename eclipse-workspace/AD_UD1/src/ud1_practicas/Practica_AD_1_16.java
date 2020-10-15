@@ -15,24 +15,50 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Practica_AD_1_16 {
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		File ficheroXML = new File("C:\\Users\\USER\\Desktop\\Nueva carpeta\\alumnos.xml");
 		//leerXML(ficheroXML);
 		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-		alumnos = obtenerObjetosAlumno(ficheroXML);
+		try {
+			alumnos = obtenerObjetosAlumno(ficheroXML);
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(int i=0;i<alumnos.size();i++) {
 			System.out.println(alumnos.get(i).getApellidos());
 		}
 		
 		//leerRecurXML(ficheroXML);
 	}
-	public static void leerXML(File f) throws ParserConfigurationException, SAXException, IOException {
+	public static void leerXML(File f){
 		//Creamos DocumentBuilder
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
+		DocumentBuilder builder = null;
+		try {
+			builder = factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Document documento = builder.parse(f);
+		Document documento = null;
+		try {
+			documento = builder.parse(f);
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//Paso 1: obtener la raizdel fichero
 		Element raiz = documento.getDocumentElement();

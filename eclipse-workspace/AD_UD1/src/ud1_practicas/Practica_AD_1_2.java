@@ -1,6 +1,5 @@
 package ud1_practicas;
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 
 public class Practica_AD_1_2 {
@@ -10,15 +9,7 @@ public class Practica_AD_1_2 {
 		System.out.println("Ficheros en el directorio actual: ");
 		File f = new File(".");
 		File[] archivos = f.listFiles();
-		try {
-			recursionFicheros(archivos,0);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		recursionFicheros(archivos,0);
 	
 	}
 	public static void sacarDatos(File fich,Integer profundidad) {
@@ -59,7 +50,7 @@ public class Practica_AD_1_2 {
 			
 		}
 	}
-	public static void recursionFicheros(File[] archivos,Integer profundidad) throws IOException, InterruptedException {
+	public static void recursionFicheros(File[] archivos,Integer profundidad) {
         for(int i=0; i<archivos.length;i++) {
 
 

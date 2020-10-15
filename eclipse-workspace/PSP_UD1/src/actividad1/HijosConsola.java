@@ -24,6 +24,7 @@ public class HijosConsola {
 		Process p1 = h1.start(); Process p2 = h2.start();
 	
 		
+		//Cojemos la entrada del proceso 2 y le vamos metiendo caracter a caracter la salida del proceso1
 		OutputStream os = p2.getOutputStream();
 		InputStream is = p1.getInputStream();
 		int c;
@@ -35,7 +36,7 @@ public class HijosConsola {
 		is.close();
 		
 		
-		
+		//leemos la salida del proceso 2
 		InputStream is2 = p2.getInputStream();
 		while((c= is2.read()) != -1) {
 			System.out.print((char) c);

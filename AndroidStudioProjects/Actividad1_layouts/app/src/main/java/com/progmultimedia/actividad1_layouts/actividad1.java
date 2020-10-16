@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -15,7 +17,7 @@ public class actividad1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad1);
+        setContentView(R.layout.act8_radiobutton);
         //setContentView(R.layout.textview2);
         //setContentView(R.layout.textview3);
         //setContentView(R.layout.textview4);
@@ -49,6 +51,18 @@ public class actividad1 extends AppCompatActivity {
         miTexto.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
         textview4*/
 
+
+        /*radioButton*/
+        RadioGroup miGrupo = (RadioGroup)findViewById(R.id.grupo);
+        miGrupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                TextView view = (TextView)findViewById(R.id.textView6);
+                RadioButton boton_pulsado = (RadioButton)findViewById(checkedId);
+                view.setText("Pulsado: "+boton_pulsado.getText());
+            }
+        });
+        /*radioButton*/
     }
     protected void onDestroy() {
         super.onDestroy();

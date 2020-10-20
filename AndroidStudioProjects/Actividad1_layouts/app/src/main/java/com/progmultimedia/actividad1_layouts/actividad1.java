@@ -17,7 +17,7 @@ public class actividad1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act8_radiobutton);
+        setContentView(R.layout.act9_switch_rbutton_ckbox);
         //setContentView(R.layout.textview2);
         //setContentView(R.layout.textview3);
         //setContentView(R.layout.textview4);
@@ -52,7 +52,7 @@ public class actividad1 extends AppCompatActivity {
         textview4*/
 
 
-        /*radioButton*/
+        /*radioButton
         RadioGroup miGrupo = (RadioGroup)findViewById(R.id.grupo);
         miGrupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -62,7 +62,7 @@ public class actividad1 extends AppCompatActivity {
                 view.setText("Pulsado: "+boton_pulsado.getText());
             }
         });
-        /*radioButton*/
+        radioButton*/
     }
     protected void onDestroy() {
         super.onDestroy();

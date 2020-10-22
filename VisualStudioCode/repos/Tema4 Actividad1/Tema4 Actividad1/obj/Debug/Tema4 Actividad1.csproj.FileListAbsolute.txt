@@ -1,0 +1,15 @@
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\bin\Debug\Tema4 Actividad1.exe.config
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\bin\Debug\Tema4 Actividad1.exe
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\bin\Debug\Tema4 Actividad1.pdb
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\MainWindow.g.cs
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\App.g.cs
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1_MarkupCompile.cache
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1_MarkupCompile.lref
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\MainWindow.baml
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.g.resources
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4_Actividad1.Properties.Resources.resources
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.exe
+C:\Users\USER\source\repos\Tema4 Actividad1\Tema4 Actividad1\obj\Debug\Tema4 Actividad1.pdb

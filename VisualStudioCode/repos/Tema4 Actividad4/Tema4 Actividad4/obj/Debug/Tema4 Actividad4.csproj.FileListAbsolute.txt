@@ -1,0 +1,15 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\bin\Debug\Tema4 Actividad4.exe.config
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\bin\Debug\Tema4 Actividad4.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\bin\Debug\Tema4 Actividad4.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\MainWindow.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\App.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4_MarkupCompile.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4_MarkupCompile.lref
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\MainWindow.baml
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.g.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4_Actividad4.Properties.Resources.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.csproj.GenerateResource.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad4\Tema4 Actividad4\obj\Debug\Tema4 Actividad4.pdb

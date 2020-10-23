@@ -28,7 +28,7 @@ public class actividad4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act4b_boton);
+        setContentView(R.layout.t5a4b_boton);
 
         Button button1 =(Button)findViewById(R.id.button2);
         button1.setOnClickListener(corkyListener1);

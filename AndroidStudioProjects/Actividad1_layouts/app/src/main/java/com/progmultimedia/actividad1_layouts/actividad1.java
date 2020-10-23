@@ -2,14 +2,20 @@ package com.progmultimedia.actividad1_layouts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import t6a5_adaptador.Adaptador;
+import t6a5_adaptador.Datos;
 
 
 public class actividad1 extends AppCompatActivity {
@@ -17,10 +23,7 @@ public class actividad1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act9_switch_rbutton_ckbox);
-        //setContentView(R.layout.textview2);
-        //setContentView(R.layout.textview3);
-        //setContentView(R.layout.textview4);
+        setContentView(R.layout.t6a2_listview);
 
 
         /*textview2
@@ -63,6 +66,73 @@ public class actividad1 extends AppCompatActivity {
             }
         });
         radioButton*/
+
+
+        /*ListView t6a2
+        ListView listado = (ListView) findViewById(R.id.milista);
+        final String[] datos = new String[]{"Francia","Portugal","Alemania","Italia","Grecia","Holanda","Suecia","Noruega","Polonia","Austria"};
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,datos);
+        listado.setAdapter(adaptador);
+
+        listado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String elemento = (String) parent.getItemAtPosition(position);
+                TextView texto = (TextView) findViewById(R.id.textView7);
+                texto.setText(elemento);
+            }
+        });
+        ListView t6a2*/
+
+
+        /*GridView t6a3
+        GridView grid = (GridView) findViewById(R.id.migrid);
+        final String[] datos = new String[]{"Francia","Portugal","Alemania","Italia","Grecia","Holanda","Suecia","Noruega","Polonia","Austria"};
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,datos);
+        grid.setAdapter(adaptador);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String elemento = (String) parent.getItemAtPosition(position);
+                TextView texto = (TextView) findViewById(R.id.textView7);
+                texto.setText(elemento);
+            }
+        });
+        GridView t6a3*/
+
+        /*SpinnerView t6a4
+        Spinner spin = (Spinner) findViewById(R.id.spinner);
+        final String[] datos = new String[]{"Francia","Portugal","Alemania","Italia","Grecia","Holanda","Suecia","Noruega","Polonia","Austria"};
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,datos);
+        spin.setAdapter(adaptador);
+
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String elemento = (String) parent.getItemAtPosition(position);
+                TextView texto = (TextView) findViewById(R.id.textView7);
+                texto.setText(elemento);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        SpinnerView t6a4*/
+
+        /*t6a5 adaptador ejemplo*/
+        Datos[] datos = new Datos[]{
+            new Datos("Linea Superior 1", "Linea Inferior 1",new CheckBox(this)),
+            new Datos("Linea Superior 2", "Linea Inferior 2",new CheckBox(this)),
+            new Datos("Linea Superior 3", "Linea Inferior 3",new CheckBox(this)),
+            new Datos("Linea Superior 4", "Linea Inferior 4",new CheckBox(this))
+        };
+        ListView listado = (ListView) findViewById(R.id.milista);
+        Adaptador miAdaptador = new Adaptador(this, datos);
+        listado.setAdapter(miAdaptador);
+        /*t6a5 adaptador ejemplo*/
     }
     protected void onDestroy() {
         super.onDestroy();

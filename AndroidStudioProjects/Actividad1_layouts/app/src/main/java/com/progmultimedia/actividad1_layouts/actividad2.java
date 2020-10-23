@@ -54,7 +54,7 @@ public class actividad2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act3_boton);
+        setContentView(R.layout.t5a3_boton);
 
 
         Button button =(Button)findViewById(R.id.button);

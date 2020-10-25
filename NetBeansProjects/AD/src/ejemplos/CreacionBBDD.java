@@ -12,7 +12,6 @@ import java.sql.*;
 public class CreacionBBDD {
     static final String DRIVER_JDBC="com.mysql.jdbc.Driver";
     static final String URL_DB="jdbc:mysql://localhost";
-    //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     static final String USUARIO="root";
     static final String PASSWORD="root";
     

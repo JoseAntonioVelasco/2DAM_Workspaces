@@ -26,9 +26,11 @@ public class Practica_AD_2_4 {
         
         try(
             Connection c = DriverManager.getConnection(urlConnection, user, pwd);
-            Statement s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM CLIENTES")){
-            rs.setFetchDirection(ResultSet.FETCH_FORWARD);
+            Statement s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+            
+            s.setFetchDirection(ResultSet.FETCH_FORWARD);
+            ResultSet rs = s.executeQuery("SELECT * FROM CLIENTES");
+            
             int i = 1;
             while(rs.next()){
                 System.out.println("[" +(i++) +"]");
@@ -37,8 +39,10 @@ public class Practica_AD_2_4 {
                 System.out.println("CP: "+rs.getString("CP"));
             }
             
+            s.setFetchDirection(ResultSet.FETCH_REVERSE);
             ResultSet rs1 = s.executeQuery("SELECT * FROM CLIENTES ");
-            rs1.setFetchDirection(ResultSet.FETCH_REVERSE);     
+            
+            
             int i1 = 1;
             while(rs1.next()){
                 System.out.println("[" +(i1++) +"]");

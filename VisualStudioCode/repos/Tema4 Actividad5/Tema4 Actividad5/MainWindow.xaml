@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tema4_Actividad5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Cálculos con esferas" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="1"/>
+                <GradientStop Color="White" Offset="0.682"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Margin="23.81,68.238,354.097,57.524" Source="Sphere_-_Esfera.svg.png" Stretch="Fill"/>
+        <Label Content="Radio de la esfera:" HorizontalAlignment="Left" Margin="509.094,74.189,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.334,-0.459" Width="171.192" Height="36.674" FontWeight="Bold" FontSize="18" FontFamily="Segoe UI Black"/>
+        <TextBox HorizontalAlignment="Left" Height="39.667" Margin="509.094,110.863,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240.238" RenderTransformOrigin="0.416,0.246" FontWeight="Bold" Name="t1"/>
+        <Label Content="Superficie:" HorizontalAlignment="Left" Margin="509.094,262.283,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.729,0.596" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Volumen:" HorizontalAlignment="Left" Margin="509.094,293.563,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Button Content="Calcular" HorizontalAlignment="Left" Margin="509.094,150.53,0,0" VerticalAlignment="Top" Width="240.238" RenderTransformOrigin="-0.016,0.596" Height="29.484" FontWeight="Bold" FontSize="16" Click="calcular"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="603.991,264.443,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.47,0.642" Width="145.341" FontWeight="Bold" FontSize="14" Name="superficie"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="595.064,295.723,0,0" VerticalAlignment="Top" Width="93.946" FontWeight="Bold" FontSize="14" Name="volumen"/>
     </Grid>
 </Window>

@@ -1,0 +1,15 @@
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\bin\Debug\Tema4 Actividad5.exe.config
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\bin\Debug\Tema4 Actividad5.exe
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\bin\Debug\Tema4 Actividad5.pdb
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.csprojAssemblyReference.cache
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\MainWindow.g.cs
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\App.g.cs
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5_MarkupCompile.cache
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5_MarkupCompile.lref
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\MainWindow.baml
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.g.resources
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4_Actividad5.Properties.Resources.resources
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.csproj.GenerateResource.cache
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.csproj.CoreCompileInputs.cache
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.exe
+C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema4 Actividad5\Tema4 Actividad5\obj\Debug\Tema4 Actividad5.pdb

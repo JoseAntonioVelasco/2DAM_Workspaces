@@ -1,0 +1,15 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\MainWindow.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\App.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba_MarkupCompile.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba_MarkupCompile.lref
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\bin\Debug\prueba.exe.config
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\bin\Debug\prueba.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\bin\Debug\prueba.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\MainWindow.baml
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.g.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.Properties.Resources.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.csproj.GenerateResource.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\prueba\prueba\obj\Debug\prueba.pdb

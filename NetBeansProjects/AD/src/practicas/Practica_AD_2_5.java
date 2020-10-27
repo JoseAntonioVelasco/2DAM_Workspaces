@@ -26,11 +26,17 @@ public class Practica_AD_2_5 {
         
         try(
             Connection c = DriverManager.getConnection(urlConnection, user, pwd);
-            Statement s = c.createStatement();
+            Statement s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = s.executeQuery("SELECT * FROM CLIENTES ")){
+            rs.last();
+            System.out.println("se van a ver "+rs.getRow()+" lineas");
             
+            rs.first();
             int i = 1;
             while(rs.next()){
+                if(i==1){
+                    rs.first();
+                }
                 System.out.println("[" +(i++) +"]");
                 System.out.println("DNI: "+rs.getString("DNI"));
                 System.out.println("Apellidos: "+rs.getString("APELLIDOS"));

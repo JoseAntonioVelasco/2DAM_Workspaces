@@ -28,7 +28,7 @@ public class Practica_AD_2_4 {
             Connection c = DriverManager.getConnection(urlConnection, user, pwd);
             Statement s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
             
-            s.setFetchDirection(ResultSet.FETCH_FORWARD);
+            
             ResultSet rs = s.executeQuery("SELECT * FROM CLIENTES");
             
             int i = 1;
@@ -39,12 +39,16 @@ public class Practica_AD_2_4 {
                 System.out.println("CP: "+rs.getString("CP"));
             }
             
-            s.setFetchDirection(ResultSet.FETCH_REVERSE);
+           
+            System.out.println("------Al reves---------");
             ResultSet rs1 = s.executeQuery("SELECT * FROM CLIENTES ");
             
-            
+            rs1.last();
             int i1 = 1;
-            while(rs1.next()){
+            while(rs1.previous()){
+                if(i1==1){/*Resuelto de manera sucia pero valida*/
+                    rs1.last();
+                }
                 System.out.println("[" +(i1++) +"]");
                 System.out.println("DNI: "+rs1.getString("DNI"));
                 System.out.println("Apellidos: "+rs1.getString("APELLIDOS"));

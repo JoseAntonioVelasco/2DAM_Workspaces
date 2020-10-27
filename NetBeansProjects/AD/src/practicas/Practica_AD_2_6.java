@@ -38,9 +38,20 @@ public class Practica_AD_2_6 {
         crearTablas();
         
         /*consultas*/
+        System.out.println("------Consulta1------");
         consulta1();
+        System.out.println("------Consulta2------");
         consulta2();
+        System.out.println("------Consulta3------");
         consulta3();
+        System.out.println("------Consulta4------");
+        consulta4();
+        System.out.println("------Consulta5------");
+        consulta5();
+        System.out.println("------Consulta6------");
+        consulta6();
+        System.out.println("------Consulta7------");
+        consulta8();
         /*consultas*/
         
         c.close();
@@ -218,4 +229,87 @@ public class Practica_AD_2_6 {
             e.printStackTrace(System.err);
         }
     }
+    private static void consulta4(){
+         try(Statement s = c.createStatement()){
+            ResultSet rs = s.executeQuery("SELECT o.idO,o.calle,o.localidad,o.provincia,COUNT(e.idE)as num FROM Oficina o " +
+                                            "INNER JOIN Empleados e ON o.idO = e.idOficina GROUP BY o.idO; ");
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("ID oficina: "+rs.getString("idO"));
+                System.out.println("Calle: "+rs.getString("calle"));
+                System.out.println("Localidad: "+rs.getString("localidad"));
+                System.out.println("Provincia: "+rs.getString("provincia"));
+                System.out.println("Nº de empleados: "+rs.getString("num"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+    private static void consulta5(){
+         try(Statement s = c.createStatement()){
+            ResultSet rs = s.executeQuery("SELECT o.idO,o.calle,o.localidad,o.provincia,COUNT(e.idE)as ventas FROM Oficina o " +
+                                            "INNER JOIN Empleados e ON o.idO = e.idOficina " +
+                                            "INNER JOIN Ventas v ON v.idVendedor = e.idE  GROUP BY o.idO; ");
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("ID oficina: "+rs.getString("idO"));
+                System.out.println("Calle: "+rs.getString("calle"));
+                System.out.println("Localidad: "+rs.getString("localidad"));
+                System.out.println("Provincia: "+rs.getString("provincia"));
+                System.out.println("Nº de ventas: "+rs.getString("ventas"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+    private static void consulta6(){
+         try(Statement s = c.createStatement()){
+            ResultSet rs = s.executeQuery(" SELECT e.nombre,e.apellidos,COUNT(v.idVendedor) as ventas FROM Empleados e" +
+                                            " INNER JOIN Ventas v ON v.idVendedor = e.idE GROUP BY e.idE ORDER BY ventas DESC");
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Nombre: "+rs.getString("nombre"));
+                System.out.println("Apellido: "+rs.getString("apellidos"));
+                System.out.println("Ventas: "+rs.getString("ventas"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+     private static void consulta8(){
+         try(Statement s = c.createStatement()){
+            ResultSet rs = s.executeQuery(" SELECT c.idC,c.nombre,c.apellidos,c.telefono,COUNT(v.idCliente)as compras FROM Clientes c" +
+                                            " INNER JOIN Ventas v ON v.idCliente = c.idC GROUP BY c.idC ORDER BY compras DESC;");
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Nombre: "+rs.getString("nombre"));
+                System.out.println("Apellido: "+rs.getString("apellidos"));
+                System.out.println("Telefono: "+rs.getString("telefono"));
+                System.out.println("Compras: "+rs.getString("compras"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ public class actividad1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.t6a2_listview);
+        setContentView(R.layout.t6a1_listview);
 
 
         /*textview2
@@ -124,10 +124,10 @@ public class actividad1 extends AppCompatActivity {
 
         /*t6a5 adaptador ejemplo*/
         Datos[] datos = new Datos[]{
-            new Datos("Linea Superior 1", "Linea Inferior 1",new CheckBox(this)),
-            new Datos("Linea Superior 2", "Linea Inferior 2",new CheckBox(this)),
-            new Datos("Linea Superior 3", "Linea Inferior 3",new CheckBox(this)),
-            new Datos("Linea Superior 4", "Linea Inferior 4",new CheckBox(this))
+            new Datos("Linea Superior 1", "Linea Inferior 1","ck1"),
+            new Datos("Linea Superior 2", "Linea Inferior 2","ck2"),
+            new Datos("Linea Superior 3", "Linea Inferior 3","ck3"),
+            new Datos("Linea Superior 4", "Linea Inferior 4","ck4")
         };
         ListView listado = (ListView) findViewById(R.id.milista);
         Adaptador miAdaptador = new Adaptador(this, datos);

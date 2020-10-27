@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.progmultimedia.actividad1_layouts.R;
@@ -27,6 +28,8 @@ public class Adaptador extends ArrayAdapter {
         texto1.setText(datos[position].getTexto1());
         TextView texto2 = (TextView) elemento.findViewById(R.id.textView8);
         texto2.setText(datos[position].getTexto2());
+        CheckBox ckbox = (CheckBox) elemento.findViewById(R.id.checkBox4);
+        ckbox.setText(datos[position].getTexto_Ckbox());
         return elemento;
     }
 }

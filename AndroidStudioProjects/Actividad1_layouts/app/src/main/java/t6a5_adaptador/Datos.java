@@ -5,11 +5,11 @@ import android.widget.CheckBox;
 public class Datos {
     private String texto1;
     private String texto2;
-    private CheckBox ckbox;
-    public Datos(String texto1, String texto2,CheckBox ckbox){
+    private String texto_ckbox;
+    public Datos(String texto1, String texto2,String ckbox){
         this.texto1 = texto1;
         this.texto2 = texto2;
-        this.ckbox = ckbox;
+        this.texto_ckbox = ckbox;
     }
     public String getTexto1(){
         return texto1;
@@ -17,7 +17,7 @@ public class Datos {
     public String getTexto2(){
         return texto2;
     }
-    public CheckBox getCkbox(){
-        return ckbox;
+    public String getTexto_Ckbox(){
+        return texto_ckbox;
     }
 }

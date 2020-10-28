@@ -18,6 +18,7 @@ public class MatarHilo extends Thread{
     public void run(){
         while(!pararHilo){
             System.out.println("Dentro del hilo");
+            System.out.println("Dentro del hilo "+System.currentTimeMillis());
         }
     }
     

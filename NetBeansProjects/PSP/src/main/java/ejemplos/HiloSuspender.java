@@ -22,10 +22,12 @@ public class HiloSuspender extends Thread{
     public void Reanudar(){
         s.set(false);
     }
+    @Override
     public void run(){
         try{
             for(int i = 0; i<10; i++){
                 System.out.println("Hilo en ejecucion... "+i);
+                System.out.println(this.getName());
                 s.esperaActiva();
             }
         }catch(InterruptedException ex){
@@ -41,6 +43,13 @@ public class HiloSuspender extends Thread{
         System.out.println("Hilo suspendido");
         hilo.Reanudar();
         System.out.println("Hilo reanudado");
+           HiloSuspender hilo2 = new HiloSuspender();
+        hilo2.start();
+        System.out.println("Hilo2 iniciado");
+        hilo2.SuspenderHilo();
+        System.out.println("Hilo2 suspendido");
+        hilo2.Reanudar();
+        System.out.println("Hilo2 reanudado");
     }
     
 }

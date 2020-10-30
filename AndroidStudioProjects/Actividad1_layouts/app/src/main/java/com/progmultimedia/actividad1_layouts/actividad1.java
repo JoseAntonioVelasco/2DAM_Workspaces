@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,11 +22,20 @@ import t6a5_adaptador.Datos;
 
 
 public class actividad1 extends AppCompatActivity {
-
+    private static final int MnOp1 = R.id.MnOp1;
+    private static final int MnOp2 = R.id.MnOp2;
+    private static final int MnOp3 = R.id.MnOp3;
+    private static final int MnOp4 = R.id.MnOp4;
+    private static final int MnOp5 = R.id.MnOp5;
+    private static final int MnOp6 = R.id.MnOp6;
+    private static final int MnOp7 = R.id.MnOp7;
+    private static final int MnOp8 = R.id.MnOp8;
+    private static final int MnOp9 = R.id.MnOp9;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.t6a1_listview);
+        setContentView(R.layout.t6a7_menu);
+
 
 
         /*textview2
@@ -122,7 +134,7 @@ public class actividad1 extends AppCompatActivity {
         });
         SpinnerView t6a4*/
 
-        /*t6a5 adaptador ejemplo*/
+        /*t6a5 adaptador ejemplo
         Datos[] datos = new Datos[]{
             new Datos("Linea Superior 1", "Linea Inferior 1","ck1"),
             new Datos("Linea Superior 2", "Linea Inferior 2","ck2"),
@@ -132,11 +144,89 @@ public class actividad1 extends AppCompatActivity {
         ListView listado = (ListView) findViewById(R.id.milista);
         Adaptador miAdaptador = new Adaptador(this, datos);
         listado.setAdapter(miAdaptador);
-        /*t6a5 adaptador ejemplo*/
+        t6a5 adaptador ejemplo*/
+
+
     }
     protected void onDestroy() {
         super.onDestroy();
         Intent ejemplo = new Intent(this, actividad2.class);
         startActivity(ejemplo);
     }
+    /*t6a7*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        /*Manera 1 desde xml*/
+        //getMenuInflater().inflate(R.menu.t6a7_menu, menu);
+
+        /*Manera 2 desde java
+        menu.add(Menu.NONE, MnOp1, Menu.NONE, "Lunes");
+        menu.add(Menu.NONE, MnOp2, Menu.NONE, "Martes");
+        menu.add(Menu.NONE, MnOp3, Menu.NONE, "Miercoles");
+        menu.add(Menu.NONE, MnOp4, Menu.NONE, "Jueves");
+        menu.add(Menu.NONE, MnOp5, Menu.NONE, "Viernes");
+        menu.add(Menu.NONE, MnOp6, Menu.NONE, "Sabado");
+        menu.add(Menu.NONE, MnOp7, Menu.NONE, "Domingo");
+        */
+
+        //submenus
+        SubMenu smenu = menu.addSubMenu(Menu.NONE, MnOp1,Menu.NONE,"DIA");
+        smenu.add(Menu.NONE, MnOp1, Menu.NONE, "Lunes");
+        smenu.add(Menu.NONE, MnOp2, Menu.NONE, "Martes");
+        smenu.add(Menu.NONE, MnOp3, Menu.NONE, "Miercoles");
+        smenu.add(Menu.NONE, MnOp4, Menu.NONE, "Jueves");
+        smenu.add(Menu.NONE, MnOp5, Menu.NONE, "Viernes");
+        smenu.add(Menu.NONE, MnOp6, Menu.NONE, "Sabado");
+        smenu.add(Menu.NONE, MnOp7, Menu.NONE, "Domingo");
+        SubMenu smenu2 = menu.addSubMenu(Menu.NONE, MnOp1,Menu.NONE,"MES");
+        smenu2.add(Menu.NONE, MnOp8, Menu.NONE, "Enero");
+        smenu2.add(Menu.NONE, MnOp9, Menu.NONE, "Febrero");
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        TextView view = findViewById(R.id.texto);
+        //String mensaje= "";
+        switch(item.getItemId()){
+            case R.id.MnOp1:
+                //codigo
+                view.setText("LUNES");
+                return true;
+            case R.id.MnOp2:
+                //codigo
+                view.setText("MARTES");
+                return true;
+            case R.id.MnOp3:
+                //codigo
+                view.setText("MIERCOLES");
+                return true;
+            case R.id.MnOp4:
+                //codigo
+                view.setText("JUEVES");
+                return true;
+            case R.id.MnOp5:
+                //codigo
+                view.setText("VIERNES");
+                return true;
+            case R.id.MnOp6:
+                //codigo
+                view.setText("SABADO");
+                return true;
+            case R.id.MnOp7:
+                //codigo
+                view.setText("DOMINGO");
+                return true;
+            case R.id.MnOp8:
+                //codigo
+                view.setText("ENERO");
+                return true;
+            case R.id.MnOp9:
+                //codigo
+                view.setText("FEBRERO");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    /*t6a7*/
 }

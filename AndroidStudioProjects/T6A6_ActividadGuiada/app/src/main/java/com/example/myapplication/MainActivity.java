@@ -79,9 +79,10 @@ public class MainActivity extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Encapsulador elegido =(Encapsulador)parent.getItemAtPosition(position);
-                CharSequence textoelegido = "Seleccionado: "+elegido.getTexto();
-                texto.setText(textoelegido);
+                //Encapsulador elegido =(Encapsulador)parent.getItemAtPosition(position);
+                //CharSequence textoelegido = "Seleccionado: "+elegido.getTexto();
+                //String text ="algo";
+                texto.setText("textoelegido");
             }
         });
     }

@@ -1,0 +1,13 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\bin\Debug\CrearComponente.dll
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\bin\Debug\CrearComponente.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\UserControl1.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente_MarkupCompile.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente_MarkupCompile.lref
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\UserControl1.baml
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.g.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.Properties.Resources.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.csproj.GenerateResource.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.dll
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\CrearComponente\CrearComponente\obj\Debug\CrearComponente.csprojAssemblyReference.cache

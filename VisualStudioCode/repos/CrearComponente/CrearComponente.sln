@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrearComponente", "CrearComponente\CrearComponente.csproj", "{5025BCD6-95D3-4DAA-AD99-BFD68FAD44DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplicarComponente", "AplicarComponente\AplicarComponente.csproj", "{9BEC0DEA-943A-4782-B522-C82C91407D58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5025BCD6-95D3-4DAA-AD99-BFD68FAD44DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5025BCD6-95D3-4DAA-AD99-BFD68FAD44DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5025BCD6-95D3-4DAA-AD99-BFD68FAD44DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5025BCD6-95D3-4DAA-AD99-BFD68FAD44DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BEC0DEA-943A-4782-B522-C82C91407D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BEC0DEA-943A-4782-B522-C82C91407D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BEC0DEA-943A-4782-B522-C82C91407D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BEC0DEA-943A-4782-B522-C82C91407D58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA68FF68-8297-4E17-B7B9-B7DAC55C2BDE}
+	EndGlobalSection
+EndGlobal

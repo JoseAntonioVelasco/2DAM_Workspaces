@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tem_4_Actividad6"
         mc:Ignorable="d"
-        Title="Fiestas" Height="450" Width="800">
+        Title="Festival de musica electronica" Height="450" Width="800">
     <Window.Resources>
-        
         <Style x:Key="estilo2" TargetType="{x:Type Button}">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
@@ -17,8 +16,8 @@
             <Setter Property="Margin" Value="10"/>
         </Style>
     </Window.Resources>
-    
-    
+
+
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid>
             <Grid.Background>
@@ -29,21 +28,31 @@
 
             <Border BorderBrush="Black" BorderThickness="2" Margin="60.577,10,37.5,338.367">
                 <Grid Margin="8,8,-2,8">
-                    <Button Content="Viernes" HorizontalAlignment="Left" Margin="87.845,0,0,0" VerticalAlignment="Top" Width="118.269" Click="Button_Click" Height="47.5" Style="{StaticResource estilo2}"/>
-                    <Button Content="Sabado" HorizontalAlignment="Left" Margin="266.692,0,0,0" VerticalAlignment="Top" Width="124.039" RenderTransformOrigin="0.019,0.54" Click="Button_Click_1" Height="47.5" Style="{StaticResource estilo2}"/>
-                    <Button Content="Domingo" HorizontalAlignment="Left" Margin="446.981,0,0,0" VerticalAlignment="Top" Width="129.808" RenderTransformOrigin="0.135,0.54" Click="Button_Click_2" Height="47.5" Style="{StaticResource estilo2}"/>
+                    <Button x:Name="viernes" Content="Viernes" HorizontalAlignment="Left" Margin="87.845,0,0,0" VerticalAlignment="Top" Width="118.269" Click="Button_Click" Height="47.5" Style="{StaticResource estilo2}"/>
+                    <Button x:Name="sabado" Content="Sabado" HorizontalAlignment="Left" Margin="266.692,0,0,0" VerticalAlignment="Top" Width="124.039" RenderTransformOrigin="0.019,0.54" Click="Button_Click_1" Height="47.5" Style="{StaticResource estilo2}"/>
+                    <Button x:Name="domingo" Content="Domingo" HorizontalAlignment="Left" Margin="446.981,0,0,0" VerticalAlignment="Top" Width="129.808" RenderTransformOrigin="0.135,0.54" Click="Button_Click_2" Height="47.5" Style="{StaticResource estilo2}"/>
                 </Grid>
             </Border>
 
 
             <Border BorderBrush="Black" BorderThickness="2" Margin="60.577,81.633,37.5,83.368">
-                <Grid >
+                <Grid>
+                    <Grid.Resources>
+                        <Style x:Key="estilo1" TargetType="{x:Type Label}">
+                            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                    </Grid.Resources>
                     <Label Content="Panel Central" HorizontalAlignment="Left" Margin="301.208,0,0,0" VerticalAlignment="Top" Background="White" />
                     <Grid x:Name="panel1">
                         <!--panel1-->
                         <Grid.Background>
                             <ImageBrush ImageSource="fiesta1.jpg" />
                         </Grid.Background>
+                        <Label Content="&#x9;   DJS&#xD;&#xA;disc jockey 1 &quot;nombre1&quot;&#xD;&#xA;disc jockey 2 &quot;nombre2&quot;&#xD;&#xA;disc jockey 3 &quot;nombre3&quot;&#xD;&#xA;disc jockey 4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="26.66,27.842,0,0" VerticalAlignment="Top" Background="White" Width="154.66" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="          Canciones&#xA;cancion 1 &quot;nombre1&quot;&#xA;cancion  2 &quot;nombre2&quot;&#xA;cancion  3 &quot;nombre3&quot;&#xA;cancion  4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="514.755,27.842,0,0" VerticalAlignment="Top" Background="White" Width="139.184" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="FIESTA 1" HorizontalAlignment="Left" Margin="299.279,27.842,0,0" VerticalAlignment="Top"  Style="{StaticResource estilo1}"/>
                     </Grid>
 
                     <Grid x:Name="panel2">
@@ -51,22 +60,34 @@
                         <Grid.Background>
                             <ImageBrush ImageSource="fiesta2.jpg" />
                         </Grid.Background>
+                        <Label Content="&#x9;   DJS&#xD;&#xA;disc jockey 1 &quot;nombre1&quot;&#xD;&#xA;disc jockey 2 &quot;nombre2&quot;&#xD;&#xA;disc jockey 3 &quot;nombre3&quot;&#xD;&#xA;disc jockey 4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="26.66,27.842,0,0" VerticalAlignment="Top" Background="White" Width="154.66" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="          Canciones&#xA;cancion 1 &quot;nombre1&quot;&#xA;cancion  2 &quot;nombre2&quot;&#xA;cancion  3 &quot;nombre3&quot;&#xA;cancion  4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="514.755,27.842,0,0" VerticalAlignment="Top" Background="White" Width="139.184" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="FIESTA 2" HorizontalAlignment="Left" Margin="299.279,27.842,0,0" VerticalAlignment="Top" Style="{StaticResource estilo1}"/>
                     </Grid>
 
                     <Grid x:Name="panel3">
-                        <!--panel3-->
                         <Grid.Background>
-                            <ImageBrush ImageSource="fiesta3.jpg" />
+                            <ImageBrush ImageSource="fiesta3.jpg"/>
                         </Grid.Background>
+                        <Label Content="&#x9;   DJS&#xD;&#xA;disc jockey 1 &quot;nombre1&quot;&#xD;&#xA;disc jockey 2 &quot;nombre2&quot;&#xD;&#xA;disc jockey 3 &quot;nombre3&quot;&#xD;&#xA;disc jockey 4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="26.66,27.842,0,0" VerticalAlignment="Top" Background="White" Width="154.66" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="          Canciones&#xA;cancion 1 &quot;nombre1&quot;&#xA;cancion  2 &quot;nombre2&quot;&#xA;cancion  3 &quot;nombre3&quot;&#xA;cancion  4 &quot;nombre4&quot;" HorizontalAlignment="Left" Margin="514.755,27.842,0,0" VerticalAlignment="Top" Background="White" Width="139.184" Height="94.301" FontWeight="Bold"/>
+                        <Label Content="FIESTA 3" HorizontalAlignment="Left" Margin="299.279,27.842,0,0" VerticalAlignment="Top" Style="{StaticResource estilo1}"/>
+                        <!--panel3-->
                     </Grid>
 
-                    <Grid>
+                    <Grid x:Name="panel0">
                         <!--panel4-->
+                        <Grid.Background>
+                            <ImageBrush ImageSource="fiesta_inicio.jpg"/>
+                        </Grid.Background>
+                        <Label Content="Fiesta de fin de año" HorizontalAlignment="Left" Margin="180.232,24.271,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" FontFamily="Showcard Gothic" Background="White"/>
+                        <Label Content=" Valladolid&#xD;&#xA;31/12/2020" HorizontalAlignment="Left" Margin="277.851,96.891,0,0" VerticalAlignment="Top" Height="68.111" Width="123.494" FontWeight="Bold" FontSize="20" Background="White"/>
+
                     </Grid>
                 </Grid>
             </Border>
-            
-            
+
+
             <Border BorderBrush="Black" BorderThickness="2" Margin="60.577,336.632,37.5,10">
                 <Grid>
                     <Grid.Resources>
@@ -79,26 +100,15 @@
                             <Setter Property="Margin" Value="10"/>
                         </Style>
                     </Grid.Resources>
-                    <Button Content="INICIO" Margin="23.077,8,512.019,8" Click="Button_Click_4" Style="{StaticResource estilo2}"/>
-                    <Button Content="SALIR" Margin="547.042,8,36.467,8" Click="Button_Click_3" Style="{StaticResource estilo2}" Width="102.414"/>
-                    <Label Content="aaaaaaaaaaaaaaaaaaaaaaaaa" HorizontalAlignment="Left" Margin="247.844,2,0,0" VerticalAlignment="Top" Background="#FFD4AEAE" Height="34.656" RenderTransformOrigin="0.5,0.5"/>
+                    <Button Content="INICIO" Margin="23.077,8,512.019,8" Click="Button_Click_4" Style="{StaticResource estilo1}"/>
+                    <Button Content="SALIR" Margin="547.042,8,36.467,8" Click="Button_Click_3" Style="{StaticResource estilo1}" Width="102.414"/>
+                    <Label Content="Pulsa sobre los botones para&#xD;&#xA; ver información del festival" HorizontalAlignment="Left" Margin="252.606,12.714,0,0" VerticalAlignment="Top" Background="White" Height="41.654" RenderTransformOrigin="0.5,0.5" Width="165.146"/>
 
                 </Grid>
             </Border>
 
 
-
         </Grid>
     </Border>
-
-
-
-    <!-- <Button Content="Button" HorizontalAlignment="Left" Margin="107.057,179.249,0,0" VerticalAlignment="Top" Width="103.846" Height="56.018" Style="{StaticResource estilo1}"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="246.961,179.249,0,0" VerticalAlignment="Top" Width="124.038" Height="56.018" Style="{StaticResource estilo2}"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="417.154,179.249,0,0" VerticalAlignment="Top" Width="116.827" Height="56.018"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="578.692,179.249,0,0" VerticalAlignment="Top" Width="124.038" Height="56.018"/>-->
-
-
-
 
 </Window>

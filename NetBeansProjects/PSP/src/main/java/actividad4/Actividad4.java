@@ -44,7 +44,13 @@ class Cliente extends Thread{
     public boolean entra() throws InterruptedException{
         //si el aforo esta lleno espera a la cola
         semaforo.acquire();
-        if(ContadorAforo.aforo==5){ 
+        if(ContadorAforo.aforo==5){
+            //si ese cliente ya esta en la cola no se tiene que volver a poner
+            if(ContadorAforo.cola.contains(this)){
+                semaforo.release();
+                return false;
+            }
+            //si no esta se pone a la cola
             ContadorAforo.cola.add(this);
             semaforo.release();
             return false;
@@ -67,10 +73,17 @@ class Cliente extends Thread{
             if(haEntrado){
                 bebe();
                 sale();
-            }  
+            }
+            //el primero que salga de los que esta bebiendo "avisa" al primero de la cola para que entre
             if(!ContadorAforo.cola.isEmpty()){
-                ContadorAforo.cola.get(0).entra(); 
-                ContadorAforo.cola.remove(0);
+                boolean haEntrado2=ContadorAforo.cola.get(0).entra();
+                if(haEntrado2){
+                    semaforo.acquire();
+                    ContadorAforo.cola.remove(0);
+                    semaforo.release();
+                    bebe();
+                    sale(); //RECURSION TODO
+                }       
             }
             
         }catch(InterruptedException e){

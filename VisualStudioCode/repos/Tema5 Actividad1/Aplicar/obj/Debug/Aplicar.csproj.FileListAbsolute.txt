@@ -1,0 +1,3 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5 Actividad1\Aplicar\obj\Debug\Aplicar.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5 Actividad1\Aplicar\obj\Debug\App.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5 Actividad1\Aplicar\obj\Debug\Aplicar_MarkupCompile.cache

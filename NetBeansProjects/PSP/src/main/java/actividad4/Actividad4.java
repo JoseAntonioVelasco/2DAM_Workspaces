@@ -29,56 +29,50 @@ class Cliente extends Thread{
     public void bebe() throws InterruptedException{
         for(int i=0; i<5; i++){
             bebido=bebido+20;
-            System.out.print(bebido +" ");
-            Thread.sleep(1000);
+            System.out.print(id+": "+bebido +" ");
+            //Thread.sleep(1000);
         }
     }
     
-    public void sale(){
+    public void sale() throws InterruptedException{
+        semaforo.acquire();
         ContadorAforo.aforo--;
         System.out.println("\nSale cliente: "+id +" Aforo = "+ContadorAforo.aforo);
-        //si hay alguien en la cola entra el primero
-        if(!ContadorAforo.cola.isEmpty()){
-            ContadorAforo.cola.get(0).entra(); 
-            ContadorAforo.cola.remove(0);
-        }
+        semaforo.release();
+        
     }
-    public boolean entra(){
+    public boolean entra() throws InterruptedException{
         //si el aforo esta lleno espera a la cola
+        semaforo.acquire();
         if(ContadorAforo.aforo==5){ 
+            ContadorAforo.cola.add(this);
+            semaforo.release();
             return false;
-        }else{
-            ContadorAforo.aforo++;
-            System.out.println("Entra cliente: "+id +" Aforo = "+ContadorAforo.aforo);
-            return true;
         }
+        
+        ContadorAforo.aforo++;
+        System.out.println("Entra cliente: "+id +" Aforo = "+ContadorAforo.aforo);
+        semaforo.release();
+        return true;
+        
     }
     
     @Override
     public void run(){
         try{  
-            semaforo.acquire();
+            //intenta entrar
+                //comprueba si hay menos de 5 personas, entra ...acquire +1 al foro release...
+                //si hay mas de 5 espera a la cola
             boolean haEntrado=entra();
-            if(!haEntrado){
-                ContadorAforo.cola.add(this);
-            }
-            semaforo.release();
-            while(!haEntrado){
-                if(ContadorAforo.aforo<5){
-                    entra();
-                }
-            }
-            
             if(haEntrado){
-                bebe();   
-            }  
-            
-            
-            semaforo.acquire();
-            if(haEntrado){
+                bebe();
                 sale();
-            }    
-            semaforo.release();
+            }  
+            if(!ContadorAforo.cola.isEmpty()){
+                ContadorAforo.cola.get(0).entra(); 
+                ContadorAforo.cola.remove(0);
+            }
+            
         }catch(InterruptedException e){
             e.printStackTrace();
         }  

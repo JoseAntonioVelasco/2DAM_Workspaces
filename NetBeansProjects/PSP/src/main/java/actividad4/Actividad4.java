@@ -12,7 +12,14 @@ import java.util.concurrent.Semaphore;
  *
  * @author JoseAntonioVelasco
  */
+
 class ContadorAforo {
+    //this are the SHARED VARIABLES in the threads.
+    
+    //Warning: everytime that you have to modify these variables
+    //you must acquire the "green light" from the Semaphore
+    //and realease after you finish.
+    
     public static ArrayList<Cliente> cola = new ArrayList<Cliente>();
     public static int aforo = 0;
 }
@@ -40,17 +47,24 @@ class Cliente extends Thread{
         System.out.println("\nSale cliente: "+id +" Aforo = "+ContadorAforo.aforo);
         semaforo.release();
         
+        //when leaving, notify the first in the queue
+        if(!ContadorAforo.cola.isEmpty()){
+            Cliente siguiente = ContadorAforo.cola.get(0);
+            ContadorAforo.cola.remove(0);
+            siguiente.run();
+        }
+        
     }
     public boolean entra() throws InterruptedException{
-        //si el aforo esta lleno espera a la cola
+        //if the capacity is at its limit it waits in the queue
         semaforo.acquire();
         if(ContadorAforo.aforo==5){
-            //si ese cliente ya esta en la cola no se tiene que volver a poner
+            //if the customer is already in the queue we dont add him
             if(ContadorAforo.cola.contains(this)){
                 semaforo.release();
                 return false;
             }
-            //si no esta se pone a la cola
+            //if it isn`t in the queue we add him
             ContadorAforo.cola.add(this);
             semaforo.release();
             return false;
@@ -66,26 +80,11 @@ class Cliente extends Thread{
     @Override
     public void run(){
         try{  
-            //intenta entrar
-                //comprueba si hay menos de 5 personas, entra ...acquire +1 al foro release...
-                //si hay mas de 5 espera a la cola
-            boolean haEntrado=entra();
-            if(haEntrado){
+            //tries to enter, if it enters drinks and then leaves
+            if(entra()){
                 bebe();
                 sale();
-            }
-            //el primero que salga de los que esta bebiendo "avisa" al primero de la cola para que entre
-            if(!ContadorAforo.cola.isEmpty()){
-                boolean haEntrado2=ContadorAforo.cola.get(0).entra();
-                if(haEntrado2){
-                    semaforo.acquire();
-                    ContadorAforo.cola.remove(0);
-                    semaforo.release();
-                    bebe();
-                    sale(); //RECURSION TODO
-                }       
-            }
-            
+            } 
         }catch(InterruptedException e){
             e.printStackTrace();
         }  
@@ -97,19 +96,22 @@ public class Actividad4 {
     private static Semaphore semaforo = new Semaphore(1);
     
     public static void main(String[] args){
-        int totalClientes = 12;
+        int max = 12; 
+        int min = 8; 
+        int range = max - min + 1; 
+        int totalClientes = (int)(Math.random() * range) + min;
+        System.out.println("Total clientes: "+totalClientes);
         clientes = new Cliente[totalClientes];
         
       
         for(int i=0; i<totalClientes; i++){
-            //se generan todos los clientes y todos quieren entrar a la vez    
+            //creates all the customers and all wants to enter at the same time
             clientes[i] = new Cliente(i,semaforo);
             clientes[i].start();
         }
         
-        
-        
-        //esperamos a que todos los hilos mueran
+             
+        //waiting for all threads(customers) to die
         for(int i=0; i<totalClientes; i++){
             try{
                 clientes[i].join();

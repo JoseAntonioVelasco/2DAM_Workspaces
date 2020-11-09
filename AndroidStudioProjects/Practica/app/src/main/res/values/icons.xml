@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon_heart">&#xf004;</string>
+    <string name="icon_addContact">&#xf234;</string>
+    <string name="icon_paperplane">&#xf1d8;</string>
+    <string name="icon_phone">&#xf095;</string>
+</resources>

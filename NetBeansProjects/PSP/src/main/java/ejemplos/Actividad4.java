@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package actividad4;
+package ejemplos;
 
 import java.util.concurrent.Semaphore;
 
@@ -12,11 +12,11 @@ import java.util.concurrent.Semaphore;
  */
 
 class Cliente extends Thread{
-    private Semaphore semaforo;
+    private Semaforo semaforo;
     private int bebido=0;
     private int id;
     
-    Cliente(int id,Semaphore s){
+    Cliente(int id,Semaforo s){
         this.id=id;
         this.semaforo=s;
     }
@@ -24,16 +24,16 @@ class Cliente extends Thread{
     @Override
     public void run(){
         try{ 
-            semaforo.acquire();
-            System.out.println("Entra cliente: "+id +" Aforo Disponible = "+(semaforo.availablePermits()));
+            semaforo.acquire(id);
+            //System.out.println("Entra cliente: "+id +" Aforo Disponible = "+(semaforo.availablePermits()));
             for(int i=0;i<5;i++){
                 //System.out.print("sleep"+id+" ");
                 bebido=bebido+20;
                 System.out.println(id+": "+bebido +"% ");
                 Thread.sleep(1000);
              }
-            semaforo.release();
-            System.out.println("Sale cliente: "+id +" Aforo Disponible = "+(semaforo.availablePermits()));
+            semaforo.release(id);
+            //System.out.println("Sale cliente: "+id +" Aforo Disponible = "+(semaforo.availablePermits()));
         }catch(InterruptedException e){
             e.printStackTrace();
         }  
@@ -42,7 +42,7 @@ class Cliente extends Thread{
 
 public class Actividad4 {
     private static Cliente clientes[];
-    private static Semaphore semaforo = new Semaphore(5);
+    private static Semaforo semaforo = new Semaforo(5);
     //"5" number of permits "green lights" , only 5 threads will be active simultaneously
     public static void main(String[] args){
         int max = 12; 
@@ -73,3 +73,19 @@ public class Actividad4 {
     }
 }
 
+class Semaforo extends Semaphore{
+    
+    public Semaforo(int permits) {
+        super(permits);
+    }
+    @Override
+    public void acquire(int id) throws InterruptedException{
+        super.acquire();
+        System.out.println("Entra cliente: "+id +" Aforo Disponible = "+(this.availablePermits()));
+    }
+    @Override
+    public void release(int id){
+        super.release();
+        System.out.println("Sale cliente: "+id +" Aforo Disponible = "+(this.availablePermits()));
+    }
+}

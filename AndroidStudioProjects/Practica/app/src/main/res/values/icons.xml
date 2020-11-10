@@ -5,5 +5,8 @@
     <string name="icon_paperplane">&#xf1d8;</string>
     <string name="icon_phone">&#xf095;</string>
     <string name="icon_bookmark">&#xf02e;</string>
-    <string name="icon_editContact">&#xf4ff;</string>
+    <string name="icon_editContact">&#xf044;</string>
+    <string name="icon_plus">&#xf067;</string>
+    <string name="icon_check">&#xf00c;</string>
+    <string name="icon_history">&#xf1da;</string>
 </resources>

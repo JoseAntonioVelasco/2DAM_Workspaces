@@ -8,13 +8,15 @@ public class Contacto implements Parcelable {
     private int imagen;
     private String nombre;
     private String descripcion;
+    private String telefono;
     private Boolean bookmarked;
 
-    public Contacto(int id, int imagen, String nombre, String descripcion, Boolean bookmarked) {
+    public Contacto(int id, int imagen, String nombre, String descripcion, String telefono, Boolean bookmarked) {
         this.id = id;
         this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.telefono = telefono;
         this.bookmarked = bookmarked;
     }
 
@@ -38,16 +40,44 @@ public class Contacto implements Parcelable {
         }
     };
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getImagen() {
         return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public Boolean getBookmarked() {
@@ -56,14 +86,6 @@ public class Contacto implements Parcelable {
 
     public void setBookmarked(Boolean bookmarked) {
         this.bookmarked = bookmarked;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

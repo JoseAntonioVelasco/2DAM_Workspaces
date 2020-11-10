@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -40,15 +41,17 @@ public class Bookmarks extends AppCompatActivity {
             public void onEntrada(final Object entrada, View view) {
                 TextView texto_superior_entrada = (TextView) view.findViewById(R.id.nombreContacto);
                 TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.descripcion);
+                TextView telefono = (TextView) view.findViewById(R.id.telefono);
                 ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagen);
 
-                Button bookmark = (Button) view.findViewById(R.id.button);
+                ToggleButton bookmark = (ToggleButton) view.findViewById(R.id.toggleButton);
                 Button edit = (Button) view.findViewById(R.id.button2);
                 bookmark.setTypeface(font);
                 edit.setTypeface(font);
 
                 texto_superior_entrada.setText(((Contacto) entrada).getNombre());
                 texto_inferior_entrada.setText(((Contacto) entrada).getDescripcion());
+                telefono.setText(((Contacto) entrada).getTelefono());
                 imagen_entrada.setImageResource(((Contacto) entrada).getImagen());
 
                 bookmark.setOnClickListener(new View.OnClickListener(){
@@ -73,6 +76,7 @@ public class Bookmarks extends AppCompatActivity {
     }
     protected void onDestroy() {
         super.onDestroy();
+
         //merge the contacts arraylists (bookmarkeds and contacts)
         ArrayList<Contacto> updated_contacts = new ArrayList<Contacto>();
         for(int i=0; i<contactos.size();i++){

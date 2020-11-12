@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //call the contact clicked
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ""));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contactos.get(position).getTelefono()));
                 startActivity(intent);
             }
         });

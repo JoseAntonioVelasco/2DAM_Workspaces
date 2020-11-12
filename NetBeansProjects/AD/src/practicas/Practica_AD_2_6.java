@@ -33,9 +33,9 @@ public class Practica_AD_2_6 {
     static Connection c = null;
     
     public static void main(String[] args) throws SQLException{
-        crearBBDD();
+       // crearBBDD();
         conectarBBDD();
-        crearTablas();
+        //crearTablas();
         
         /*consultas*/
         System.out.println("------Consulta1------");
@@ -51,7 +51,13 @@ public class Practica_AD_2_6 {
         System.out.println("------Consulta6------");
         consulta6();
         System.out.println("------Consulta7------");
+        consulta7();
+        System.out.println("------Consulta8------");
         consulta8();
+        System.out.println("------Consulta9------");
+        consulta9();
+        System.out.println("------Consulta10------");
+        consulta10();
         /*consultas*/
         
         c.close();
@@ -273,7 +279,7 @@ public class Practica_AD_2_6 {
         }
     }
     private static void consulta6(){
-         try(Statement s = c.createStatement()){
+        try(Statement s = c.createStatement()){
             ResultSet rs = s.executeQuery(" SELECT e.nombre,e.apellidos,COUNT(v.idVendedor) as ventas FROM Empleados e" +
                                             " INNER JOIN Ventas v ON v.idVendedor = e.idE GROUP BY e.idE ORDER BY ventas DESC");
             
@@ -291,7 +297,33 @@ public class Practica_AD_2_6 {
             e.printStackTrace(System.err);
         }
     }
-     private static void consulta8(){
+    private static void consulta7(){
+         try(Statement s = c.createStatement()){
+            ResultSet rs = s.executeQuery("SELECT e.idE,e.nombre,e.apellidos FROM Empleados e" );
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("IdVendedor: "+rs.getInt("idE"));
+                System.out.println("Nombre: "+rs.getString("nombre"));
+                System.out.println("Apellido: "+rs.getString("apellidos"));
+                
+                ResultSet rs1 = s.executeQuery("SELECT idV,concepto FROM Ventas v WHERE idVendedor="+rs.getInt("idE"));
+                while(rs1.next()){
+                    System.out.println("[" +(i++) +"]");
+                    System.out.println("IdVenta: "+rs.getInt("idV"));
+                    System.out.println("Concepto: "+rs.getString("concepto"));
+                }
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+   
+    private static void consulta8(){
          try(Statement s = c.createStatement()){
             ResultSet rs = s.executeQuery(" SELECT c.idC,c.nombre,c.apellidos,c.telefono,COUNT(v.idCliente)as compras FROM Clientes c" +
                                             " INNER JOIN Ventas v ON v.idCliente = c.idC GROUP BY c.idC ORDER BY compras DESC;");
@@ -303,6 +335,52 @@ public class Practica_AD_2_6 {
                 System.out.println("Apellido: "+rs.getString("apellidos"));
                 System.out.println("Telefono: "+rs.getString("telefono"));
                 System.out.println("Compras: "+rs.getString("compras"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+    private static void consulta9(){
+         try(Statement s = c.createStatement()){
+            PreparedStatement ps = c.prepareStatement("SELECT o.calle,o.localidad,o.provincia FROM Oficina o WHERE localidad=?;");
+            String localidad = "Palencia";
+            ps.setString(1, localidad);
+            ResultSet rs=ps.executeQuery();
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Calle: "+rs.getString("calle"));
+                System.out.println("Localidad: "+rs.getString("localidad"));
+                System.out.println("Provincia: "+rs.getString("provincia"));
+            }
+           s.close();
+         }catch(SQLException e){
+            muestraErrorSQL(e);
+        }catch(Exception e){
+            e.printStackTrace(System.err);
+        }
+    }
+    private static void consulta10(){
+         try(Statement s = c.createStatement()){
+             ResultSet rs = s.executeQuery("SELECT idE FROM Empleados e");
+      
+            //int i = 1;
+            while(rs.next()){
+                PreparedStatement ps = c.prepareStatement("SELECT * FROM Empleados e WHERE e.idE = ?;");
+                ps.setInt(1, rs.getInt("idE"));
+                ResultSet rs1=ps.executeQuery();
+                int i = 1;
+                while(rs1.next()){
+                    System.out.println("[" +(i++) +"]");
+                    System.out.println("idEmpleado: "+rs1.getString("idE"));
+                    System.out.println("nombre: "+rs1.getString("nombre"));
+                    System.out.println("apellidos: "+rs1.getString("apellidos"));
+                    System.out.println("antiguedad: "+rs1.getString("antiguedad"));
+                    System.out.println("idOficina: "+rs1.getString("idOficina"));
+                }
             }
            s.close();
          }catch(SQLException e){

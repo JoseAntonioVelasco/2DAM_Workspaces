@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -20,14 +21,18 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int BOOKMARKS_ACTIVITY_REQUEST_CODE = 0;
+    private static final int ADDCONTACT_ACTIVITY_REQUEST_CODE = 1;
+    private static final int EDITCONTACT_ACTIVITY_REQUEST_CODE = 2;
+    private ArrayList<Contacto> contactos;
+    private Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //font added
-        final Typeface font = Typeface.createFromAsset( getAssets(), "fonts/fontawesome-webfont.ttf" );
+        font = Typeface.createFromAsset( getAssets(), "fonts/fontawesome-webfont.ttf" );
 
         //add the font to the buttons
         Button addContact = (Button)findViewById( R.id.button );
@@ -40,14 +45,95 @@ public class MainActivity extends AppCompatActivity {
         bookmarks.setTypeface(font);
         history.setTypeface(font);
 
-        //list
-        ListView lista = (ListView)findViewById(R.id.lista);
+        //lista
+        cargarDatos();
+        cargarlista();
 
-        /*Contact list*/
-        final ArrayList<Contacto> contactos = new ArrayList<Contacto>();
+        /*listeners for the bottom buttons*/
+        bookmarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bookmarks = new Intent(MainActivity.this, Bookmarks.class);
+                bookmarks.putParcelableArrayListExtra("CONTACTOS", contactos);
+                startActivityForResult(bookmarks, BOOKMARKS_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+        addContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edit = new Intent(MainActivity.this, AddContact.class);
+                edit.putParcelableArrayListExtra("CONTACTOS", contactos);
+                startActivityForResult(edit, ADDCONTACT_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ""));
+                startActivity(intent);
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO startactivity history of calls
+            }
+        });
+
+
+        /*listeners for the bottom buttons*/
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Check that it is the Bookmarks activity with an OK result
+        if(requestCode == BOOKMARKS_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // Updated ArrayList from Bookmarks
+                contactos = data.getParcelableArrayListExtra("CONTACTOS");
+                cargarlista();
+            }
+        }
+        else if(requestCode == ADDCONTACT_ACTIVITY_REQUEST_CODE){
+            if (resultCode == RESULT_OK) {
+                // Updated ArrayList from Addcontact
+                Contacto c = data.getParcelableExtra("CONTACTO");
+                c.setId(contactos.size()+1);
+                contactos.add(c);
+                cargarlista();
+            }
+        }
+        else if(requestCode == EDITCONTACT_ACTIVITY_REQUEST_CODE){
+            if (resultCode == RESULT_OK) {
+                // Updated ArrayList from editContact add the modified contact to the list
+                Contacto c = data.getParcelableExtra("CONTACTO");
+                System.out.println(c.getNombre());
+                for(int i=0;i<contactos.size();i++){
+                    if(contactos.get(i).getId()==c.getId()){
+                        System.out.println("entro");
+                        contactos.set(i,c);
+                    }
+                }
+                cargarlista();
+            }
+        }
+
+    }
+    private void cargarDatos(){
+        contactos = new ArrayList<Contacto>();
+
         contactos.add(new Contacto(1,R.drawable.diegop,"Diego P","El de la 09","567 345 123",false));
-        contactos.add(new Contacto(2,R.drawable.misi,"Diego Misi","","123 456 789",false));
-        /*Contact list*/
+        contactos.add(new Contacto(2,R.drawable.misi,"Diego Misi","","123 456 789",true));
+    }
+
+    private void cargarlista(){
+        ListView lista = (ListView)findViewById(R.id.lista);
 
         lista.setAdapter(new Adaptador(contactos, R.layout.entrada, this) {
             @Override
@@ -58,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagen);
 
                 final ToggleButton bookmark = (ToggleButton) view.findViewById(R.id.toggleButton);
-                if(bookmark.isChecked()){
+                Contacto contacto = (Contacto) entrada;
+                if(contacto.getBookmarked()){
+                    bookmark.setChecked(true);
                     bookmark.setTextColor(Color.parseColor("#5B0000"));
                 }
                 Button edit = (Button) view.findViewById(R.id.button2);
@@ -68,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 texto_superior_entrada.setText(((Contacto) entrada).getNombre());
                 texto_inferior_entrada.setText(((Contacto) entrada).getDescripcion());
                 telefono.setText(((Contacto) entrada).getTelefono());
-                imagen_entrada.setImageResource(((Contacto) entrada).getImagen());
+                //imagen_entrada.setImageResource(((Contacto) entrada).getImagen());
 
                 bookmark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -92,48 +180,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //start activity and edit contact in that activity
                         Intent edit = new Intent(MainActivity.this, AddContact.class);
-                        edit.putParcelableArrayListExtra("CONTACTOS", contactos);
-                        startActivity(edit);
+                        Contacto contacto = (Contacto) entrada;
+                        edit.putExtra("CONTACTO",contacto);
+                        startActivityForResult(edit,EDITCONTACT_ACTIVITY_REQUEST_CODE);
                     }
                 });
 
             }
         });
-
-        bookmarks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent bookmarks = new Intent(MainActivity.this, Bookmarks.class);
-                bookmarks.putParcelableArrayListExtra("CONTACTOS", contactos);
-                startActivity(bookmarks);
-            }
-        });
-
-        addContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent edit = new Intent(MainActivity.this, AddContact.class);
-                edit.putParcelableArrayListExtra("CONTACTOS", contactos);
-                startActivity(edit);
-            }
-        });
-
-
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ""));
-                startActivity(intent);
-            }
-        });
-
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO startactivity history of calls
-            }
-        });
-
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -142,6 +196,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

@@ -2,6 +2,7 @@ package com.example.practica;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
 public class Contacto implements Parcelable {
     private int id;
@@ -21,9 +22,11 @@ public class Contacto implements Parcelable {
     }
 
     protected Contacto(Parcel in) {
+        id = in.readInt();
         imagen = in.readInt();
         nombre = in.readString();
         descripcion = in.readString();
+        telefono = in.readString();
         byte tmpBookmarked = in.readByte();
         bookmarked = tmpBookmarked == 0 ? null : tmpBookmarked == 1;
     }
@@ -95,9 +98,11 @@ public class Contacto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeInt(imagen);
         dest.writeString(nombre);
         dest.writeString(descripcion);
+        dest.writeString(telefono);
         dest.writeByte((byte) (bookmarked == null ? 0 : bookmarked ? 1 : 2));
     }
 }

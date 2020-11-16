@@ -36,6 +36,7 @@ public class ConsultasSelect {
                 System.out.println("Apellidos: "+rs.getString("APELLIDOS"));
                 System.out.println("CP: "+rs.getString("CP"));
             }
+            
         }catch(SQLException e){
             muestraErrorSQL(e);
         }catch(Exception e){

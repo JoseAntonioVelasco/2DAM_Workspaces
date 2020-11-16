@@ -30,7 +30,7 @@ public class Practica_AD_1_9 {
 	public void escribirObjetos(ArrayList<Alumno> alumnos) {
 		ObjectOutputStream objetoOS = null;
 		try {
-			objetoOS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+			objetoOS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\cagan\\Desktop\\archivo\\ficherosAlumnos.dat"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -57,7 +57,7 @@ public class Practica_AD_1_9 {
 	public void leerObjetos(){
 		ObjectInputStream objetoIS = null;
 		try {
-			objetoIS = new ObjectInputStream(new FileInputStream("C:\\Users\\USER\\eclipse-workspace\\AD_Unidad1_Practica9\\src\\ficherosAlumnos.dat"));
+			objetoIS = new ObjectInputStream(new FileInputStream("C:\\Users\\cagan\\Desktop\\archivo\\ficherosAlumnos.dat"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

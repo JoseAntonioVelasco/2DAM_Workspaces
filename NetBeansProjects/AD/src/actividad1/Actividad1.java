@@ -8,6 +8,7 @@ package actividad1;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
@@ -21,6 +22,9 @@ import org.xml.sax.SAXException;
 public class Actividad1{
 	static FileWriter myWriter = null;
         private static Scanner sc;
+        private static ArrayList<Alumno> alumnos;
+        private static ArrayList<Modulo> modulos;
+        private static ArrayList<Nota> notas;
 	public static void main(String[] args) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
             sc =new Scanner(System.in);
             /*PARTE 1*/
@@ -61,10 +65,9 @@ public class Actividad1{
             //crearBBDD();
             //conectarBBDD();
             //crearTablas();
-            //anadirDatos();
-            //ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-            obtenerAlumnosXML(new File("C:\\Users\\cagan\\Desktop\\archivo\\archivo.xml"));
-            //mostrarAlumnos(alumnos);
+            leerFicheros(new File(ruta_destino));
+            quitarDuplicados();
+            anadirDatos();
             
             /*PARTE 2*/
 	}
@@ -287,7 +290,7 @@ public class Actividad1{
                
            
         }
-        static class Nota{
+        static class Nota implements Serializable{
             private Integer idAlumno;
             private Integer idModulo;
             private Double calificacion;
@@ -341,23 +344,22 @@ public class Actividad1{
                     Element elementoAlumno = (Element) nodoAlumno;
                     Integer id=null; String nombre=null; String apellidos=null;
                     try{
-                         id = Integer.parseInt(elementoAlumno.getElementsByTagName("id").item(0).getTextContent());
+                        id = Integer.parseInt(elementoAlumno.getElementsByTagName("id").item(0).getTextContent());
                     }catch(Exception e){
-                        objetoIncompleto("Alumno","id");
+                        id=(Integer)objetoIncompleto("Alumno","id");
                     }
                     try{
                          nombre = elementoAlumno.getElementsByTagName("nombre").item(0).getTextContent();
                     }catch(Exception e){
-                        objetoIncompleto("Alumno","nombre");
+                        nombre=(String)objetoIncompleto("Alumno","nombre");
                     }
                     try{
                          apellidos = elementoAlumno.getElementsByTagName("apellidos").item(0).getTextContent();
                     }catch(Exception e){
-                       objetoIncompleto("Alumno","apellidos");
+                       apellidos=(String)objetoIncompleto("Alumno","apellidos");
                     }
                     Alumno al = new Alumno(id,nombre,apellidos);
-                    alumnos.add(al);
-                          
+                    alumnos.add(al);                          
                 }
             }
 
@@ -379,7 +381,7 @@ public class Actividad1{
                     Integer id=null; String nombreCompleto=null; String ciclo=null;
                     Integer curso=null;Integer ECTS=null;
                     
-                   
+                    //TODO try-catch
                     id=Integer.parseInt(elementoModulo.getElementsByTagName("id").item(0).getTextContent());
                     nombreCompleto=elementoModulo.getElementsByTagName("nombreCompleto").item(0).getTextContent();
                     ciclo=elementoModulo.getElementsByTagName("ciclo").item(0).getTextContent();
@@ -392,6 +394,71 @@ public class Actividad1{
                 }
             }
              return modulos;
+        }
+        private static ArrayList<Nota> obtenerNotasXML(File f) throws SAXException, ParserConfigurationException, IOException{
+            ArrayList<Nota> notas = new ArrayList<Nota>();
+            
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.parse(f);
+            //obtenemos las notas
+            NodeList listaNotas = documento.getElementsByTagName("nota");
+
+            for(int i=0; i<listaNotas.getLength();i++) {
+                Node nodoNota = listaNotas.item(i);
+                if(nodoNota.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elementoNota = (Element) nodoNota;
+                    Integer idAlumno=null; Integer idModulo=null; Double calificacion=null;
+                    
+                    //TODO try-catch
+                    idAlumno=Integer.parseInt(elementoNota.getElementsByTagName("idAlumno").item(0).getTextContent());
+                    idModulo=Integer.parseInt(elementoNota.getElementsByTagName("idModulo").item(0).getTextContent());
+                    calificacion=Double.parseDouble(elementoNota.getElementsByTagName("calificacion").item(0).getTextContent());
+                
+                    
+                    Nota nota = new Nota(idAlumno,idModulo,calificacion);
+                    notas.add(nota);
+                    //si no encuentra algun dato saltara una exception
+                }
+            }
+            return notas;
+        }
+        private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
+            File[] files =f.listFiles();
+            ArrayList<Alumno> alumnos_aux;
+            ArrayList<Modulo> modulos_aux;
+            ArrayList<Nota> notas_aux;
+
+            for(int i=0; i<files.length; i++){
+                if(getFileExtension(files[i]).equals("xml")){
+                    alumnos_aux=obtenerAlumnosXML(files[i]);
+                    modulos_aux=obtenerModulosXML(files[i]);
+                    notas_aux=obtenerNotasXML(files[i]);
+                    
+                    alumnos.addAll(alumnos_aux);
+                    modulos.addAll(modulos_aux);
+                    notas.addAll(notas_aux);
+                }else{
+                    ObjectInputStream objetoIS = null;
+                    objetoIS = new ObjectInputStream(new FileInputStream(files[i]));
+
+                    Object object = null;
+                    while((object = objetoIS.readObject()) != null) {
+                        if(object instanceof Alumno){
+                            Alumno al = (Alumno) object;
+                            alumnos.add(al);
+                        }else if(object instanceof Modulo){
+                            Modulo mod = (Modulo) object;
+                            modulos.add(mod);
+                        }else{
+                            Nota nota = (Nota) object;
+                            notas.add(nota);
+                        }
+
+                    }
+                    objetoIS.close();
+                }
+            }
         }
         private static Object objetoIncompleto(String tipoObjeto,String atributo){
             System.out.println("Objeto incompleto. Desea completarlo?");
@@ -406,7 +473,7 @@ public class Actividad1{
                     }else{
                         System.out.println("apellidos: ");
                         String apellidos = sc.nextLine();
-                        retrun apellidos;
+                        return apellidos;
                     }
                    
                 }
@@ -420,54 +487,50 @@ public class Actividad1{
                 }
             }
         }
-        private static void obtenerObjetosDAT(File f) throws FileNotFoundException, IOException, ClassNotFoundException{
-            ObjectInputStream objetoIS = null;
-            objetoIS = new ObjectInputStream(new FileInputStream(f));
-
-            Object object = null;
-            while((object = objetoIS.readObject()) != null) {
-                if(object instanceof Alumno){
-                    Alumno al = (Alumno) object;
-                    System.out.println(al.getApellidos());
-                    System.out.println(al.getNombre());
-      
-                   
-                }
-                
-            }
-
-            objetoIS.close();
-            
-	}
-        private static void escribirObjetos() throws FileNotFoundException, IOException {
-            ObjectOutputStream objetoOS = null;
-            objetoOS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\cagan\\Desktop\\archivo\\ficherosAlumnos.dat"));
-           
-            objetoOS.close();
-	}
-        private static void mostrarAlumnos(ArrayList<Alumno> alumnos){
-            for(int i=0; i<alumnos.size();i++){
-                System.out.println(alumnos.get(i).getIdAlumno());
-                System.out.println(alumnos.get(i).getNombre());
-                System.out.println(alumnos.get(i).getApellidos());
-              
-            }
-            
+        
+        private static void quitarDuplicados(){
+            //TODO esto no funciona bien
+            LinkedHashSet<Alumno> hashSet = new LinkedHashSet<>(alumnos);
+            alumnos = new ArrayList<>(hashSet);
+            LinkedHashSet<Modulo> hashSet2 = new LinkedHashSet<>(modulos);
+            modulos = new ArrayList<>(hashSet2);
+            LinkedHashSet<Nota> hashSet3 = new LinkedHashSet<>(notas);
+            notas = new ArrayList<>(hashSet3);
         }
-        private static void anadirDatos(){
-            //TODO se addean todos los datos de los ficheros xml y dat a las tablas de bbdd
-                //obtener los arraylists de alumnos, modulos, etc..
-                //meter todos los datos obtenidos a la bbdd
+        private static void anadirDatos() throws SQLException{
+            for(int i=0; i<alumnos.size(); i++){
+                insertAlumno(alumnos.get(i));
+            }
+            for(int i=0; i<modulos.size(); i++){
+                insertModulo(modulos.get(i));
+            }
+            for(int i=0; i<notas.size(); i++){
+                insertNota(notas.get(i));
+            }
         }
         
-        private static void insertAlumno(Alumno al){
-            //TODO
+        private static void insertAlumno(Alumno al) throws SQLException{
+            PreparedStatement s = c.prepareStatement("INSERT INTO Alumno (id_alumno,nombre,apellidos) VALUES (?,?,?)");
+            s.setInt(1, al.getIdAlumno());
+            s.setString(2, al.getNombre());
+            s.setString(3, al.getApellidos());
+            s.executeUpdate();
         }
-        private static void insertModulo(Modulo mod){
-            //TODO
+        private static void insertModulo(Modulo mod) throws SQLException{
+            PreparedStatement s = c.prepareStatement("INSERT INTO Modulo (id_modulo,nombreCompleto,ciclo,curso,ECTS) VALUES (?,?,?,?,?)");
+            s.setInt(1, mod.getIdModulo());
+            s.setString(2, mod.getNombreCompleto());
+            s.setString(3, mod.getCiclo());
+            s.setInt(4,mod.getCurso());
+            s.setInt(5,mod.getECTS());
+            s.executeUpdate();
         }
-        private static void insertNota(Nota nota){
-            //TODO
+        private static void insertNota(Nota nota) throws SQLException{
+            PreparedStatement s = c.prepareStatement("INSERT INTO Notas (id_modulo,id_alumno,calificacion) VALUES (?,?,?)");
+            s.setInt(1, nota.getIdModulo());
+            s.setInt(2, nota.getIdAlumno());
+            s.setDouble(3, nota.getCalificacion());
+            s.executeUpdate();
         }
         
 }

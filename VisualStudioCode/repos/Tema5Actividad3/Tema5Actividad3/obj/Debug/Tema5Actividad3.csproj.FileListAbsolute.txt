@@ -1,0 +1,12 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\bin\Debug\Tema5Actividad3.dll
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\bin\Debug\Tema5Actividad3.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\UserControl1.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3_MarkupCompile.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3_MarkupCompile.lref
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\UserControl1.baml
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.g.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.Properties.Resources.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.csproj.GenerateResource.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.dll
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema5Actividad3\Tema5Actividad3\obj\Debug\Tema5Actividad3.pdb

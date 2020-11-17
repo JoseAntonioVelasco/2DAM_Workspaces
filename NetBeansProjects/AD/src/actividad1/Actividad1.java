@@ -65,7 +65,9 @@ public class Actividad1{
             //crearBBDD();
             //conectarBBDD();
             //crearTablas();
-            leerFicheros(new File(ruta_destino));
+            //leerFicheros(new File(ruta_destino));
+            leerFicheros(new File("C:\\Users\\cagan\\Desktop\\Nueva carpeta"));
+            System.out.println("finish");
             quitarDuplicados();
             anadirDatos();
             
@@ -425,6 +427,10 @@ public class Actividad1{
         }
         private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
             File[] files =f.listFiles();
+            alumnos=new ArrayList<Alumno>();
+            modulos=new ArrayList<Modulo>();
+            notas=new ArrayList<Nota>();
+            
             ArrayList<Alumno> alumnos_aux;
             ArrayList<Modulo> modulos_aux;
             ArrayList<Nota> notas_aux;

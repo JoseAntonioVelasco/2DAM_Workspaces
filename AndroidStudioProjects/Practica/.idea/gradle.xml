@@ -11,10 +11,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-<<<<<<< HEAD
-=======
             <option value="$PROJECT_DIR$/app" />
->>>>>>> parent of 04993fd... 17/11/2020 clase
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

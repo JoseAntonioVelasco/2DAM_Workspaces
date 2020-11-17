@@ -339,18 +339,25 @@ public class Actividad1{
                 Node nodoAlumno = listaAlumnos.item(i);
                 if(nodoAlumno.getNodeType() == Node.ELEMENT_NODE) {
                     Element elementoAlumno = (Element) nodoAlumno;
+                    Integer id=null; String nombre=null; String apellidos=null;
                     try{
-                        Alumno al = new Alumno(
-                        Integer.parseInt(elementoAlumno.getElementsByTagName("id").item(0).getTextContent()),
-                        elementoAlumno.getElementsByTagName("nombre").item(0).getTextContent(),
-                        elementoAlumno.getElementsByTagName("apellidos").item(0).getTextContent());
-                        alumnos.add(al);
+                         id = Integer.parseInt(elementoAlumno.getElementsByTagName("id").item(0).getTextContent());
                     }catch(Exception e){
-                        //si no encuentra algun dato saltara un nullpointerexception
-                        System.out.println("Informacion incompleta. Desea Completar?");
-                        objetoIncompleto("Alumno");
+                        objetoIncompleto("Alumno","id");
                     }
-                    
+                    try{
+                         nombre = elementoAlumno.getElementsByTagName("nombre").item(0).getTextContent();
+                    }catch(Exception e){
+                        objetoIncompleto("Alumno","nombre");
+                    }
+                    try{
+                         apellidos = elementoAlumno.getElementsByTagName("apellidos").item(0).getTextContent();
+                    }catch(Exception e){
+                       objetoIncompleto("Alumno","apellidos");
+                    }
+                    Alumno al = new Alumno(id,nombre,apellidos);
+                    alumnos.add(al);
+                          
                 }
             }
 
@@ -369,29 +376,39 @@ public class Actividad1{
                 Node nodoModulo = listaModulos.item(i);
                 if(nodoModulo.getNodeType() == Node.ELEMENT_NODE) {
                     Element elementoModulo = (Element) nodoModulo;
-
-                    Modulo mod = new Modulo(
-                    Integer.parseInt(elementoModulo.getElementsByTagName("id").item(0).getTextContent()),
-                    elementoModulo.getElementsByTagName("nombreCompleto").item(0).getTextContent(),
-                    elementoModulo.getElementsByTagName("ciclo").item(0).getTextContent(),
-                    Integer.parseInt(elementoModulo.getElementsByTagName("curso").item(0).getTextContent()),
-                    Integer.parseInt(elementoModulo.getElementsByTagName("ECTS").item(0).getTextContent()));
-
+                    Integer id=null; String nombreCompleto=null; String ciclo=null;
+                    Integer curso=null;Integer ECTS=null;
+                    
+                   
+                    id=Integer.parseInt(elementoModulo.getElementsByTagName("id").item(0).getTextContent());
+                    nombreCompleto=elementoModulo.getElementsByTagName("nombreCompleto").item(0).getTextContent();
+                    ciclo=elementoModulo.getElementsByTagName("ciclo").item(0).getTextContent();
+                    curso=Integer.parseInt(elementoModulo.getElementsByTagName("curso").item(0).getTextContent());
+                    ECTS=Integer.parseInt(elementoModulo.getElementsByTagName("ECTS").item(0).getTextContent());
+                    
+                    Modulo mod = new Modulo(id,nombreCompleto,ciclo,curso,ECTS);
                     modulos.add(mod);
                     //si no encuentra algun dato saltara una exception
                 }
             }
              return modulos;
         }
-        private static Object objetoIncompleto(String tipoObjeto){
+        private static Object objetoIncompleto(String tipoObjeto,String atributo){
+            System.out.println("Objeto incompleto. Desea completarlo?");
+            
             switch (tipoObjeto) {
                 case "Alumno" -> {
-                    System.out.println("nombre: ");
-                    String nombre = sc.nextLine();
-                    System.out.println("apellidos: ");
-                    String apellidos = sc.nextLine();
-                    Alumno al = new Alumno(10,nombre,apellidos);
-                    return al;
+                    
+                    if(atributo.equals("nombre")){
+                        System.out.println("nombre: ");
+                        String nombre = sc.nextLine();
+                        return nombre;
+                    }else{
+                        System.out.println("apellidos: ");
+                        String apellidos = sc.nextLine();
+                        retrun apellidos;
+                    }
+                   
                 }
                 case "Modulo" -> {
                     Modulo mod = new Modulo(1,"","",1,1);

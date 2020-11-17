@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/darkBackground"
+    >
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        app:srcCompat="@drawable/face"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        />
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+
+        android:textColor="@color/darkText"
+        android:textColorHint="@color/darkText"
+       />
+
+    <EditText
+        android:id="@+id/descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Descripcion"
+        android:inputType="textPersonName"
+
+        android:textColor="@color/darkText"
+        android:textColorHint="@color/darkText"
+        />
+    <EditText
+        android:id="@+id/telefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="textPersonName"
+
+        android:textColor="@color/darkText"
+        android:textColorHint="@color/darkText"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icon_cross"
+            android:layout_gravity="left"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+
+            android:textColor="@color/red"
+            android:textSize="30sp"
+            android:backgroundTint="@color/darkButton"/>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icon_check"
+            android:layout_gravity="right"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+
+            android:textColor="@color/green"
+            android:textSize="30sp"
+            android:backgroundTint="@color/darkButton"/>
+
+    </FrameLayout>
+</LinearLayout>

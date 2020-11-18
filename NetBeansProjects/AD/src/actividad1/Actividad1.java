@@ -9,6 +9,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -25,11 +27,11 @@ public class Actividad1{
         private static ArrayList<Modulo> modulos;
         private static ArrayList<Nota> notas;
         private static String ruta_destino;
-	public static void main(String[] args) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
             sc =new Scanner(System.in);
             /*PARTE 1*/
-            /*System.out.println("Escribe la ruta donde quieres que se guarden los ficheros: ");
-            String ruta_destino = sc.nextLine();
+            System.out.println("Escribe la ruta donde quieres que se guarden los ficheros: ");
+            ruta_destino = sc.nextLine();
 
 
             File directorio = new File(ruta_destino);
@@ -58,19 +60,23 @@ public class Actividad1{
                     myWriter.close();
             } catch (IOException e) {
                     e.printStackTrace();
-            }*/
+            }
             /*PARTE 1*/
             
             /*PARTE 2*/
-            //crearBBDD();
-            //conectarBBDD();
-            //crearTablas();
-            //leerFicheros(new File(ruta_destino));
-            leerFicheros(new File("C:\\Users\\cagan\\Desktop\\Nueva carpeta"));
-            quitarDuplicados();
-            anadirDatos();
-            
+            leerFicheros(new File(ruta_destino));
+            try {
+                crearBBDD();
+                conectarBBDD();
+                crearTablas();
+                anadirDatos();
+                buscarDatos();
+            } catch (SQLException ex) {
+                //Logger.getLogger(Actividad1.class.getName()).log(Level.SEVERE, null, ex);
+                muestraErrorSQL(ex);
+            }
             /*PARTE 2*/
+            sc.close();
 	}
 	public static void recursion(File[] archivos,String ruta_destino,String ruta_origen,File log) {
             for(int i=0; i<archivos.length;i++) {
@@ -162,15 +168,9 @@ public class Actividad1{
             s.close();
             c.close();
         }
-        private static void conectarBBDD(){
-            try{
-                c = DriverManager.getConnection(urlConnection, user, pwd);
-                System.out.println("Conexion realizada");
-            }catch(SQLException e){
-                muestraErrorSQL(e);
-            }catch(Exception e){
-                e.printStackTrace(System.err);
-            }
+        private static void conectarBBDD() throws SQLException{
+            c = DriverManager.getConnection(urlConnection, user, pwd);
+            System.out.println("Conexion realizada");
         }
         private static void crearTablas() throws SQLException{
             Statement s = c.createStatement();
@@ -191,10 +191,16 @@ public class Actividad1{
                     + " FOREIGN KEY (id_modulo) REFERENCES Modulo(id_modulo));");
             s.close();
         }
-        private static void muestraErrorSQL(SQLException e){
-            System.err.println("SQL ERROR mensaje: "+e.getMessage());
-            System.err.println("SQL Estado: "+e.getSQLState());
-            System.err.println("SQL codigo especifico: "+e.getErrorCode());
+        private static void muestraErrorSQL(SQLException e){           
+            try {
+                FileWriter myWriter = new FileWriter(ruta_destino+"//erroresSQL.txt");
+                myWriter.append("SQL Estado: "+e.getSQLState()+"\n");
+                myWriter.append("SQL codigo especifico: "+e.getErrorCode()+"\n");
+                myWriter.append("SQL ERROR mensaje: "+e.getMessage()+"\n");
+                myWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Actividad1.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
         
         static class Alumno implements Serializable{
@@ -290,7 +296,12 @@ public class Actividad1{
             public void setECTS(Integer ECTS) {
                 this.ECTS = ECTS;
             }
-               
+            public Boolean comparar(Modulo mod){
+                return this.nombreCompleto.equals(mod.getNombreCompleto())
+                        &&this.curso==mod.getCurso()
+                        &&this.ciclo.equals(mod.getCiclo())
+                        &&this.ECTS==mod.getECTS();
+            }   
            
         }
         static class Nota implements Serializable{
@@ -332,7 +343,6 @@ public class Actividad1{
         }
               
         private static ArrayList<Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
-            ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
               
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -349,27 +359,35 @@ public class Actividad1{
                     try{
                         id = Integer.parseInt(elementoAlumno.getElementsByTagName("id").item(0).getTextContent());
                     }catch(Exception e){
-                        id=(Integer)objetoIncompleto("Alumno","id");
+                        if(preguntarDescartar_objetoIncompleto("Alumno")){
+                            id=(Integer)objetoIncompleto("Alumno","id");
+                        } else{continue;}
                     }
                     try{
                          nombre = elementoAlumno.getElementsByTagName("nombre").item(0).getTextContent();
                     }catch(Exception e){
-                        nombre=(String)objetoIncompleto("Alumno","nombre");
+                        if(preguntarDescartar_objetoIncompleto("Alumno")){
+                            nombre=(String)objetoIncompleto("Alumno","nombre");
+                        }else{continue;}
                     }
                     try{
                          apellidos = elementoAlumno.getElementsByTagName("apellidos").item(0).getTextContent();
                     }catch(Exception e){
-                       apellidos=(String)objetoIncompleto("Alumno","apellidos");
+                        if(preguntarDescartar_objetoIncompleto("Alumno")){
+                            apellidos=(String)objetoIncompleto("Alumno","apellidos");
+                        }else{continue;}
                     }
                     Alumno al = new Alumno(id,nombre,apellidos);
-                    alumnos.add(al);                          
+                    if(!repetido(al)){
+                        alumnos.add(al);
+                    }
+                                 
                 }
             }
 
             return alumnos;         
         }
         private static ArrayList<Modulo> obtenerModulosXML(File f) throws SAXException, ParserConfigurationException, IOException{
-            ArrayList<Modulo> modulos = new ArrayList<Modulo>();
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -384,22 +402,56 @@ public class Actividad1{
                     Integer id=null; String nombreCompleto=null; String ciclo=null;
                     Integer curso=null;Integer ECTS=null;
                     
-                    //TODO try-catch
-                    id=Integer.parseInt(elementoModulo.getElementsByTagName("id").item(0).getTextContent());
-                    nombreCompleto=elementoModulo.getElementsByTagName("nombreCompleto").item(0).getTextContent();
-                    ciclo=elementoModulo.getElementsByTagName("ciclo").item(0).getTextContent();
-                    curso=Integer.parseInt(elementoModulo.getElementsByTagName("curso").item(0).getTextContent());
-                    ECTS=Integer.parseInt(elementoModulo.getElementsByTagName("ECTS").item(0).getTextContent());
+                    try{
+                        id=Integer.parseInt(elementoModulo.getElementsByTagName("id").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Modulo")){
+                            id=(Integer)objetoIncompleto("Modulo","id");
+                        }else{continue;}
+                    }
+                    
+                    try{
+                        nombreCompleto=elementoModulo.getElementsByTagName("nombreCompleto").item(0).getTextContent();
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Modulo")){
+                            nombreCompleto=(String)objetoIncompleto("Modulo","nombre");
+                        }else{continue;}
+                    }
+                    
+                    try{
+                        ciclo=elementoModulo.getElementsByTagName("ciclo").item(0).getTextContent();
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Modulo")){
+                            ciclo=(String)objetoIncompleto("Modulo","ciclo");
+                        }else{continue;}
+                    }
+                    
+                    try{
+                        curso=Integer.parseInt(elementoModulo.getElementsByTagName("curso").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Modulo")){
+                            curso=(Integer)objetoIncompleto("Modulo","curso");
+                        }else{continue;}
+                    }
+                    
+                    try{
+                        ECTS=Integer.parseInt(elementoModulo.getElementsByTagName("ECTS").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Modulo")){
+                            ECTS=(Integer)objetoIncompleto("Modulo","ECTS");
+                        }else{continue;}
+                    }
                     
                     Modulo mod = new Modulo(id,nombreCompleto,ciclo,curso,ECTS);
-                    modulos.add(mod);
-                    //si no encuentra algun dato saltara una exception
+                    if(!repetido(mod)){
+                        modulos.add(mod);
+                    }else{continue;}
+
                 }
             }
              return modulos;
         }
         private static ArrayList<Nota> obtenerNotasXML(File f) throws SAXException, ParserConfigurationException, IOException{
-            ArrayList<Nota> notas = new ArrayList<Nota>();
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -414,38 +466,55 @@ public class Actividad1{
                     Integer idAlumno=null; Integer idModulo=null; Double calificacion=null;
                     
                     //TODO try-catch
-                    idAlumno=Integer.parseInt(elementoNota.getElementsByTagName("idAlumno").item(0).getTextContent());
-                    idModulo=Integer.parseInt(elementoNota.getElementsByTagName("idModulo").item(0).getTextContent());
-                    calificacion=Double.parseDouble(elementoNota.getElementsByTagName("calificacion").item(0).getTextContent());
-                
+                    try{
+                        idAlumno=Integer.parseInt(elementoNota.getElementsByTagName("idAlumno").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Nota")){
+                            idAlumno=(Integer)objetoIncompleto("Nota","idAlumno");
+                        }else{continue;}
+                    }
                     
+                    try{
+                        idModulo=Integer.parseInt(elementoNota.getElementsByTagName("idModulo").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Nota")){
+                            idModulo=(Integer)objetoIncompleto("Nota","idModulo");
+                        }else{continue;}
+                    }
+                     
+                    try{
+                        calificacion=Double.parseDouble(elementoNota.getElementsByTagName("calificacion").item(0).getTextContent());
+                    }catch(Exception e){
+                        if(preguntarDescartar_objetoIncompleto("Nota")){
+                            calificacion=(Double)objetoIncompleto("Nota","calificacion");
+                        }else{continue;}
+                    }
+
                     Nota nota = new Nota(idAlumno,idModulo,calificacion);
-                    notas.add(nota);
-                    //si no encuentra algun dato saltara una exception
+                    if(!repetido(nota)){
+                        notas.add(nota);
+                    }
+                  
                 }
             }
             return notas;
         }
         private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
             File[] files =f.listFiles();
-            alumnos=new ArrayList<Alumno>();
-            modulos=new ArrayList<Modulo>();
-            notas=new ArrayList<Nota>();
+            alumnos=new ArrayList<>();
+            modulos=new ArrayList<>();
+            notas=new ArrayList<>();
             
-            ArrayList<Alumno> alumnos_aux;
-            ArrayList<Modulo> modulos_aux;
-            ArrayList<Nota> notas_aux;
-
+            //recorremos todos los ficheros que hay
             for(int i=0; i<files.length; i++){
                 if(getFileExtension(files[i]).equals("xml")){
-                    alumnos_aux=obtenerAlumnosXML(files[i]);
-                    modulos_aux=obtenerModulosXML(files[i]);
-                    notas_aux=obtenerNotasXML(files[i]);
-                    
-                    alumnos.addAll(alumnos_aux);
-                    modulos.addAll(modulos_aux);
-                    notas.addAll(notas_aux);
-                }else{
+                    //AQUI XML
+                    //obtenemos todos los objetos del xml y los metemos en sus respectivos arrays
+                    obtenerAlumnosXML(files[i]);
+                    obtenerModulosXML(files[i]);
+                    obtenerNotasXML(files[i]);
+                }else if(getFileExtension(files[i]).equals("dat")){
+                    //AQUI DAT
                     ObjectInputStream objetoIS = null;
                     objetoIS = new ObjectInputStream(new FileInputStream(files[i]));
 
@@ -453,71 +522,136 @@ public class Actividad1{
                     while((object = objetoIS.readObject()) != null) {
                         if(object instanceof Alumno){
                             Alumno al = (Alumno) object;
-                            alumnos.add(al);
+                            if(!repetido(al)){
+                                alumnos.add(al);
+                            }
                         }else if(object instanceof Modulo){
                             Modulo mod = (Modulo) object;
-                            modulos.add(mod);
+                            if(!repetido(mod)){
+                                modulos.add(mod);
+                            }
                         }else{
                             Nota nota = (Nota) object;
-                            notas.add(nota);
+                            if(!repetido(nota)){
+                                notas.add(nota);
+                            }
                         }
-
                     }
                     objetoIS.close();
                 }
             }
         }
+        private static Boolean preguntarDescartar_objetoIncompleto(String tipo){
+            System.out.println(tipo+" incompleto. Desea completarlo?");
+            System.out.println("1)Si");
+            System.out.println("2)No");
+            System.out.print("Opcion: ");
+            Integer opcion = sc.nextInt();sc.nextLine();
+            if(opcion==1){
+                return true;
+            }else{
+                return false;
+            }
+        }
         private static Object objetoIncompleto(String tipoObjeto,String atributo){
-            System.out.println("Objeto incompleto. Desea completarlo?");
             
             switch (tipoObjeto) {
                 case "Alumno" -> {
-                    
-                    if(atributo.equals("nombre")){
-                        System.out.println("nombre: ");
-                        String nombre = sc.nextLine();
-                        return nombre;
+                    if(atributo.equals("id")){
+                        System.out.print("id: ");
+                        Integer id = sc.nextInt();sc.nextLine();
+                        return id;
+                    }else if(atributo.equals("nombre")){
+                        System.out.print("nombre: ");
+                        return sc.nextLine();
                     }else{
-                        System.out.println("apellidos: ");
-                        String apellidos = sc.nextLine();
-                        return apellidos;
+                        System.out.print("apellidos: ");
+                        return sc.nextLine();
                     }
-                   
+
                 }
                 case "Modulo" -> {
-                    Modulo mod = new Modulo(1,"","",1,1);
-                    return mod;
+                    if(atributo.equals("id")){
+                        System.out.print("id: ");
+                        Integer id = sc.nextInt();sc.nextLine();
+                        return id;
+                    }else if(atributo.equals("nombre")){
+                        System.out.print("nombre: ");
+                        return sc.nextLine();
+                    }else if(atributo.equals("ciclo")){
+                        System.out.print("ciclo: ");
+                        return sc.nextLine();
+                    }else if(atributo.equals("curso")){
+                        System.out.print("curso: ");
+                        Integer id = sc.nextInt();sc.nextLine();
+                        return id;
+                    }else{
+                        System.out.print("ECTS: ");
+                        Integer id = sc.nextInt();sc.nextLine();
+                        return id;
+                    }
                 }
                 default -> {
-                    Nota nota = new Nota(1,1,1.0);
-                    return nota;
+                    if(atributo.equals("idAlumno")){
+                        System.out.print("id alumno: ");
+                        Integer id = sc.nextInt();sc.nextLine();
+                        return id;
+                    }else if(atributo.equals("idModulo")){
+                        System.out.print("id modulo: ");
+                        return sc.nextInt();
+                    }else{
+                        System.out.print("calificacion: ");
+                        Double id = sc.nextDouble();sc.nextLine();
+                        return id;
+                    }
                 }
             }
+    
+        }
+        private static Boolean repetido(Object objeto) throws IOException{
+            if(objeto instanceof Alumno){
+                Alumno al = (Alumno)objeto;
+                for(int i=0;i<alumnos.size();i++){
+                    if(al.getIdAlumno()==alumnos.get(i).getIdAlumno()){
+                        //CONFLICTO alumnos con mismo id
+                        duplicadoAlumno(alumnos.get(i),al);
+                        return true;
+                    }
+                    if(al.comparar(alumnos.get(i))){
+                        //CONFLICTO alumnos con distinto id pero misma informacion
+                        duplicadoAlumno(alumnos.get(i),al);
+                        return true;
+                    }
+                }
+            }else if(objeto instanceof Modulo){
+                Modulo mod = (Modulo)objeto;
+                for(int i=0;i<modulos.size();i++){
+                    if(mod.getIdModulo()==modulos.get(i).getIdModulo()){
+                        //CONFLICTO alumnos con mismo id
+                        duplicadoModulo(modulos.get(i),mod);
+                        return true;
+                    }
+                    if(mod.comparar(modulos.get(i))){
+                        //CONFLICTO alumnos con distinto id pero misma informacion
+                        duplicadoModulo(modulos.get(i),mod);
+                        return true;
+                    }
+                }
+            }else{
+                Nota nota = (Nota)objeto;
+                for(int i=0;i<notas.size();i++){
+                    if(nota.getIdModulo()==notas.get(i).getIdModulo() && nota.getIdAlumno()==notas.get(i).getIdAlumno()){
+                       //CONFLICTO un alumno no puede tener tener dos notas en el mismo modulo
+                       duplicadoNota(notas.get(i),nota);
+                       return true;
+                    }
+                }
+            }
+            return false;
         }
         
-        private static void quitarDuplicados() throws IOException{
-            //TODO
-            //quitar duplicados alumnos
-            for(int i=0; i<alumnos.size(); i++){
-                for(int j=0; i<alumnos.size(); j++){
-                    if(alumnos.get(j).getIdAlumno()==alumnos.get(i).getIdAlumno()){
-                        //CONFLICTO alumnos con mismo id
-                        Alumno ali = alumnos.get(i);Alumno alj = alumnos.get(j);
-                        duplicadoAlumno(ali,alj);
-                    }
-                    if(alumnos.get(i).comparar(alumnos.get(j))){
-                        //CONFLICTO alumnos con distinto id pero misma informacion
-                        Alumno ali = alumnos.get(i);Alumno alj = alumnos.get(j);
-                        duplicadoAlumno(ali,alj);
-                    }
-                }
-            }
-            //quitar duplicados modulos
-            
-            //quitar duplicados notas
-        }
         private static void duplicadoAlumno(Alumno ali,Alumno alj) throws IOException{
-            System.out.println("Conflicto: alumno con misma id // mismos datos");
+            System.out.println("Conflicto alumno: misma id // mismos datos");
             System.out.println("- - -ALUMNO 1- - -");
             System.out.println("Id: "+ali.getIdAlumno());
             System.out.println("nombre: "+ali.getNombre());
@@ -526,31 +660,74 @@ public class Actividad1{
             System.out.println("Id: "+alj.getIdAlumno());
             System.out.println("nombre: "+alj.getNombre());
             System.out.println("Apellidos: "+alj.getApellidos());
-            System.out.println("Elije que alumno guardar: ");
+            System.out.print("Elije que alumno guardar: ");
+            Integer opcion = sc.nextInt();sc.nextLine();
+            if(opcion == 1){
+                guardarDuplicadosDescartados(ruta_destino,alj);
+            }else{
+                alumnos.remove(ali);
+                alumnos.add(alj);
+                guardarDuplicadosDescartados(ruta_destino,ali);    
+            }
+        } 
+        private static void duplicadoModulo(Modulo ali,Modulo alj) throws IOException{
+            System.out.println("Conflicto modulo: misma id // mismos datos");
+            System.out.println("- - -MODULO 1- - -");
+            System.out.println("Id: "+ali.getIdModulo());
+            System.out.println("nombre: "+ali.getNombreCompleto());
+            System.out.println("ciclo: "+ali.getCiclo());
+            System.out.println("curso: "+ali.getCurso());
+            System.out.println("ECTS: "+ali.getECTS());
+            System.out.println("- - -MODULO 2- - -");
+            System.out.println("Id: "+alj.getIdModulo());
+            System.out.println("nombre: "+alj.getNombreCompleto());
+            System.out.println("ciclo: "+alj.getCiclo());
+            System.out.println("curso: "+alj.getCurso());
+            System.out.println("ECTS: "+alj.getECTS());
+            System.out.print("Elije que modulo guardar: ");
             Integer opcion = sc.nextInt();
             if(opcion == 1){
-                alumnos.remove(ali);
-                guardarDuplicadosDescartados(ruta_destino,ali);
+                guardarDuplicadosDescartados(ruta_destino,alj);
             }else{
-                alumnos.remove(alj);
-                guardarDuplicadosDescartados(ruta_destino,alj);    
+                modulos.remove(ali);
+                modulos.add(alj);
+                guardarDuplicadosDescartados(ruta_destino,ali);    
+            }
+        }
+         private static void duplicadoNota(Nota ali,Nota alj) throws IOException{
+            System.out.println("Conflicto alumno: misma id // mismos datos");
+            System.out.println("- - -NOTA 1- - -");
+            System.out.println("Id alumno: "+ali.getIdAlumno());
+            System.out.println("Id modulo: "+ali.getIdModulo());
+            System.out.println("calificacion: "+ali.getCalificacion());
+            System.out.println("- - -NOTA2 2- - -");
+            System.out.println("Id alumno: "+alj.getIdAlumno());
+            System.out.println("Id modulo: "+alj.getIdModulo());
+            System.out.println("calificacion: "+alj.getCalificacion());
+            System.out.print("Elije que nota guardar: ");
+            Integer opcion = sc.nextInt();sc.nextLine();
+            if(opcion == 1){
+                guardarDuplicadosDescartados(ruta_destino,alj);
+            }else{
+                notas.remove(ali);
+                notas.add(alj);
+                guardarDuplicadosDescartados(ruta_destino,ali);    
             }
         } 
         private static void guardarDuplicadosDescartados(String ruta_destino,Object objeto) throws IOException{
-            FileWriter myWriter = new FileWriter(ruta_destino+"//duplicadosDescartados.txt");
+            FileWriter myWriter = new FileWriter(ruta_destino+"//duplicadosDescartados.txt",true);
             if(objeto instanceof Alumno){
                 Alumno al = (Alumno)objeto;
-                myWriter.write("Alumno: "+al.getIdAlumno()+", "+al.getNombre()+", "+al.getApellidos());
+                myWriter.append("Alumno: "+al.getIdAlumno()+", "+al.getNombre()+", "+al.getApellidos()+"\n");
             }else if(objeto instanceof Modulo){
                 Modulo mod = (Modulo)objeto;
-                //myWriter.write("Alumno: "+id+", "+mod.getNombre()+", "+al.getApellidos());
+                myWriter.append("Modulo: "+mod.getIdModulo()+", "+mod.getNombreCompleto()+", "+mod.getCiclo()+", "+mod.getCurso()+", "+mod.getECTS()+"\n");
             }else{
-                Actividad1Maps.Nota nota = (Actividad1Maps.Nota)objeto;
-                //
+                Nota nota = (Nota)objeto;
+                myWriter.append("Nota: "+nota.getIdAlumno()+", "+nota.getIdModulo()+", "+nota.getCalificacion()+"\n");
             }
             myWriter.close();
-               
-            
+        
         }
         private static void anadirDatos() throws SQLException{
             for(int i=0; i<alumnos.size(); i++){
@@ -587,5 +764,103 @@ public class Actividad1{
             s.setDouble(3, nota.getCalificacion());
             s.executeUpdate();
         }
-        
+        private static void buscarDatos(){
+            System.out.println("1)Buscar por campos.");
+            System.out.println("2)Mostrar todos los datos de la tabla.");
+            System.out.print("Opcion: ");
+            Integer option = sc.nextInt();sc.nextLine();
+            
+            if(option ==1){
+                System.out.println("En que tabla quieres buscar: ");
+                System.out.println("1)Alumnos");
+                System.out.println("2)Modulos");
+                System.out.println("3)Notas");         
+                System.out.print("Opcion: ");
+                Integer opcion = sc.nextInt();sc.nextLine();
+                switch (opcion) {
+                    case 1 -> {
+                        System.out.println("Por que campo quieres buscar");
+                        System.out.println("1)Id");
+                        System.out.println("2)Nombre");
+                        System.out.println("3)Apellidos");    
+                        System.out.print("Opcion: ");
+                        Integer opcion1 = sc.nextInt();
+                        switch (opcion1) {
+                            case 1 -> {
+                                System.out.print("Introduce id: ");
+                            }
+                            case 2 -> {
+                                System.out.print("Introduce nombre: ");
+                            }
+                            default -> {
+                                System.out.print("Introduce apellidos: ");
+                            }
+                        }
+                    }
+                    case 2 -> {
+                        System.out.println("Por que campo quieres buscar");
+                        System.out.println("1)Id");
+                        System.out.println("2)Nombre completo");
+                        System.out.println("3)Ciclo");
+                        System.out.println("4)Curso"); 
+                        System.out.println("5)ECTS"); 
+                        System.out.print("Opcion: ");
+                        Integer opcion2 = sc.nextInt();sc.nextLine();
+                        switch (opcion2) {
+                            case 1 -> {
+                                System.out.print("Introduce id: ");
+                            }
+                            case 2 -> {
+                                System.out.print("Introduce nombre completo: ");
+                            }
+                            case 3 -> {
+                                System.out.print("Introduce ciclo: ");
+                            }
+                            case 4 -> {
+                                System.out.print("Introduce curso: ");
+                            }
+                            default -> {
+                                System.out.print("Introduce ECTS: ");
+                            }
+                        }
+                    }
+                    default -> {
+                        System.out.println("Por que campo quieres buscar");
+                        System.out.println("1)Id alumno");
+                        System.out.println("2)Id modulo");
+                        System.out.println("3)Calificacion");    
+                        System.out.print("Opcion: ");
+                        Integer opcion3 = sc.nextInt();sc.nextLine();
+                        switch (opcion3) {
+                            case 1 -> {
+                                System.out.print("Introduce id alumno: ");
+                            }
+                            case 2 -> {
+                                System.out.print("Introduce id modulo: ");
+                            }
+                            default -> {
+                                System.out.print("Introduce calificacion: ");
+                            }
+                        }
+                    }
+                }
+            }else{
+                System.out.println("1)Tabla alumnos");
+                System.out.println("2)Tabla modulos");
+                System.out.println("3)Tabla notas");
+                System.out.print("Opcion: ");
+                Integer opcion = sc.nextInt();sc.nextLine();
+                switch (opcion) {
+                    case 1 -> {
+                        
+                    }
+                    case 2 -> {
+                       
+                    }
+                    default -> {
+                        
+                    }
+                }
+            }
+        }
 }

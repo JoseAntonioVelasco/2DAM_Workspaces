@@ -5,9 +5,11 @@
  */
 package actividad1;
 
+import actividad1.Actividad1Maps.Alumno;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
@@ -18,18 +20,18 @@ import org.xml.sax.SAXException;
  *
  * @author JoseAntonioVelasco
  */
-public class Actividad1{
+public class Actividad1Maps{
 	static FileWriter myWriter = null;
         private static Scanner sc;
-        private static ArrayList<Alumno> alumnos;
-        private static ArrayList<Modulo> modulos;
+        private static HashMap<Integer,Alumno> alumnos;
+        private static HashMap<Integer,Modulo> modulos;
         private static ArrayList<Nota> notas;
         private static String ruta_destino;
 	public static void main(String[] args) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
             sc =new Scanner(System.in);
             /*PARTE 1*/
             /*System.out.println("Escribe la ruta donde quieres que se guarden los ficheros: ");
-            String ruta_destino = sc.nextLine();
+            ruta_destino = sc.nextLine();
 
 
             File directorio = new File(ruta_destino);
@@ -66,8 +68,8 @@ public class Actividad1{
             //conectarBBDD();
             //crearTablas();
             //leerFicheros(new File(ruta_destino));
-            leerFicheros(new File("C:\\Users\\cagan\\Desktop\\Nueva carpeta"));
-            quitarDuplicados();
+            leerFicheros(ruta_destino);
+            System.out.println("finish");
             anadirDatos();
             
             /*PARTE 2*/
@@ -198,22 +200,12 @@ public class Actividad1{
         }
         
         static class Alumno implements Serializable{
-            private Integer idAlumno;
             private String nombre;
             private String apellidos;
 
-            public Alumno(Integer idAlumno, String nombre, String apellidos) {
-                this.idAlumno = idAlumno;
+            public Alumno(String nombre, String apellidos) {
                 this.nombre = nombre;
                 this.apellidos = apellidos;
-            }
-
-            public Integer getIdAlumno() {
-                return idAlumno;
-            }
-
-            public void setIdAlumno(Integer idAlumno) {
-                this.idAlumno = idAlumno;
             }
 
             public String getNombre() {
@@ -231,32 +223,21 @@ public class Actividad1{
             public void setApellidos(String apellidos) {
                 this.apellidos = apellidos;
             }
-            public Boolean comparar(Alumno al){
-                return this.nombre.equals(al.nombre) && this.apellidos.equals(al.apellidos);
-            }
 
+        
+            
         }
         static class Modulo implements Serializable{
-            private Integer idModulo;
             private String nombreCompleto;
             private String ciclo;
             private Integer curso;
             private Integer ECTS;
 
-            public Modulo(Integer idModulo, String nombreCompleto, String ciclo, Integer curso, Integer ECTS) {
-                this.idModulo = idModulo;
+            public Modulo(String nombreCompleto, String ciclo, Integer curso, Integer ECTS) {
                 this.nombreCompleto = nombreCompleto;
                 this.ciclo = ciclo;
                 this.curso = curso;
                 this.ECTS = ECTS;
-            }
-
-            public Integer getIdModulo() {
-                return idModulo;
-            }
-
-            public void setIdModulo(Integer idModulo) {
-                this.idModulo = idModulo;
             }
 
             public String getNombreCompleto() {
@@ -290,8 +271,7 @@ public class Actividad1{
             public void setECTS(Integer ECTS) {
                 this.ECTS = ECTS;
             }
-               
-           
+
         }
         static class Nota implements Serializable{
             private Integer idAlumno;
@@ -331,8 +311,8 @@ public class Actividad1{
             
         }
               
-        private static ArrayList<Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
-            ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+        private static HashMap<Integer,Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
+            HashMap<Integer,Alumno> alumnos = new HashMap<Integer,Alumno>();
               
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -361,8 +341,44 @@ public class Actividad1{
                     }catch(Exception e){
                        apellidos=(String)objetoIncompleto("Alumno","apellidos");
                     }
-                    Alumno al = new Alumno(id,nombre,apellidos);
-                    alumnos.add(al);                          
+                    Alumno al = new Alumno(nombre,apellidos);
+                    //comprobar
+                    if(alumnos.containsKey(id)){
+                        //conflicto alumnos misma id
+                        Alumno al1=alumnos.get(id);
+                        System.out.println("Conflicto: alumno con misma id");
+                        System.out.println("- - -ALUMNO 1- - -");
+                        System.out.println("nombre: "+al1.getNombre());
+                        System.out.println("Apellidos: "+al1.getApellidos());
+                        System.out.println("- - -ALUMNO 2- - -");
+                        System.out.println("nombre: "+al.getNombre());
+                        System.out.println("Apellidos: "+al.getApellidos());
+                        System.out.println("Elije que alumno guardar: ");
+                        Integer opcion = sc.nextInt();
+                        if(opcion == 1){
+                            //me quedo con el alumnos de Hashmap
+                            guardarDuplicadosDescartados(ruta_destino,al,id);
+                        }else{
+                            //me quedo con el alumno de xml
+                            guardarDuplicadosDescartados(ruta_destino,al1,id);  
+                            alumnos.remove(id, alumnos.get(id));
+                            alumnos.put(id, al);
+                        }
+                    }if(alumnos.containsValue(al)){
+                        //conflicto mismo alumno distinta id TODO
+                        Alumno al1=alumnos.get(id);
+                        System.out.println("Conflicto: alumno con distinta id pero mismos datos");
+                        System.out.println("- - -ALUMNO 1- - -");
+                        System.out.println("nombre: "+al1.getNombre());
+                        System.out.println("Apellidos: "+al1.getApellidos());
+                        System.out.println("- - -ALUMNO 2- - -");
+                        System.out.println("nombre: "+al.getNombre());
+                        System.out.println("Apellidos: "+al.getApellidos());
+                        System.out.println("Elije que alumno guardar: ");
+                        Integer opcion = sc.nextInt();
+                        
+                    }   
+                                            
                 }
             }
 
@@ -391,7 +407,7 @@ public class Actividad1{
                     curso=Integer.parseInt(elementoModulo.getElementsByTagName("curso").item(0).getTextContent());
                     ECTS=Integer.parseInt(elementoModulo.getElementsByTagName("ECTS").item(0).getTextContent());
                     
-                    Modulo mod = new Modulo(id,nombreCompleto,ciclo,curso,ECTS);
+                    Modulo mod = new Modulo(nombreCompleto,ciclo,curso,ECTS);
                     modulos.add(mod);
                     //si no encuentra algun dato saltara una exception
                 }
@@ -426,14 +442,15 @@ public class Actividad1{
             }
             return notas;
         }
-        private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
+        private static void leerFicheros(String rutaDestino) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
+            File f = new File(rutaDestino);
             File[] files =f.listFiles();
-            alumnos=new ArrayList<Alumno>();
-            modulos=new ArrayList<Modulo>();
+            alumnos=new HashMap<Integer,Alumno>();
+            modulos=new HashMap<Integer,Modulo>();
             notas=new ArrayList<Nota>();
             
-            ArrayList<Alumno> alumnos_aux;
-            ArrayList<Modulo> modulos_aux;
+            HashMap<Integer,Alumno> alumnos_aux;
+            HashMap<Integer,Modulo> modulos_aux;
             ArrayList<Nota> notas_aux;
 
             for(int i=0; i<files.length; i++){
@@ -442,8 +459,8 @@ public class Actividad1{
                     modulos_aux=obtenerModulosXML(files[i]);
                     notas_aux=obtenerNotasXML(files[i]);
                     
-                    alumnos.addAll(alumnos_aux);
-                    modulos.addAll(modulos_aux);
+                    alumnos.putAll(alumnos_aux);
+                    modulos.putAll(modulos_aux);
                     notas.addAll(notas_aux);
                 }else{
                     ObjectInputStream objetoIS = null;
@@ -451,7 +468,7 @@ public class Actividad1{
 
                     Object object = null;
                     while((object = objetoIS.readObject()) != null) {
-                        if(object instanceof Alumno){
+                        if(object instanceof Alumno){ 
                             Alumno al = (Alumno) object;
                             alumnos.add(al);
                         }else if(object instanceof Modulo){
@@ -495,63 +512,24 @@ public class Actividad1{
             }
         }
         
-        private static void quitarDuplicados() throws IOException{
-            //TODO
-            //quitar duplicados alumnos
-            for(int i=0; i<alumnos.size(); i++){
-                for(int j=0; i<alumnos.size(); j++){
-                    if(alumnos.get(j).getIdAlumno()==alumnos.get(i).getIdAlumno()){
-                        //CONFLICTO alumnos con mismo id
-                        Alumno ali = alumnos.get(i);Alumno alj = alumnos.get(j);
-                        duplicadoAlumno(ali,alj);
-                    }
-                    if(alumnos.get(i).comparar(alumnos.get(j))){
-                        //CONFLICTO alumnos con distinto id pero misma informacion
-                        Alumno ali = alumnos.get(i);Alumno alj = alumnos.get(j);
-                        duplicadoAlumno(ali,alj);
-                    }
-                }
-            }
-            //quitar duplicados modulos
-            
-            //quitar duplicados notas
-        }
-        private static void duplicadoAlumno(Alumno ali,Alumno alj) throws IOException{
-            System.out.println("Conflicto: alumno con misma id // mismos datos");
-            System.out.println("- - -ALUMNO 1- - -");
-            System.out.println("Id: "+ali.getIdAlumno());
-            System.out.println("nombre: "+ali.getNombre());
-            System.out.println("Apellidos: "+ali.getApellidos());
-            System.out.println("- - -ALUMNO 2- - -");
-            System.out.println("Id: "+alj.getIdAlumno());
-            System.out.println("nombre: "+alj.getNombre());
-            System.out.println("Apellidos: "+alj.getApellidos());
-            System.out.println("Elije que alumno guardar: ");
-            Integer opcion = sc.nextInt();
-            if(opcion == 1){
-                alumnos.remove(ali);
-                guardarDuplicadosDescartados(ruta_destino,ali);
-            }else{
-                alumnos.remove(alj);
-                guardarDuplicadosDescartados(ruta_destino,alj);    
-            }
-        } 
-        private static void guardarDuplicadosDescartados(String ruta_destino,Object objeto) throws IOException{
+        private static void guardarDuplicadosDescartados(String ruta_destino,Object objeto,Integer id) throws IOException{
             FileWriter myWriter = new FileWriter(ruta_destino+"//duplicadosDescartados.txt");
             if(objeto instanceof Alumno){
                 Alumno al = (Alumno)objeto;
-                myWriter.write("Alumno: "+al.getIdAlumno()+", "+al.getNombre()+", "+al.getApellidos());
+                myWriter.write("Alumno: "+id+", "+al.getNombre()+", "+al.getApellidos());
             }else if(objeto instanceof Modulo){
                 Modulo mod = (Modulo)objeto;
                 //myWriter.write("Alumno: "+id+", "+mod.getNombre()+", "+al.getApellidos());
             }else{
-                Actividad1Maps.Nota nota = (Actividad1Maps.Nota)objeto;
+                Nota nota = (Nota)objeto;
                 //
             }
             myWriter.close();
                
             
         }
+            
+        
         private static void anadirDatos() throws SQLException{
             for(int i=0; i<alumnos.size(); i++){
                 insertAlumno(alumnos.get(i));

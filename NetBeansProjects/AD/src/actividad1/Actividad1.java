@@ -78,6 +78,13 @@ public class Actividad1{
             /*PARTE 2*/
             sc.close();
 	}
+        /**
+         * Reccorre de manera recursiva un directorio moviendo los ficheros de un origen a un destino
+         * @param archivos los ficheros que hay dentro del archivo
+         * @param ruta_destino la ruta donde se van a guardar los ficheros seleccionados
+         * @param ruta_origen la ruta de donde va a sacar los ficheros
+         * @param log  el fichero donde va a guardar los cambios ocurridos
+         */
 	public static void recursion(File[] archivos,String ruta_destino,String ruta_origen,File log) {
             for(int i=0; i<archivos.length;i++) {
 
@@ -98,13 +105,23 @@ public class Actividad1{
 	}
 	
 	//funcion copiada de: https://www.journaldev.com/842/java-get-file-extension
+        /**
+         * Consigue el formato de un fichero
+         * @param file fichero del que queremos sacar la extension
+         * @return retorna la extension del fichero
+         */
 	private static String getFileExtension(File file) {
             String fileName = file.getName();
             if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
             return fileName.substring(fileName.lastIndexOf(".")+1);
             else return "";
 	}
-	
+	/**
+         * para registrar los cambios ocurridos
+         * @param name_filemoved nombre del fichero que se ha movido
+         * @param origen donde estaba el fichero
+         * @param destino donde se ha movido el fichero
+         */
 	private static void logTo(String name_filemoved,String origen,String destino) {
             try { 
                   myWriter.append(name_filemoved+" copiado a "+destino+". \nEliminado con exito de "+origen+"\n"); 
@@ -112,7 +129,12 @@ public class Actividad1{
                   e.printStackTrace();
                 } 
 	}
-	
+	/**
+         * si la clase que se ha intentado renombrar falla se le da un nuevo nombre
+         * @param archivo fichero que ha fallado el renombrar
+         * @param ruta_destino destino de donde lo vamos a meter
+         * @param num numero que aparecera en el archivo renombrado
+         */
 	private static void failedRename(File archivo,String ruta_destino,int num) {
 	
             if(!(archivo.renameTo(new File(ruta_destino+"/"+stripExtension(archivo.getName())+"("+num+")"+"."+getFileExtension(archivo))))) {
@@ -122,6 +144,11 @@ public class Actividad1{
 	
 	//nota la libreria "org.apache.commons.io.FilenameUtils" tiene unos metodos muy utiles para este ejercicio
 	//funcion copiada de: https://stackoverflow.com/questions/924394/how-to-get-the-filename-without-the-extension-in-java
+        /**
+         * saca de un string la extension que tenga ej: "cadena.exe" retorna exe
+         * @param str la cadena de la que queremos obtener la extension
+         * @return la extension del string
+         */
 	private static String stripExtension (String str) {
             // Handle null case specially.
             if (str == null) return null;
@@ -153,7 +180,10 @@ public class Actividad1{
         /*conectar bbdd*/
         
         static Connection c = null;
-        
+        /**
+         * Crea la Base de datos en mysql
+         * @throws SQLException 
+         */
         private static void crearBBDD() throws SQLException{
             Connection c = null;
             Statement s = null;
@@ -168,10 +198,18 @@ public class Actividad1{
             s.close();
             c.close();
         }
+        /**
+         * Conecta a la bbdd
+         * @throws SQLException 
+         */
         private static void conectarBBDD() throws SQLException{
             c = DriverManager.getConnection(urlConnection, user, pwd);
             System.out.println("Conexion realizada");
         }
+        /**
+         * Crea las tablas
+         * @throws SQLException 
+         */
         private static void crearTablas() throws SQLException{
             Statement s = c.createStatement();
      
@@ -191,6 +229,10 @@ public class Actividad1{
                     + " FOREIGN KEY (id_modulo) REFERENCES Modulo(id_modulo));");
             s.close();
         }
+        /**
+         * guarda los errores en un fichero de erroresSQL en la ruta_destino
+         * @param e 
+         */
         private static void muestraErrorSQL(SQLException e){           
             try {
                 FileWriter myWriter = new FileWriter(ruta_destino+"//erroresSQL.txt");
@@ -341,7 +383,14 @@ public class Actividad1{
  
             
         }
-              
+        /**
+         * Para obtener los alumnos de un fichero xml
+         * @param f fichero del que queremos obtener los alumnos
+         * @return
+         * @throws SAXException
+         * @throws ParserConfigurationException
+         * @throws IOException 
+         */
         private static ArrayList<Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
               
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -387,6 +436,14 @@ public class Actividad1{
 
             return alumnos;         
         }
+       /**
+         * Para obtener los alumnos de un fichero xml
+         * @param f fichero del que queremos obtener los modulos
+         * @return
+         * @throws SAXException
+         * @throws ParserConfigurationException
+         * @throws IOException 
+         */
         private static ArrayList<Modulo> obtenerModulosXML(File f) throws SAXException, ParserConfigurationException, IOException{
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -451,6 +508,14 @@ public class Actividad1{
             }
              return modulos;
         }
+         /**
+         * Para obtener los alumnos de un fichero xml
+         * @param f fichero del que queremos obtener las notas
+         * @return
+         * @throws SAXException
+         * @throws ParserConfigurationException
+         * @throws IOException 
+         */
         private static ArrayList<Nota> obtenerNotasXML(File f) throws SAXException, ParserConfigurationException, IOException{
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -499,6 +564,15 @@ public class Actividad1{
             }
             return notas;
         }
+        /**
+         * lee todos los ficheros xml y dat del que se encuentren en ese lugar y obtiene todos los alumnos, modulos y notas
+         * 
+         * @param f lugar del que queremos leer todos los ficheros
+         * @throws SAXException
+         * @throws ParserConfigurationException
+         * @throws IOException
+         * @throws ClassNotFoundException 
+         */
         private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
             File[] files =f.listFiles();
             alumnos=new ArrayList<>();
@@ -541,6 +615,11 @@ public class Actividad1{
                 }
             }
         }
+        /**
+         * pregunta si quiere descartar un tipo de objeto
+         * @param tipo nombre de la clase que quiere descartar
+         * @return true -> completar false -> descartar
+         */
         private static Boolean preguntarDescartar_objetoIncompleto(String tipo){
             System.out.println(tipo+" incompleto. Desea completarlo?");
             System.out.println("1)Si");
@@ -553,6 +632,12 @@ public class Actividad1{
                 return false;
             }
         }
+        /**
+         * Si encuentra un objeto incompleto preguntara los datos que le falten
+         * @param tipoObjeto nombre de la clase de la que faltan datos
+         * @param atributo atributo de la clase de la que faltan datos
+         * @return lo que falta de la clase
+         */
         private static Object objetoIncompleto(String tipoObjeto,String atributo){
             
             switch (tipoObjeto) {
@@ -608,6 +693,12 @@ public class Actividad1{
             }
     
         }
+        /**
+         * comprueba si el objeto esta repetido en su respectivo arraylist
+         * @param objeto
+         * @return true->repetido false->sin repetir
+         * @throws IOException 
+         */
         private static Boolean repetido(Object objeto) throws IOException{
             if(objeto instanceof Alumno){
                 Alumno al = (Alumno)objeto;
@@ -649,7 +740,12 @@ public class Actividad1{
             }
             return false;
         }
-        
+        /**
+         * muestra el mensaje de conflicto por alumno duplicado y da a elegir, y guarda el descartado en un fichero txt
+         * @param ali alumno 1 del conflicto
+         * @param alj alumno 2 del conflicto
+         * @throws IOException 
+         */
         private static void duplicadoAlumno(Alumno ali,Alumno alj) throws IOException{
             System.out.println("Conflicto alumno: misma id // mismos datos");
             System.out.println("- - -ALUMNO 1- - -");
@@ -669,7 +765,13 @@ public class Actividad1{
                 alumnos.add(alj);
                 guardarDuplicadosDescartados(ruta_destino,ali);    
             }
-        } 
+        }
+         /**
+         * muestra el mensaje de conflicto por modulo duplicado y da a elegir, y guarda el descartado en un fichero txt
+         * @param ali modulo 1 del conflicto
+         * @param alj modulo 2 del conflicto
+         * @throws IOException 
+         */
         private static void duplicadoModulo(Modulo ali,Modulo alj) throws IOException{
             System.out.println("Conflicto modulo: misma id // mismos datos");
             System.out.println("- - -MODULO 1- - -");
@@ -694,6 +796,12 @@ public class Actividad1{
                 guardarDuplicadosDescartados(ruta_destino,ali);    
             }
         }
+        /**
+         * muestra el mensaje de conflicto por nota duplicado y da a elegir, y guarda el descartado en un fichero txt
+         * @param ali nota 1 del conflicto
+         * @param alj nota 2 del conflicto
+         * @throws IOException 
+         */
          private static void duplicadoNota(Nota ali,Nota alj) throws IOException{
             System.out.println("Conflicto alumno: misma id // mismos datos");
             System.out.println("- - -NOTA 1- - -");
@@ -713,7 +821,13 @@ public class Actividad1{
                 notas.add(alj);
                 guardarDuplicadosDescartados(ruta_destino,ali);    
             }
-        } 
+        }
+         /**
+          * para guardar el objeto duplicado en el fichero txt
+          * @param ruta_destino
+          * @param objeto
+          * @throws IOException 
+          */
         private static void guardarDuplicadosDescartados(String ruta_destino,Object objeto) throws IOException{
             FileWriter myWriter = new FileWriter(ruta_destino+"//duplicadosDescartados.txt",true);
             if(objeto instanceof Alumno){
@@ -729,6 +843,10 @@ public class Actividad1{
             myWriter.close();
         
         }
+        /**
+         * Inserta los datos contenidos en los arraylist en la base de datos
+         * @throws SQLException 
+         */
         private static void anadirDatos() throws SQLException{
             for(int i=0; i<alumnos.size(); i++){
                 insertAlumno(alumnos.get(i));
@@ -740,7 +858,11 @@ public class Actividad1{
                 insertNota(notas.get(i));
             }
         }
-        
+        /**
+         * Consulta que inserta un alumno a la bbdd
+         * @param al alumno que queremos insertar
+         * @throws SQLException 
+         */
         private static void insertAlumno(Alumno al) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Alumno (id_alumno,nombre,apellidos) VALUES (?,?,?)");
             s.setInt(1, al.getIdAlumno());
@@ -748,6 +870,11 @@ public class Actividad1{
             s.setString(3, al.getApellidos());
             s.executeUpdate();
         }
+        /**
+         * Consulta que inserta un modulo a la bbdd
+         * @param al modulo que queremos insertar
+         * @throws SQLException 
+         */
         private static void insertModulo(Modulo mod) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Modulo (id_modulo,nombreCompleto,ciclo,curso,ECTS) VALUES (?,?,?,?,?)");
             s.setInt(1, mod.getIdModulo());
@@ -757,6 +884,11 @@ public class Actividad1{
             s.setInt(5,mod.getECTS());
             s.executeUpdate();
         }
+        /**
+         * Consulta que inserta un nota a la bbdd
+         * @param al nota que queremos insertar
+         * @throws SQLException 
+         */
         private static void insertNota(Nota nota) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Notas (id_modulo,id_alumno,calificacion) VALUES (?,?,?)");
             s.setInt(1, nota.getIdModulo());
@@ -764,103 +896,395 @@ public class Actividad1{
             s.setDouble(3, nota.getCalificacion());
             s.executeUpdate();
         }
-        private static void buscarDatos(){
-            System.out.println("1)Buscar por campos.");
-            System.out.println("2)Mostrar todos los datos de la tabla.");
-            System.out.print("Opcion: ");
-            Integer option = sc.nextInt();sc.nextLine();
+        /**
+         * Menu que nos permite buscar datos en la base de datos
+         * @throws SQLException 
+         */
+        private static void buscarDatos() throws SQLException{
+            Boolean salir = false;
+            while(!salir){
+                System.out.println("1)Buscar por campos.");
+                System.out.println("2)Mostrar todos los datos de la tabla.");
+                System.out.print("Opcion: ");
+                Integer option = sc.nextInt();sc.nextLine();
+
+                if(option ==1){
+                    System.out.println("En que tabla quieres buscar: ");
+                    System.out.println("1)Alumnos");
+                    System.out.println("2)Modulos");
+                    System.out.println("3)Notas");         
+                    System.out.print("Opcion: ");
+                    Integer opcion = sc.nextInt();sc.nextLine();
+                    switch (opcion) {
+                        case 1 -> {
+                            System.out.println("Por que campo quieres buscar");
+                            System.out.println("1)Id");
+                            System.out.println("2)Nombre");
+                            System.out.println("3)Apellidos");    
+                            System.out.print("Opcion: ");
+                            Integer opcion1 = sc.nextInt();
+                            switch (opcion1) {
+                                case 1 -> {
+                                    System.out.print("Introduce id: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarAlumnos_porID(id);
+                                }
+                                case 2 -> {
+                                    System.out.print("Introduce nombre: ");
+                                    String nombre = sc.nextLine();
+                                    buscarAlumnos_porNombre(nombre);
+                                }
+                                default -> {
+                                    System.out.print("Introduce apellidos: ");
+                                    String nombre = sc.nextLine();
+                                    buscarAlumnos_porApellidos(nombre);
+                                }
+                            }
+                        }
+                        case 2 -> {
+                            System.out.println("Por que campo quieres buscar");
+                            System.out.println("1)Id");
+                            System.out.println("2)Nombre completo");
+                            System.out.println("3)Ciclo");
+                            System.out.println("4)Curso"); 
+                            System.out.println("5)ECTS"); 
+                            System.out.print("Opcion: ");
+                            Integer opcion2 = sc.nextInt();sc.nextLine();
+                            switch (opcion2) {
+                                case 1 -> {
+                                    System.out.print("Introduce id: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarModulos_porID(id);
+                                }
+                                case 2 -> {
+                                    System.out.print("Introduce nombre completo: ");
+                                    String nombre = sc.nextLine();
+                                    buscarModulos_porNombre(nombre);
+                                }
+                                case 3 -> {
+                                    System.out.print("Introduce ciclo: ");
+                                    String nombre = sc.nextLine();
+                                    buscarModulos_porCiclo(nombre);
+                                }
+                                case 4 -> {
+                                    System.out.print("Introduce curso: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarModulos_porCurso(id);
+                                }
+                                default -> {
+                                    System.out.print("Introduce ECTS: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarModulos_porECTS(id);
+                                }
+                            }
+                        }
+                        default -> {
+                            System.out.println("Por que campo quieres buscar");
+                            System.out.println("1)Id alumno");
+                            System.out.println("2)Id modulo");
+                            System.out.println("3)Calificacion");    
+                            System.out.print("Opcion: ");
+                            Integer opcion3 = sc.nextInt();sc.nextLine();
+                            switch (opcion3) {
+                                case 1 -> {
+                                    System.out.print("Introduce id alumno: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarNotas_porIdAlumno(id);
+                                }
+                                case 2 -> {
+                                    System.out.print("Introduce id modulo: ");
+                                    Integer id = sc.nextInt();sc.nextLine();
+                                    buscarNotas_porIdModulo(id);
+                                }
+                                default -> {
+                                    System.out.print("Introduce calificacion: ");
+                                    Double id = sc.nextDouble();sc.nextLine();
+                                    buscarNotas_porCalificacion(id);
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("1)Tabla alumnos");
+                    System.out.println("2)Tabla modulos");
+                    System.out.println("3)Tabla notas");
+                    System.out.print("Opcion: ");
+                    Integer opcion = sc.nextInt();sc.nextLine();
+                    switch (opcion) {
+                        case 1 -> {
+                            mostrarTablaAlumnos();
+                        }
+                        case 2 -> {
+                            mostrarTablaModulos();
+                        }
+                        default -> {
+                            mostrarTablaNotas();
+                        }
+                    }
+                }
+                System.out.println("Salir?: ");
+                System.out.println("1)Si");
+                System.out.println("2)No");
+                Integer opcion = sc.nextInt();sc.nextLine();
+                if(opcion==1){
+                    salir=true;
+                }else{
+                    salir=false;
+                }
+            }
+        }
+        /**
+         * Muestra todos los datos en la tabla alumnos
+         * @throws SQLException 
+         */
+        private static void mostrarTablaAlumnos() throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos");
             
-            if(option ==1){
-                System.out.println("En que tabla quieres buscar: ");
-                System.out.println("1)Alumnos");
-                System.out.println("2)Modulos");
-                System.out.println("3)Notas");         
-                System.out.print("Opcion: ");
-                Integer opcion = sc.nextInt();sc.nextLine();
-                switch (opcion) {
-                    case 1 -> {
-                        System.out.println("Por que campo quieres buscar");
-                        System.out.println("1)Id");
-                        System.out.println("2)Nombre");
-                        System.out.println("3)Apellidos");    
-                        System.out.print("Opcion: ");
-                        Integer opcion1 = sc.nextInt();
-                        switch (opcion1) {
-                            case 1 -> {
-                                System.out.print("Introduce id: ");
-                            }
-                            case 2 -> {
-                                System.out.print("Introduce nombre: ");
-                            }
-                            default -> {
-                                System.out.print("Introduce apellidos: ");
-                            }
-                        }
-                    }
-                    case 2 -> {
-                        System.out.println("Por que campo quieres buscar");
-                        System.out.println("1)Id");
-                        System.out.println("2)Nombre completo");
-                        System.out.println("3)Ciclo");
-                        System.out.println("4)Curso"); 
-                        System.out.println("5)ECTS"); 
-                        System.out.print("Opcion: ");
-                        Integer opcion2 = sc.nextInt();sc.nextLine();
-                        switch (opcion2) {
-                            case 1 -> {
-                                System.out.print("Introduce id: ");
-                            }
-                            case 2 -> {
-                                System.out.print("Introduce nombre completo: ");
-                            }
-                            case 3 -> {
-                                System.out.print("Introduce ciclo: ");
-                            }
-                            case 4 -> {
-                                System.out.print("Introduce curso: ");
-                            }
-                            default -> {
-                                System.out.print("Introduce ECTS: ");
-                            }
-                        }
-                    }
-                    default -> {
-                        System.out.println("Por que campo quieres buscar");
-                        System.out.println("1)Id alumno");
-                        System.out.println("2)Id modulo");
-                        System.out.println("3)Calificacion");    
-                        System.out.print("Opcion: ");
-                        Integer opcion3 = sc.nextInt();sc.nextLine();
-                        switch (opcion3) {
-                            case 1 -> {
-                                System.out.print("Introduce id alumno: ");
-                            }
-                            case 2 -> {
-                                System.out.print("Introduce id modulo: ");
-                            }
-                            default -> {
-                                System.out.print("Introduce calificacion: ");
-                            }
-                        }
-                    }
-                }
-            }else{
-                System.out.println("1)Tabla alumnos");
-                System.out.println("2)Tabla modulos");
-                System.out.println("3)Tabla notas");
-                System.out.print("Opcion: ");
-                Integer opcion = sc.nextInt();sc.nextLine();
-                switch (opcion) {
-                    case 1 -> {
-                        
-                    }
-                    case 2 -> {
-                       
-                    }
-                    default -> {
-                        
-                    }
-                }
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_alumno"));
+                System.out.println("nombre: "+rs.getString("nombre"));
+                System.out.println("apellidos: "+rs.getString("apellidos"));
+            }
+        }
+        /**
+         * Busca todos los alumnos que tengan esa id
+         * @throws SQLException 
+         */
+        private static void buscarAlumnos_porID(Integer id) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE id_alumno=?");
+            s.setInt(1, id);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_alumno"));
+                System.out.println("nombre: "+rs.getString("nombre"));
+                System.out.println("apellidos: "+rs.getString("apellidos"));
+            }
+            
+        }
+        /**
+         * Busca todos los alumnos que tengan esa nombre
+         * @throws SQLException 
+         */
+        private static void buscarAlumnos_porNombre(String nombre) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE nombre=?");
+            s.setString(1, nombre);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_alumno"));
+                System.out.println("nombre: "+rs.getString("nombre"));
+                System.out.println("apellidos: "+rs.getString("apellidos"));
+            }
+        }
+        /**
+         * Busca todos los alumnos que tengan esa apellidos
+         * @throws SQLException 
+         */
+        private static void buscarAlumnos_porApellidos(String apellidos) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE apellidos=?");
+            s.setString(1, apellidos);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_alumno"));
+                System.out.println("nombre: "+rs.getString("nombre"));
+                System.out.println("apellidos: "+rs.getString("apellidos"));
+            }
+        }
+        
+         /**
+         * Muestra todos los datos en la tabla modulos
+         * @throws SQLException 
+         */
+        private static void mostrarTablaModulos() throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos");
+            
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+        }
+         /**
+         * Busca todos los modulos que tengan esa id
+         * @throws SQLException 
+         */
+        private static void buscarModulos_porID(Integer id) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE id = ?");
+            s.setInt(1, id);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+            
+        }
+        /**
+         * Busca todos los modulos que tengan esa nombre
+         * @throws SQLException 
+         */
+        private static void buscarModulos_porNombre(String nombre) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE nombreCompleto = ?");
+            s.setString(1, nombre);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+        }
+        /**
+         * Busca todos los modulos que tengan esa ciclo
+         * @throws SQLException 
+         */
+        private static void buscarModulos_porCiclo(String ciclo) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE ciclo = ?");
+            s.setString(1, ciclo);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+        }
+        /**
+         * Busca todos los modulos que tengan esa curso
+         * @throws SQLException 
+         */
+        private static void buscarModulos_porCurso(Integer curso) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE curso = ?");
+            s.setInt(1, curso);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+        }
+        /**
+         * Busca todos los modulos que tengan esa ECTS
+         * @throws SQLException 
+         */
+        private static void buscarModulos_porECTS(Integer ECTS) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE ECTS = ?");
+            s.setInt(1, ECTS);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id: "+rs.getString("id_modulo"));
+                System.out.println("nombre: "+rs.getString("nombreCompleto"));
+                System.out.println("ciclo: "+rs.getString("ciclo"));
+                System.out.println("curso: "+rs.getString("curso"));
+                System.out.println("ECTS: "+rs.getString("ECTS"));
+            }
+        }
+        
+        /**
+         * Muestra todos los datos en la tabla alumnos
+         * @throws SQLException 
+         */
+        private static void mostrarTablaNotas() throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM notas");
+            
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id alumno: "+rs.getString("id_alumno"));
+                System.out.println("Id modulo: "+rs.getString("id_modulo"));
+                System.out.println("calificacion: "+rs.getString("calificacion"));
+            }
+        }
+        /**
+         * Busca todos los notas que tengan esa id alumno
+         * @throws SQLException 
+         */
+        private static void buscarNotas_porIdAlumno(Integer idAlumno) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE id_alumno = ?");
+            s.setInt(1, idAlumno);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id alumno: "+rs.getString("id_alumno"));
+                System.out.println("Id modulo: "+rs.getString("id_modulo"));
+                System.out.println("calificacion: "+rs.getString("calificacion"));
+            }
+        }
+        /**
+         * Busca todos los notas que tengan esa id modulo
+         * @throws SQLException 
+         */
+        private static void buscarNotas_porIdModulo(Integer idModulo) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE id_modulo = ?");
+            s.setInt(1, idModulo);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id alumno: "+rs.getString("id_alumno"));
+                System.out.println("Id modulo: "+rs.getString("id_modulo"));
+                System.out.println("calificacion: "+rs.getString("calificacion"));
+            }
+        }
+        /**
+         * Busca todos los notas que tengan esa calificacion
+         * @throws SQLException 
+         */
+        private static void buscarNotas_porCalificacion(Double calificacion) throws SQLException{
+            PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE calificacion = ?");
+            s.setDouble(1, calificacion);
+            ResultSet rs=s.executeQuery();
+            
+            int i = 1;
+            while(rs.next()){
+                System.out.println("[" +(i++) +"]");
+                System.out.println("Id alumno: "+rs.getString("id_alumno"));
+                System.out.println("Id modulo: "+rs.getString("id_modulo"));
+                System.out.println("calificacion: "+rs.getString("calificacion"));
             }
         }
 }

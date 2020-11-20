@@ -19,6 +19,17 @@ import org.xml.sax.SAXException;
 /**
  *
  * @author JoseAntonioVelasco
+ * Nota: para almacenar los datos de los xml y dat he utilizado ArrayList, si los xml son muy grandes
+ * habria que utilizar Mapas para que las busquedas tengan un coste fijo.
+ * 
+ * A partir de que punto renta usar Mapas? Habria que hacer pruebas comparando los tiempos de busqueda.
+ * https://stackoverflow.com/questions/150750/hashset-vs-list-performance
+ * En este post en uno de los comentarios muestran una tablas donde se ven los diferentes tiempos de busqueda
+ * en funcion del tamaño del arraylist/mapa y para almacenar grandes cantidades y no tan grandes de datos gana por excelencia
+ * los mapas.
+ * 
+ * Todos los metodos son publicos porque si los quedaba en privado tenia que generar el javadoc con una configuracion diferente
+ * para que cojiera el javadoc de los metodos privados.
  */
 public class Actividad1{
 	static FileWriter myWriter = null;
@@ -27,7 +38,17 @@ public class Actividad1{
         private static ArrayList<Modulo> modulos;
         private static ArrayList<Nota> notas;
         private static String ruta_destino;
-	public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
+
+    /**
+     *
+     * @param args
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     */
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException, SAXException, ParserConfigurationException {
             sc =new Scanner(System.in);
             /*PARTE 1*/
             System.out.println("Escribe la ruta donde quieres que se guarden los ficheros: ");
@@ -84,7 +105,7 @@ public class Actividad1{
          * @param ruta_destino la ruta donde se van a guardar los ficheros seleccionados
          * @param ruta_origen la ruta de donde va a sacar los ficheros
          * @param log  el fichero donde va a guardar los cambios ocurridos
-         */
+        */
 	public static void recursion(File[] archivos,String ruta_destino,String ruta_origen,File log) {
             for(int i=0; i<archivos.length;i++) {
 
@@ -109,8 +130,8 @@ public class Actividad1{
          * Consigue el formato de un fichero
          * @param file fichero del que queremos sacar la extension
          * @return retorna la extension del fichero
-         */
-	private static String getFileExtension(File file) {
+        */
+	public static String getFileExtension(File file) {
             String fileName = file.getName();
             if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
             return fileName.substring(fileName.lastIndexOf(".")+1);
@@ -122,7 +143,7 @@ public class Actividad1{
          * @param origen donde estaba el fichero
          * @param destino donde se ha movido el fichero
          */
-	private static void logTo(String name_filemoved,String origen,String destino) {
+	public static void logTo(String name_filemoved,String origen,String destino) {
             try { 
                   myWriter.append(name_filemoved+" copiado a "+destino+". \nEliminado con exito de "+origen+"\n"); 
                 } catch (IOException e) {
@@ -135,7 +156,7 @@ public class Actividad1{
          * @param ruta_destino destino de donde lo vamos a meter
          * @param num numero que aparecera en el archivo renombrado
          */
-	private static void failedRename(File archivo,String ruta_destino,int num) {
+	public static void failedRename(File archivo,String ruta_destino,int num) {
 	
             if(!(archivo.renameTo(new File(ruta_destino+"/"+stripExtension(archivo.getName())+"("+num+")"+"."+getFileExtension(archivo))))) {
                     failedRename(archivo,ruta_destino,num+1);
@@ -149,7 +170,7 @@ public class Actividad1{
          * @param str la cadena de la que queremos obtener la extension
          * @return la extension del string
          */
-	private static String stripExtension (String str) {
+	public static String stripExtension (String str) {
             // Handle null case specially.
             if (str == null) return null;
             // Get position of last '.'.
@@ -184,7 +205,7 @@ public class Actividad1{
          * Crea la Base de datos en mysql
          * @throws SQLException 
          */
-        private static void crearBBDD() throws SQLException{
+        public static void crearBBDD() throws SQLException{
             Connection c = null;
             Statement s = null;
 
@@ -202,7 +223,7 @@ public class Actividad1{
          * Conecta a la bbdd
          * @throws SQLException 
          */
-        private static void conectarBBDD() throws SQLException{
+        public static void conectarBBDD() throws SQLException{
             c = DriverManager.getConnection(urlConnection, user, pwd);
             System.out.println("Conexion realizada");
         }
@@ -210,7 +231,7 @@ public class Actividad1{
          * Crea las tablas
          * @throws SQLException 
          */
-        private static void crearTablas() throws SQLException{
+        public static void crearTablas() throws SQLException{
             Statement s = c.createStatement();
      
             //Tabla Alumno
@@ -233,7 +254,7 @@ public class Actividad1{
          * guarda los errores en un fichero de erroresSQL en la ruta_destino
          * @param e 
          */
-        private static void muestraErrorSQL(SQLException e){           
+        public static void muestraErrorSQL(SQLException e){           
             try {
                 FileWriter myWriter = new FileWriter(ruta_destino+"//erroresSQL.txt");
                 myWriter.append("SQL Estado: "+e.getSQLState()+"\n");
@@ -391,7 +412,7 @@ public class Actividad1{
          * @throws ParserConfigurationException
          * @throws IOException 
          */
-        private static ArrayList<Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
+        public static ArrayList<Alumno> obtenerAlumnosXML(File f) throws SAXException, ParserConfigurationException, IOException{
               
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -444,7 +465,7 @@ public class Actividad1{
          * @throws ParserConfigurationException
          * @throws IOException 
          */
-        private static ArrayList<Modulo> obtenerModulosXML(File f) throws SAXException, ParserConfigurationException, IOException{
+        public static ArrayList<Modulo> obtenerModulosXML(File f) throws SAXException, ParserConfigurationException, IOException{
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -516,7 +537,7 @@ public class Actividad1{
          * @throws ParserConfigurationException
          * @throws IOException 
          */
-        private static ArrayList<Nota> obtenerNotasXML(File f) throws SAXException, ParserConfigurationException, IOException{
+        public static ArrayList<Nota> obtenerNotasXML(File f) throws SAXException, ParserConfigurationException, IOException{
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -573,7 +594,7 @@ public class Actividad1{
          * @throws IOException
          * @throws ClassNotFoundException 
          */
-        private static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
+        public static void leerFicheros(File f) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException{
             File[] files =f.listFiles();
             alumnos=new ArrayList<>();
             modulos=new ArrayList<>();
@@ -618,9 +639,9 @@ public class Actividad1{
         /**
          * pregunta si quiere descartar un tipo de objeto
          * @param tipo nombre de la clase que quiere descartar
-         * @return true -> completar false -> descartar
+         * @return true -) completar false -) descartar
          */
-        private static Boolean preguntarDescartar_objetoIncompleto(String tipo){
+        public static Boolean preguntarDescartar_objetoIncompleto(String tipo){
             System.out.println(tipo+" incompleto. Desea completarlo?");
             System.out.println("1)Si");
             System.out.println("2)No");
@@ -638,7 +659,7 @@ public class Actividad1{
          * @param atributo atributo de la clase de la que faltan datos
          * @return lo que falta de la clase
          */
-        private static Object objetoIncompleto(String tipoObjeto,String atributo){
+        public static Object objetoIncompleto(String tipoObjeto,String atributo){
             
             switch (tipoObjeto) {
                 case "Alumno" -> {
@@ -696,10 +717,10 @@ public class Actividad1{
         /**
          * comprueba si el objeto esta repetido en su respectivo arraylist
          * @param objeto
-         * @return true->repetido false->sin repetir
+         * @return true -) repetido false -) sin repetir
          * @throws IOException 
          */
-        private static Boolean repetido(Object objeto) throws IOException{
+        public static Boolean repetido(Object objeto) throws IOException{
             if(objeto instanceof Alumno){
                 Alumno al = (Alumno)objeto;
                 for(int i=0;i<alumnos.size();i++){
@@ -746,7 +767,7 @@ public class Actividad1{
          * @param alj alumno 2 del conflicto
          * @throws IOException 
          */
-        private static void duplicadoAlumno(Alumno ali,Alumno alj) throws IOException{
+        public static void duplicadoAlumno(Alumno ali,Alumno alj) throws IOException{
             System.out.println("Conflicto alumno: misma id // mismos datos");
             System.out.println("- - -ALUMNO 1- - -");
             System.out.println("Id: "+ali.getIdAlumno());
@@ -772,7 +793,7 @@ public class Actividad1{
          * @param alj modulo 2 del conflicto
          * @throws IOException 
          */
-        private static void duplicadoModulo(Modulo ali,Modulo alj) throws IOException{
+        public static void duplicadoModulo(Modulo ali,Modulo alj) throws IOException{
             System.out.println("Conflicto modulo: misma id // mismos datos");
             System.out.println("- - -MODULO 1- - -");
             System.out.println("Id: "+ali.getIdModulo());
@@ -802,7 +823,7 @@ public class Actividad1{
          * @param alj nota 2 del conflicto
          * @throws IOException 
          */
-         private static void duplicadoNota(Nota ali,Nota alj) throws IOException{
+        public static void duplicadoNota(Nota ali,Nota alj) throws IOException{
             System.out.println("Conflicto alumno: misma id // mismos datos");
             System.out.println("- - -NOTA 1- - -");
             System.out.println("Id alumno: "+ali.getIdAlumno());
@@ -828,7 +849,7 @@ public class Actividad1{
           * @param objeto
           * @throws IOException 
           */
-        private static void guardarDuplicadosDescartados(String ruta_destino,Object objeto) throws IOException{
+        public static void guardarDuplicadosDescartados(String ruta_destino,Object objeto) throws IOException{
             FileWriter myWriter = new FileWriter(ruta_destino+"//duplicadosDescartados.txt",true);
             if(objeto instanceof Alumno){
                 Alumno al = (Alumno)objeto;
@@ -847,7 +868,7 @@ public class Actividad1{
          * Inserta los datos contenidos en los arraylist en la base de datos
          * @throws SQLException 
          */
-        private static void anadirDatos() throws SQLException{
+        public static void anadirDatos() throws SQLException{
             for(int i=0; i<alumnos.size(); i++){
                 insertAlumno(alumnos.get(i));
             }
@@ -863,7 +884,7 @@ public class Actividad1{
          * @param al alumno que queremos insertar
          * @throws SQLException 
          */
-        private static void insertAlumno(Alumno al) throws SQLException{
+        public static void insertAlumno(Alumno al) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Alumno (id_alumno,nombre,apellidos) VALUES (?,?,?)");
             s.setInt(1, al.getIdAlumno());
             s.setString(2, al.getNombre());
@@ -872,10 +893,10 @@ public class Actividad1{
         }
         /**
          * Consulta que inserta un modulo a la bbdd
-         * @param al modulo que queremos insertar
+         * @param mod modulo que queremos insertar
          * @throws SQLException 
          */
-        private static void insertModulo(Modulo mod) throws SQLException{
+        public static void insertModulo(Modulo mod) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Modulo (id_modulo,nombreCompleto,ciclo,curso,ECTS) VALUES (?,?,?,?,?)");
             s.setInt(1, mod.getIdModulo());
             s.setString(2, mod.getNombreCompleto());
@@ -886,10 +907,10 @@ public class Actividad1{
         }
         /**
          * Consulta que inserta un nota a la bbdd
-         * @param al nota que queremos insertar
+         * @param nota nota que queremos insertar
          * @throws SQLException 
          */
-        private static void insertNota(Nota nota) throws SQLException{
+        public static void insertNota(Nota nota) throws SQLException{
             PreparedStatement s = c.prepareStatement("INSERT INTO Notas (id_modulo,id_alumno,calificacion) VALUES (?,?,?)");
             s.setInt(1, nota.getIdModulo());
             s.setInt(2, nota.getIdAlumno());
@@ -900,7 +921,7 @@ public class Actividad1{
          * Menu que nos permite buscar datos en la base de datos
          * @throws SQLException 
          */
-        private static void buscarDatos() throws SQLException{
+        public static void buscarDatos() throws SQLException{
             Boolean salir = false;
             while(!salir){
                 System.out.println("1)Buscar por campos.");
@@ -1037,7 +1058,7 @@ public class Actividad1{
          * Muestra todos los datos en la tabla alumnos
          * @throws SQLException 
          */
-        private static void mostrarTablaAlumnos() throws SQLException{
+        public static void mostrarTablaAlumnos() throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos");
             
             ResultSet rs=s.executeQuery();
@@ -1054,7 +1075,7 @@ public class Actividad1{
          * Busca todos los alumnos que tengan esa id
          * @throws SQLException 
          */
-        private static void buscarAlumnos_porID(Integer id) throws SQLException{
+        public static void buscarAlumnos_porID(Integer id) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE id_alumno=?");
             s.setInt(1, id);
             ResultSet rs=s.executeQuery();
@@ -1072,7 +1093,7 @@ public class Actividad1{
          * Busca todos los alumnos que tengan esa nombre
          * @throws SQLException 
          */
-        private static void buscarAlumnos_porNombre(String nombre) throws SQLException{
+        public static void buscarAlumnos_porNombre(String nombre) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE nombre=?");
             s.setString(1, nombre);
             ResultSet rs=s.executeQuery();
@@ -1089,7 +1110,7 @@ public class Actividad1{
          * Busca todos los alumnos que tengan esa apellidos
          * @throws SQLException 
          */
-        private static void buscarAlumnos_porApellidos(String apellidos) throws SQLException{
+        public static void buscarAlumnos_porApellidos(String apellidos) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM alumnos WHERE apellidos=?");
             s.setString(1, apellidos);
             ResultSet rs=s.executeQuery();
@@ -1107,7 +1128,7 @@ public class Actividad1{
          * Muestra todos los datos en la tabla modulos
          * @throws SQLException 
          */
-        private static void mostrarTablaModulos() throws SQLException{
+        public static void mostrarTablaModulos() throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos");
             
             ResultSet rs=s.executeQuery();
@@ -1126,7 +1147,7 @@ public class Actividad1{
          * Busca todos los modulos que tengan esa id
          * @throws SQLException 
          */
-        private static void buscarModulos_porID(Integer id) throws SQLException{
+        public static void buscarModulos_porID(Integer id) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE id = ?");
             s.setInt(1, id);
             ResultSet rs=s.executeQuery();
@@ -1146,7 +1167,7 @@ public class Actividad1{
          * Busca todos los modulos que tengan esa nombre
          * @throws SQLException 
          */
-        private static void buscarModulos_porNombre(String nombre) throws SQLException{
+        public static void buscarModulos_porNombre(String nombre) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE nombreCompleto = ?");
             s.setString(1, nombre);
             ResultSet rs=s.executeQuery();
@@ -1165,7 +1186,7 @@ public class Actividad1{
          * Busca todos los modulos que tengan esa ciclo
          * @throws SQLException 
          */
-        private static void buscarModulos_porCiclo(String ciclo) throws SQLException{
+        public static void buscarModulos_porCiclo(String ciclo) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE ciclo = ?");
             s.setString(1, ciclo);
             ResultSet rs=s.executeQuery();
@@ -1184,7 +1205,7 @@ public class Actividad1{
          * Busca todos los modulos que tengan esa curso
          * @throws SQLException 
          */
-        private static void buscarModulos_porCurso(Integer curso) throws SQLException{
+        public static void buscarModulos_porCurso(Integer curso) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE curso = ?");
             s.setInt(1, curso);
             ResultSet rs=s.executeQuery();
@@ -1203,7 +1224,7 @@ public class Actividad1{
          * Busca todos los modulos que tengan esa ECTS
          * @throws SQLException 
          */
-        private static void buscarModulos_porECTS(Integer ECTS) throws SQLException{
+        public static void buscarModulos_porECTS(Integer ECTS) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM modulos WHERE ECTS = ?");
             s.setInt(1, ECTS);
             ResultSet rs=s.executeQuery();
@@ -1223,7 +1244,7 @@ public class Actividad1{
          * Muestra todos los datos en la tabla alumnos
          * @throws SQLException 
          */
-        private static void mostrarTablaNotas() throws SQLException{
+        public static void mostrarTablaNotas() throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM notas");
             
             ResultSet rs=s.executeQuery();
@@ -1240,7 +1261,7 @@ public class Actividad1{
          * Busca todos los notas que tengan esa id alumno
          * @throws SQLException 
          */
-        private static void buscarNotas_porIdAlumno(Integer idAlumno) throws SQLException{
+        public static void buscarNotas_porIdAlumno(Integer idAlumno) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE id_alumno = ?");
             s.setInt(1, idAlumno);
             ResultSet rs=s.executeQuery();
@@ -1257,7 +1278,7 @@ public class Actividad1{
          * Busca todos los notas que tengan esa id modulo
          * @throws SQLException 
          */
-        private static void buscarNotas_porIdModulo(Integer idModulo) throws SQLException{
+        public static void buscarNotas_porIdModulo(Integer idModulo) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE id_modulo = ?");
             s.setInt(1, idModulo);
             ResultSet rs=s.executeQuery();
@@ -1274,7 +1295,7 @@ public class Actividad1{
          * Busca todos los notas que tengan esa calificacion
          * @throws SQLException 
          */
-        private static void buscarNotas_porCalificacion(Double calificacion) throws SQLException{
+        public static void buscarNotas_porCalificacion(Double calificacion) throws SQLException{
             PreparedStatement s = c.prepareStatement("SELECT * FROM notas WHERE calificacion = ?");
             s.setDouble(1, calificacion);
             ResultSet rs=s.executeQuery();

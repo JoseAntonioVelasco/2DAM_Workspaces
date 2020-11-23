@@ -22,4 +22,10 @@
 		<item key="DIALOG_X_ORIGIN" value="239"/>
 		<item key="DIALOG_Y_ORIGIN" value="14"/>
 	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.hibernate.eclipse.console.wizards.NewReverseEngineeringFileWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="hibernatewizards"/>
+		</list>
+	</section>
 </section>

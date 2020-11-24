@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu tools:context=".MainActivity" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/cadena_barra_nuevo" app:showAsAction="always" android:icon="@drawable/nuevo" android:id="@+id/barra_nuevo"/>
+    <item android:title="@string/cadena_barra_editar" app:showAsAction="ifRoom" android:icon="@drawable/editar" android:id="@+id/barra_editar"/>
+
+    <!-- MENU -->
+
+    <item android:title="@string/cadena_barra_configurar" app:showAsAction="never" android:id="@+id/barra_configurar"/>
+    <item android:title="@string/cadena_barra_ayuda" app:showAsAction="never" android:id="@+id/barra_ayuda"/>
+    <item android:title="@string/cadena_barra_acerca" app:showAsAction="never" android:id="@+id/barra_acerca"/>
+
+</menu>

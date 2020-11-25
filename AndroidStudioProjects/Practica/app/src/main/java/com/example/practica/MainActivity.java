@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO startactivity history of calls
+                Intent intent = new Intent(MainActivity.this,Historial.class);
+                startActivity(intent);
             }
         });
 

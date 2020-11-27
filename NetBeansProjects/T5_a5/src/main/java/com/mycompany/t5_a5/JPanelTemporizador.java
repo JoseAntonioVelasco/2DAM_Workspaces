@@ -5,6 +5,8 @@
  */
 package com.mycompany.t5_a5;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
@@ -118,8 +120,9 @@ public class JPanelTemporizador extends javax.swing.JPanel {
         thoras=Integer.parseInt(jTextField1.getText());
         tminutos=Integer.parseInt(jTextField2.getText());
         tsegundos=Integer.parseInt(jTextField3.getText());
-        if(tsegundos==0 && tminutos==0 && thoras ==0){
+        if(tsegundos==1 && tminutos==0 && thoras ==0){
             activo = false;
+            JOptionPane.showMessageDialog(this, "Cuenta atras finalizada");
         }else{
             activo = true;
         }

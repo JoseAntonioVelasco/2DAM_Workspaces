@@ -12,5 +12,6 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        android:elevation="8dp"/>
+        android:elevation="8dp"
+        />
 </LinearLayout>

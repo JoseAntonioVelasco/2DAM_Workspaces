@@ -1,2 +1,7 @@
-8,jose,36
-8,pepe,36
+4,Miguel,4
+10,Pepe,20
+5,Miguel,5
+6,Miguel,6
+7,Miguel,7
+8,Miguel,8
+9,Miguel,9

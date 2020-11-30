@@ -233,7 +233,9 @@ def menu():
              hiddenBoard.append(row)
          newGame(hiddenBoard,int(arguments[0]),int(arguments[1]),int(arguments[2]),int(arguments[3]),int(arguments[0])*2,minesFound)
     elif option == 3:
-        sorted_scores = sorted(readScoreboard(), key=lambda x: x[2])
+        scores = readScoreboard()
+        print(scores)
+        sorted_scores = sorted(scores, key=lambda x: x[2])
         print("NIVEL \t PUNTUACION \t JUGADOR")
         for i in range(len(sorted_scores)): 
             print("  "+sorted_scores[i][0],end="\t\t\t")

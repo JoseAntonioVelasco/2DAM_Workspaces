@@ -144,8 +144,8 @@ hiddenBoard = addNumbersBoard(hiddenBoard)
 visibleBoard = initBoardList(boardSize,u'\u2593')
 
 while(True):
-    print(paintBoard(hiddenBoard))
-    print(paintBoard(visibleBoard))
+    paintBoard(hiddenBoard)
+    paintBoard(visibleBoard)
     row = int(input("row: "))
     col = int(input("col: "))
     showSurroundings(hiddenBoard,visibleBoard,row,col)

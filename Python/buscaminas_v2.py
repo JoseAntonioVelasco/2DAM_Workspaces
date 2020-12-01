@@ -65,8 +65,8 @@ def paintBoard(board,rowLetter,score,combo,lifes,mines,minesFound):
             paintBottomBoard(size)
     print()
     print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-")
-    print("|  Puntuacion: ", score,"     Combo: ",combo, "     Vidas: ",lifes, "|")
-    print("|  Bombas descubiertas: ",minesFound, "  Bombas ocultas: ",mines-minesFound, "|")
+    print("|  Puntuacion: %2d      Combo: %2d      Vidas: %2d |" % (score,combo,lifes))
+    print("|  Bombas descubiertas: %2d   Bombas ocultas: %2d |" % (minesFound,mines-minesFound))
     print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-")
 def initBoardList(size,char):
     board = []
@@ -97,52 +97,21 @@ def addMine(board,numrows,numcols):
 def showSurrounding(hiddenBoard,visibleBoard,row,col,combo,score,minesFound,mines,lifes):
     if hiddenBoard[row][col] == "1":
         hiddenBoard[row][col] = "3"
-        visibleBoard[row][col] = "x"
+        visibleBoard[row][col] = u'\u25c7'
         
         combo = combo + 1
         score = score + combo
         minesFound = minesFound + 1
-        if minesFound == mines:
-            scores = readScoreboard()
-            sorted_scores = sorted(scores, key=lambda x: x[2])
-      
-            if len(sorted_scores)==0 or (int(sorted_scores[0][2]) > score)==False:
-                #yes scoreboard
-                name = "DESCONOCIDO"
-                name = input("Introduce nombre: ")
-                name.replace(",","")
-                
-                scoreboard = open("ficheroMaximasPuntuaciones.txt","r")
-                if len(open("ficheroMaximasPuntuaciones.txt").readlines()) >= 10:
-                    #find line with less score and delete it
-                    minScore = int(sorted_scores[0][2])
-                    lines = scoreboard.readlines()
-                    scoreboard = open("ficheroMaximasPuntuaciones.txt","w")
-                    for line in lines:
-                       row = line.split(",")
-                       if row[2].strip("\n") != str(minScore):
-                           scoreboard.write(line)
-                           
-                scoreboard = open("ficheroMaximasPuntuaciones.txt","a")
-                scoreboard.write(str(mines/2)+","+name+","+str(score)+"\n")
-                scoreboard.close()
-                
-            else:
-                #no scoreboard
-                print("No has superado el record.")
-                print("Tu puntuacion es: ",score)
-            secondMenu()
+        
         
     elif hiddenBoard[row][col] == "0":
         hiddenBoard[row][col] = "2"
-        visibleBoard[row][col] = " "
+        visibleBoard[row][col] = u'\u25c6'
         
         combo = 0
         score = score - 1
         lifes = lifes - 1
-        if lifes == 0:
-            print("Te has quedado sin vidas! ")
-            secondMenu()
+
     return [combo,score,minesFound,mines,lifes]
 letters = ["A","B","C","D","E","F","G","H","I","J"]
 def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
@@ -152,24 +121,67 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
         rowLetter[i] = letters[i]
         rowLetter[letters[i]] = i
     while(True):  
-      paintBoard(hiddenBoard,rowLetter,score,combo,lifes,mines,minesFound)
+      #paintBoard(hiddenBoard,rowLetter,score,combo,lifes,mines,minesFound)
       visibleBoard = calculateVisibleBoard(hiddenBoard)
       paintBoard(visibleBoard,rowLetter,score,combo,lifes,mines,minesFound)
+      if minesFound == mines:
+        scores = readScoreboard()
+        sorted_scores = sorted(scores, key=lambda x: x[2])
+  
+        if len(sorted_scores)==0 or (int(sorted_scores[0][2]) > score)==False:
+            #yes scoreboard
+            name = input("Introduce nombre: ")
+            if name == "":
+                name = "DESCONOCIDO"
+            name.replace(",","")
+            
+            scoreboard = open("ficheroMaximasPuntuaciones.txt","r")
+            if len(open("ficheroMaximasPuntuaciones.txt").readlines()) == 10:
+                #find line with less score and delete it
+                minScore = int(sorted_scores[0][2])
+                lines = scoreboard.readlines()
+                scoreboard = open("ficheroMaximasPuntuaciones.txt","w")
+                for line in lines:
+                   row = line.split(",")
+                   if row[2].strip("\n") != str(minScore):
+                       scoreboard.write(line)
+                       
+            scoreboard = open("ficheroMaximasPuntuaciones.txt","a")
+            scoreboard.write(str(int(mines/2))+","+name+","+str(score)+"\n")
+            scoreboard.close()
+            secondMenu()
+            return
+            
+        else:
+            #no scoreboard
+            print("No has superado el record.")
+            print("Tu puntuacion es: ",score)
+            secondMenu()
+            return
+            
+      elif lifes == 0:
+          print("Te has quedado sin vidas! ")
+          secondMenu()
+          return
+         
       optionLetter = input("Elija una opcion: (C)oordenada, (G)uardar o (S)alir: ")
       if optionLetter == "C":
           coord = input("Introduce coordenada <Letra><Numero>: ")
-          while (coord[0] in rowLetter and int(coord[1]) in rowLetter) == False:
-              coord = input("Introduce coordenada <Letra><Numero>: ")
+          while (len(coord)==2 and coord[0] in rowLetter and int(coord[1]) in rowLetter) == False:
+            coord = input("Introduce coordenada <Letra><Numero>: ")
+              
           arguments=showSurrounding(hiddenBoard,visibleBoard,rowLetter.get(coord[0]),int(coord[1]),combo,score,minesFound,mines,lifes)
           combo = arguments[0]
           score = arguments[1]
           minesFound = arguments[2]
           mines =  arguments[3]
           lifes = arguments[4]
+          
+ 
       elif optionLetter == "G":
           name = input("Nombre de la partida: ")
           saveGame = open(name + ".txt", "a") 
-          saveGame.write(str(difficulty)+";"+str(lifes)+";"+str(score)+";"+str(combo)+"\n")
+          saveGame.write(str(difficulty)+";"+str(lifes)+";"+str(score)+"\n")
           for i in range(difficulty):
               for j in range(difficulty):  
                 if j == difficulty - 1:
@@ -182,16 +194,15 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
           
       elif optionLetter == "S":
           sys.exit()
-
 def calculateVisibleBoard(hiddenBoard):
     size = len(hiddenBoard)
     visibleBoard = initBoardList(size,u'\u2593')
     for i in range(size):
         for j in range(size):
             if hiddenBoard[i][j] == "2":
-                visibleBoard[i][j] = " "
+                visibleBoard[i][j] = u'\u25c6'
             elif hiddenBoard[i][j] == "3":
-                visibleBoard[i][j] = "x"
+                visibleBoard[i][j] = u'\u25c7'
     return visibleBoard            
 
 def menu():
@@ -231,40 +242,52 @@ def menu():
                  if row[i] == "3":
                      minesFound = minesFound + 1
              hiddenBoard.append(row)
-         newGame(hiddenBoard,int(arguments[0]),int(arguments[1]),int(arguments[2]),int(arguments[3]),int(arguments[0])*2,minesFound)
+         newGame(hiddenBoard,int(arguments[0]),int(arguments[1]),int(arguments[2]),0,int(arguments[0])*2,minesFound)
+         
     elif option == 3:
         scores = readScoreboard()
-        print(scores)
-        sorted_scores = sorted(scores, key=lambda x: x[2])
+        scores.sort(key = lambda x:x[2])
         print("NIVEL \t PUNTUACION \t JUGADOR")
-        for i in range(len(sorted_scores)): 
-            print("  "+sorted_scores[i][0],end="\t\t\t")
-            print("  "+sorted_scores[i][2],end="\t\t")
-            print("  "+sorted_scores[i][1])
-        menu()
+        for i in range(len(scores)):
+            if i < len(scores)-1:
+                print('\U0001F3C5'+"%2d"%(scores[i][0]),end="\t  ")
+                print("  %3d"%(scores[i][2]),end="\t\t\t")
+                print("  "+scores[i][1])
+            else:
+                print('\U0001F3C6'+"%2d"%(scores[i][0]),end="\t  ")
+                print("  %3d"%(scores[i][2]),end="\t\t\t")
+                print("  "+scores[i][1])
+                
+        
     else:
          sys.exit()
+         
 def readScoreboard():
     scoreboard = open("ficheroMaximasPuntuaciones.txt","r")
     scores = []
     for line in scoreboard:
         l=line.rstrip()
         row=l.split(",")
+        row[0] = int(row[0])
+        row[2] = int(row[2])
         scores.append(row)
     scoreboard.close()
     return scores
+
 def writeScoreboard(scores):
     scoreboard = open("ficheroMaximasPuntuaciones.txt","a")
     for i in range(len(scores)):
         scoreboard.write(str(scores[i][0])+","+scores[i][1]+","+str(scores[i][2]))
     scoreboard.close()
+    
 def secondMenu():
     print("Elija una opcion: (M)enu o (S)alir: ")
     option = input()
-    if option == "M":
-        menu()
-    else:
+    if option == "S":
         sys.exit()
-
-menu()
+        
+f = open("ficheroMaximasPuntuaciones.txt", "w")
+f.close()
+while(True):
+    menu()
     

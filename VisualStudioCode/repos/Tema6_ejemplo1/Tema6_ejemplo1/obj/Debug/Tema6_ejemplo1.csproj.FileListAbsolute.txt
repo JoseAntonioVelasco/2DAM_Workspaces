@@ -1,0 +1,15 @@
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\bin\Debug\Tema6_ejemplo1.exe.config
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\bin\Debug\Tema6_ejemplo1.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\bin\Debug\Tema6_ejemplo1.pdb
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\MainWindow.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\App.g.cs
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1_MarkupCompile.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1_MarkupCompile.lref
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\MainWindow.baml
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.g.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.Properties.Resources.resources
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.csproj.GenerateResource.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.exe
+C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_ejemplo1\Tema6_ejemplo1\obj\Debug\Tema6_ejemplo1.pdb

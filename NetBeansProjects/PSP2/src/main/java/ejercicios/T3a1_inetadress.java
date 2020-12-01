@@ -34,8 +34,10 @@ public class T3a1_inetadress {
         System.out.println("\tMetodo toString(): "+ip.toString());
         System.out.println("\tMetodo getCanonicalHostName(): "+ip.getCanonicalHostName());
         System.out.println("\tDIRECCIONES IP PARA: www.google.es");
-        System.out.println("\t\t");
-        System.out.println("\t\t");
+        InetAddress[] ine = InetAddress.getAllByName("www.google.es");
+        for(int i=0; i<ine.length; i++){
+            System.out.println("\t\t "+ine[i].toString());
+        }
         
     }
     

@@ -10,14 +10,13 @@ import java.net.UnknownHostException;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class T3a1_inetadress {
     public static void main(String args[]) throws UnknownHostException {
         
         System.out.println("SALIDA PARA LOCALHOST: ");
-        
-        
+        //Esta es la informacion de conexion de nuestro pc
         System.out.println("\tMetodo getByName(): "+InetAddress.getByName(null));
         System.out.println("\tMetodo getLocalHost(): "+InetAddress.getLocalHost());
         System.out.println("\tMetodo getHostName(): "+InetAddress.getLocalHost().getHostName());
@@ -27,6 +26,7 @@ public class T3a1_inetadress {
         System.out.println("=======================================");
         InetAddress ip = InetAddress.getByName("www.google.es");
         System.out.println("SALIDA PARA UNA URL: ");
+        //Esta es la informacion de conexion a una URL
         System.out.println("\tMetodo getByName(): "+InetAddress.getByName("www.google.es"));
         System.out.println("\tMetodo getLocalHost(): "+InetAddress.getLocalHost());
         System.out.println("\tMetodo getHostName(): "+ip.getHostName());

@@ -11,7 +11,7 @@
             <TextBlock Width="248" Height="24" TextWrapping="Wrap" Text="Probador de fuentes y colores:"></TextBlock>
             <TextBlock Width="248" Height="24" Text="{Binding ElementName=LbFuente, Path=SelectedItem.Content, Mode=TwoWay}"></TextBlock>
             <TextBlock Width="248" Height="24" Text="Probando diferentes Fuentes" FontFamily="{Binding ElementName=LbFuente,Path=SelectedItem.Content}"></TextBlock>
-            <TextBox Width="250" Height="30" Text="{Binding ElementName=LbColor, Path=SelectedItem.Content, Mode=TwoWay}" LostFocus="{Binding ElementName=LbColor, Path=SelectedItem.Content, Mode=TwoWay}"></TextBox>
+            <TextBox Width="250" Height="30" Text="{Binding ElementName=LbColor, Path=SelectedItem.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </StackPanel>
         <StackPanel x:Name="StackPanelEmpleado" Margin="0,100">
             <TextBlock Width="248" Height="24" TextWrapping="Wrap" Text="Fuentes:"></TextBlock>

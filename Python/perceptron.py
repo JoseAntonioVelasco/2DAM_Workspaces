@@ -25,7 +25,7 @@ np.random.seed(1)
 #floating point numbers between -1 and 1
 synaptic_weights = 2 * np.random.random((3,1)) - 1
 
-print("randon stating synaptic weights: ")
+print("randon starting synaptic weights: ")
 print(synaptic_weights)
 
 for iteration in range(20000):

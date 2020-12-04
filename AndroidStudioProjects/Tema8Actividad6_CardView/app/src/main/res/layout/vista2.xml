@@ -20,15 +20,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:src="@drawable/cara1"></ImageView>
-
             <TextView
-                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NombrePintor1" />
+                android:text="nombre"></TextView>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -45,15 +43,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:src="@drawable/cara2"></ImageView>
-
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NombrePintor2" />
+                android:text="nombre"></TextView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -69,15 +65,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:src="@drawable/cara3"></ImageView>
-
             <TextView
-                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NombrePintor3" />
+                android:text="nombre"></TextView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -93,15 +87,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:src="@drawable/cara4"></ImageView>
-
             <TextView
-                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NombrePintor4" />
+                android:text="nombre"></TextView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </FrameLayout>

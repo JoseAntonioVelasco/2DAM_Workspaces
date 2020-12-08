@@ -25,22 +25,26 @@ import java.util.Map;
 public class T3a3_URLConnection {
     
         public static void main(String[] args) throws MalformedURLException, IOException {
+            //conectamos a la url
             URL url = new URL("https://aprende-web.net/php/ejemplos/ej5.html");
             URLConnection conexion = url.openConnection();
             conexion.setDoOutput(true);
             
+            //sacamos info de la url
             System.out.println("Metodo getUrl(): "+conexion.getURL());
             Date d = new Date(conexion.getLastModified());
             System.out.println("Metodo getLastModified(): "+d);
             System.out.println("Metodo getContentType(): "+conexion.getContentType());
             System.out.println("Metodo getHeaderFields(): ");
             
+            //recorremos el mapa
             Map map = conexion.getHeaderFields();
             List<String> l = new ArrayList<String>(map.keySet());
             for(int i=0; i<l.size(); i++){
                System.out.println("Campo: "+l.get(i)+"\tContenido: "+map.get(l.get(i)));
             }
             
+            //imprimimos en un fichero el html de la url
             FileWriter myWriter = new FileWriter("index.html");
             BufferedReader in;
             InputStream is;

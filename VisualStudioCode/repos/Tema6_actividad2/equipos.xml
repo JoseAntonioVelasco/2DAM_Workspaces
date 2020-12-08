@@ -1,0 +1,139 @@
+<EquiposNBA>
+	<Team Coference = 'NBA East' Zona='atlantic'>
+		<Id> 1 </Id>
+		<Name> Boston Celtics </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='atlantic'>
+		<Id> 2 </Id>
+		<Name> New York Knicks </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='atlantic'>
+		<Id> 3 </Id>
+		<Name> New Jersey Nets </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='atlantic'>
+		<Id> 4 </Id>
+		<Name> Philadelphia 76ers</Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='atlantic'>
+		<Id> 5 </Id>
+		<Name> Toronto Raptors </Name>
+	</Team>
+	
+	
+	
+	<Team Coference = 'NBA East' Zona='central'>
+		<Id> 6 </Id>
+		<Name> Chicago Bulls</Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='central'>
+		<Id> 7 </Id>
+		<Name>  Cleveland Cavaliers </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='central'>
+		<Id> 8 </Id>
+		<Name> Detroit Pistons </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='central'>
+		<Id> 9 </Id>
+		<Name> Indiana Pacers</Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='central'>
+		<Id> 10 </Id>
+		<Name> Milwaukee Bucks</Name>
+	</Team>
+	
+	
+	
+	
+	<Team Coference = 'NBA East' Zona='Shoutheast'>
+		<Id> 11 </Id>
+		<Name> Atlanta Hawks </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='Shoutheast'>
+		<Id> 12 </Id>
+		<Name>  Charlotte Bobcats </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='Shoutheast'>
+		<Id> 13 </Id>
+		<Name> Miami Heat </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='Shoutheast'>
+		<Id> 14 </Id>
+		<Name> Orlando Magic </Name>
+	</Team>
+	<Team Coference = 'NBA East' Zona='Shoutheast'>
+		<Id> 15 </Id>
+		<Name> Washington Wizards </Name>
+	</Team>
+	
+	
+	<Team Coference = 'NBA West' Zona='Northwest'>
+		<Id> 16 </Id>
+		<Name> Denver Nuggets </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Northwest'>
+		<Id> 17 </Id>
+		<Name> Minnesota Timberwolves </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Northwest'>
+		<Id> 18 </Id>
+		<Name> Portland Trail Blazers </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Northwest'>
+		<Id> 19 </Id>
+		<Name> Seattle Supersonics </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Northwest'>
+		<Id> 20 </Id>
+		<Name> Utah Jazz</Name>
+	</Team>
+	
+	
+	<Team Coference = 'NBA West' Zona='pacific'>
+		<Id> 21 </Id>
+		<Name> Golden State Warriors </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='pacific'>
+		<Id> 22 </Id>
+		<Name> Phoenix Suns </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='pacific'>
+		<Id> 23 </Id>
+		<Name> Sacramento Kings </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='pacific'>
+		<Id> 24 </Id>
+		<Name> Los Angeles Clippers </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='pacific'>
+		<Id> 25 </Id>
+		<Name> Los Angeles Lakers </Name>
+	</Team>
+	
+	
+	
+	
+	
+	<Team Coference = 'NBA West' Zona='Shoutwest'>
+		<Id> 26 </Id>
+		<Name> Dallas Mavericks </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Shoutwest'>
+		<Id> 27 </Id>
+		<Name> Houston Rockets </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Shoutwest'>
+		<Id> 28 </Id>
+		<Name>  Memphis Grizzlies </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Shoutwest'>
+		<Id> 29 </Id>
+		<Name> New Orleans Hornets </Name>
+	</Team>
+	<Team Coference = 'NBA West' Zona='Shoutwest'>
+		<Id> 30 </Id>
+		<Name> San Antonio Spurs </Name>
+	</Team>
+</EquiposNBA>
+	

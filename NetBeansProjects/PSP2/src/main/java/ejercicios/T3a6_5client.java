@@ -19,6 +19,7 @@ public class T3a6_5client {
         int puerto = 6000;
             
         Socket cliente=null;
+        //creamos 5 clientes que se conectan al server
         for(int a=0; a<5;a++){
             cliente = new Socket(host,puerto);
             InetAddress i = cliente.getInetAddress();

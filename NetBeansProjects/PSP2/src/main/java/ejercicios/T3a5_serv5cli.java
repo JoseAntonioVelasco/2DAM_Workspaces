@@ -18,6 +18,7 @@ public class T3a5_serv5cli {
         int puerto = 6000;
         ServerSocket servidor = new ServerSocket(puerto);
         System.out.println("Escuchando");
+        //creamos un server con capacidad para 5 clientes
         for(int i=0; i<5; i++){
             Socket cliente = servidor.accept();
             System.out.println("SERVIDOR");

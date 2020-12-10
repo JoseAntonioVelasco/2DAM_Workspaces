@@ -5,66 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tema6_actividad2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="565.385" Width="1162.637">
+        Title="Baloncesto" Height="565.385" Width="1162.637">
     <Window.Resources>
-        <XmlDataProvider x:Key="Equipos" Source="C:\Users\cagan\Documents\GitHub\2DAM_Workspaces\VisualStudioCode\repos\Tema6_actividad2\equipos.xml" XPath="EquiposNBA">
+        <XmlDataProvider x:Key="Equipos" Source="C:\Users\USER\Documents\GitWorkspaces\2DAM_Workspaces\VisualStudioCode\repos\Tema6_actividad2\equipos.xml" XPath="EquiposNBA">
         </XmlDataProvider>
     </Window.Resources>
-    <Grid>
-        <ListBox x:Name="equiposEste" HorizontalAlignment="Left" Height="147.802" Margin="65.231,78.495,0,0" VerticalAlignment="Top" Width="157.692">
+    <Grid Background="#FFBF7D7D">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="218*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="equiposEste" HorizontalAlignment="Left" Height="147.802" Margin="0.231,78.495,0,0" VerticalAlignment="Top" Width="157.692" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="equiposOeste" HorizontalAlignment="Left" Height="137.912" Margin="65.231,319.154,0,0" VerticalAlignment="Top" Width="157.692">
+        <ListBox x:Name="equiposOeste" HorizontalAlignment="Left" Height="137.912" Margin="0.231,319.154,0,0" VerticalAlignment="Top" Width="157.692" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zAtlantica" HorizontalAlignment="Left" Height="100" Margin="338.857,126.297,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zAtlantica" HorizontalAlignment="Left" Height="100" Margin="273.857,126.297,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='atlantic']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='atlantic']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zCentral" HorizontalAlignment="Left" Height="100" Margin="548.198,126.297,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zCentral" HorizontalAlignment="Left" Height="100" Margin="483.198,126.297,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='central']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='central']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zSudoeste" HorizontalAlignment="Left" Height="100" Margin="726.22,126.297,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zSudoeste" HorizontalAlignment="Left" Height="100" Margin="661.22,126.297,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='Shoutheast']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='Shoutheast']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zNoroeste" HorizontalAlignment="Left" Height="100" Margin="338.857,319.154,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zNoroeste" HorizontalAlignment="Left" Height="100" Margin="273.857,354.143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='Northwest']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='Northwest']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zPacifico" HorizontalAlignment="Left" Height="100" Margin="548.198,319.154,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zPacifico" HorizontalAlignment="Left" Height="100" Margin="483.198,354.143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='pacific']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='pacific']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="zSudeste" HorizontalAlignment="Left" Height="100" Margin="726.22,319.154,0,0" VerticalAlignment="Top" Width="100">
+        <ListBox x:Name="zSudeste" HorizontalAlignment="Left" Height="100" Margin="661.22,354.143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='Shoutwest']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA West'][@Zona='Shoutwest']/Name"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <ListBox x:Name="jugadores" HorizontalAlignment="Left" Height="378.571" Margin="915.78,78.495,0,0" VerticalAlignment="Top" Width="165.934">
+        <ListBox x:Name="jugadores" HorizontalAlignment="Left" Height="378.571" Margin="850.78,78.495,0,0" VerticalAlignment="Top" Width="165.934" Grid.Column="1">
             <ListBox.ItemsSource>
-                <Binding Source="{StaticResource Equipos}" XPath="//Team[@Coference='NBA East'][@Zona='atlantic']"></Binding>
+                <Binding Source="{StaticResource Equipos}" XPath="//Team[jugador]/jugador"></Binding>
             </ListBox.ItemsSource>
         </ListBox>
-        <Label Content="Zona Atlantica" HorizontalAlignment="Left" Margin="338.857,78.495,0,0" VerticalAlignment="Top"/>
-        <Label Content="Zona Central" HorizontalAlignment="Left" Margin="548.198,86.505,0,0" VerticalAlignment="Top"/>
-        <Label Content="Zona Sudoeste" HorizontalAlignment="Left" Margin="726.22,78.495,0,0" VerticalAlignment="Top"/>
-        <Label Content="Zona Noroeste" HorizontalAlignment="Left" Margin="338.857,278,0,0" VerticalAlignment="Top"/>
-        <Label Content="Zona del Pacifico" HorizontalAlignment="Left" Margin="548.501,278,0,0" VerticalAlignment="Top"/>
-        <Label Content="Zona Sudeste" HorizontalAlignment="Left" Margin="726.22,278,0,0" VerticalAlignment="Top"/>
-        <Label Content="Conferencia ESTE" HorizontalAlignment="Left" Margin="527,40,0,0" VerticalAlignment="Top"/>
-        <Label Content="Conferencia OESTE" HorizontalAlignment="Left" Margin="537.984,247.04,0,0" VerticalAlignment="Top"/>
-        <Label Content="Jugadores" HorizontalAlignment="Left" Margin="915.78,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="Zona Atlantica" HorizontalAlignment="Left" Margin="273.857,78.495,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Zona Central" HorizontalAlignment="Left" Margin="483.198,86.505,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Zona Sudoeste" HorizontalAlignment="Left" Margin="661.22,78.495,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Zona Noroeste" HorizontalAlignment="Left" Margin="273.857,305.576,0,0" VerticalAlignment="Top" Height="30.636" Grid.Column="1"/>
+        <Label Content="Zona del Pacifico" HorizontalAlignment="Left" Margin="483.501,305.576,0,0" VerticalAlignment="Top" Height="30.636" Grid.Column="1"/>
+        <Label Content="Zona Sudeste" HorizontalAlignment="Left" Margin="661.22,305.576,0,0" VerticalAlignment="Top" Height="30.636" Grid.Column="1"/>
+        <Label Content="Conferencia ESTE" HorizontalAlignment="Left" Margin="426,26.696,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Grid.Column="1"/>
+        <Label Content="Conferencia OESTE" HorizontalAlignment="Left" Margin="426,263.44,0,0" VerticalAlignment="Top" Height="42.136" FontWeight="Bold" FontSize="22" Grid.Column="1"/>
+        <Label Content="Jugadores" HorizontalAlignment="Left" Margin="850.78,40,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
     </Grid>
 </Window>

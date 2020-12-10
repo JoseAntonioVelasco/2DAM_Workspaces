@@ -2,22 +2,27 @@
 	<Team Coference = 'NBA East' Zona='atlantic'>
 		<Id> 1 </Id>
 		<Name> Boston Celtics </Name>
+		<jugador>Pepito</jugador>
 	</Team>
 	<Team Coference = 'NBA East' Zona='atlantic'>
 		<Id> 2 </Id>
 		<Name> New York Knicks </Name>
+		<jugador>Pepe</jugador>
 	</Team>
 	<Team Coference = 'NBA East' Zona='atlantic'>
 		<Id> 3 </Id>
 		<Name> New Jersey Nets </Name>
+		<jugador>Juancho</jugador>
 	</Team>
 	<Team Coference = 'NBA East' Zona='atlantic'>
 		<Id> 4 </Id>
 		<Name> Philadelphia 76ers</Name>
+		<jugador>Sancho</jugador>
 	</Team>
 	<Team Coference = 'NBA East' Zona='atlantic'>
 		<Id> 5 </Id>
 		<Name> Toronto Raptors </Name>
+		<jugador>Diego</jugador>
 	</Team>
 	
 	
@@ -25,6 +30,7 @@
 	<Team Coference = 'NBA East' Zona='central'>
 		<Id> 6 </Id>
 		<Name> Chicago Bulls</Name>
+		<jugador>Luis</jugador>
 	</Team>
 	<Team Coference = 'NBA East' Zona='central'>
 		<Id> 7 </Id>
@@ -135,5 +141,6 @@
 		<Id> 30 </Id>
 		<Name> San Antonio Spurs </Name>
 	</Team>
+
 </EquiposNBA>
 	

@@ -9,7 +9,4 @@
     android:scrollbars="vertical"
     android:background="@color/colorFondo">
 
-
-
-
 </androidx.recyclerview.widget.RecyclerView>

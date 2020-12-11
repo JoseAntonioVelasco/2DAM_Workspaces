@@ -1,30 +1,35 @@
 package com.progmultimedia.tema8actividad7_recyclerview;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView reciclador;
     private RecyclerView.Adapter adaptador;
-    private RecyclerView.LayoutManager layManager;
+    private RecyclerView.LayoutManager gestor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         reciclador = (RecyclerView) findViewById(R.id.reciclador);
-        reciclador.setHasFixedSize(true);
-        layManager = new LinearLayoutManager(this);
-        reciclador.setLayoutManager(layManager);
 
-
-        ArrayList<Encapsulador> datos = new ArrayList<Encapsulador>();
+        ArrayList<Encapsulador> datos = new ArrayList<>();
         datos.add(new Encapsulador(R.drawable.ima1, "DONUTS", "El 15 de septiembre de 2009, fue lanzado el SDK de Android 1.6 Donut, basado en el núcleo Linux 2.6.29. En la actualización se incluyen numerosas características nuevas."));
         datos.add(new Encapsulador(R.drawable.ima2, "FROYO", "El 20 de mayo de 2010, El SDK de Android 2.2 Froyo (Yogur helado) fue lanzado, basado en el núcleo Linux 2.6.32."));
         datos.add(new Encapsulador(R.drawable.ima3, "GINGERBREAD", "El 6 de diciembre de 2010, el SDK de Android 2.3 Gingerbread (Pan de Jengibre) fue lanzado, basado en el núcleo Linux 2.6.35."));
@@ -34,7 +39,39 @@ public class MainActivity extends AppCompatActivity {
         datos.add(new Encapsulador(R.drawable.ima7, "KITKAT", "Su nombre se debe a la chocolatina KitKat, de la empresa internacional Nestlé. Posibilidad de impresión mediante WIFI. WebViews basadas en el motor de Chromium."));
         datos.add(new Encapsulador(R.drawable.ima8, "LOLLIPOP", "Incluye Material Design, un diseño intrépido, colorido, y sensible interfaz de usuario para las experiencias coherentes e intuitivos en todos los dispositivos. Movimiento de respuesta natural, iluminación y sombras realistas y familiares elementos visuales hacen que sea más fácil de navegar su dispositivo."));
 
-        reciclador.addOnItemTouchListener(new RecyclerView.O);
+        reciclador.setHasFixedSize(true);
+        adaptador = new Adaptador(datos);
+        gestor = new LinearLayoutManager(this);
+        reciclador.setLayoutManager(gestor);
+        reciclador.setAdapter(adaptador);
+
+        reciclador.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
+                @Override
+                public boolean onSingleTapUp(MotionEvent e){
+                    return true;
+                }
+            });
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                View hijo = rv.findChildViewUnder(e.getX(),e.getY());
+                if(hijo != null && gestureDetector.onTouchEvent(e)){
+                    int position = rv.getChildAdapterPosition(hijo);
+                    Toast.makeText(getApplicationContext(),datos.get(position).getTextoTitulo(),Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
     }
 }

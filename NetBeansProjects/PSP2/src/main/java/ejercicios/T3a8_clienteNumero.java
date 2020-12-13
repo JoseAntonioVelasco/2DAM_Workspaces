@@ -11,11 +11,12 @@ import java.util.Scanner;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class T3a8_clienteNumero {
         public static void main(String[] args) throws Exception {
         // TODO Auto-generated method stub
+        //creamos cliente
         String Host = "localhost";
         int Puerto = 6000;
          
@@ -23,12 +24,12 @@ public class T3a8_clienteNumero {
         System.out.print("Introduce un numero:");
         Socket Cliente = new Socket(Host,Puerto);
         DataOutputStream flujoSalida = new DataOutputStream(Cliente.getOutputStream());
-        
+        //pedimos un numero para pasarselo al servidor
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
         sc.close();
+        //pasamos el numero al servidor
         flujoSalida.write(num);
-        //flujoSalida.writeUTF("El cliente saLuda Al seRvidor");
         
         flujoSalida.close();
         Cliente.close();

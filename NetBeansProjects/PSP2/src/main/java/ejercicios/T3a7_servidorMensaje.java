@@ -15,24 +15,27 @@ import java.net.Socket;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class T3a7_servidorMensaje {
     public static void main(String[] arg) throws IOException{
+        //creamos servidor
         int numeroPuerto = 6000;
         ServerSocket servidor = new ServerSocket(numeroPuerto);
         Socket clienteConectado = null;
+        //esperamos a que se conecte un cliente
         System.out.println("Esperando al cliente.....");
         clienteConectado = servidor.accept();
         
+        //iniciamos canal de entrada de informacion del cliente
         InputStream entrada = null;
         entrada = clienteConectado.getInputStream();
         DataInputStream flujoEntrada = new DataInputStream(entrada);
-        
+        //mensaje del cliente
         System.out.println("Recibiendo mensaje del cliente:\t"+flujoEntrada.readUTF().toLowerCase());
         
         
-        
+        //cerramos
         entrada.close();
         flujoEntrada.close();
         clienteConectado.close();

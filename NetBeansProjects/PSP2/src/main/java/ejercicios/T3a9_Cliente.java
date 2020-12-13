@@ -13,7 +13,7 @@ import java.net.Socket;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class T3a9_Cliente {
     public static void main(String[] args) throws IOException{
@@ -23,8 +23,10 @@ public class T3a9_Cliente {
         Socket cliente=null;
         //creamos 5 clientes que se conectan al server
         for(int a=0; a<5;a++){
+            //los clientes se conectan al mismo servidor
             cliente = new Socket(host,puerto);
             DataInputStream flujoEntrada = new DataInputStream(cliente.getInputStream());
+            //el servidor les devuelve que numero de cliente son
             System.out.println("Mi numero de cliente es:\t"+flujoEntrada.read());
             flujoEntrada.close();
         }

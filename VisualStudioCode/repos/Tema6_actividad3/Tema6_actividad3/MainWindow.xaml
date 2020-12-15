@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tema6_actividad3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="900" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:BibliotecaDataSet x:Key="bibliotecaDataSet"/>
+        <CollectionViewSource x:Key="librosViewSource" Source="{Binding Libros, Source={StaticResource bibliotecaDataSet}}"/>
+        <CollectionViewSource x:Key="librosPrestamosViewSource" Source="{Binding FK_Prestamos_Libros, Source={StaticResource librosViewSource}}"/>
+        <CollectionViewSource x:Key="usuariosViewSource" Source="{Binding Usuarios, Source={StaticResource bibliotecaDataSet}}"/>
+        <CollectionViewSource x:Key="usuariosPrestamosViewSource" Source="{Binding FK_Prestamos_Usuarios, Source={StaticResource usuariosViewSource}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource librosViewSource}">
+        <DataGrid x:Name="librosDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,10,459,209" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="codigo_libroColumn" Binding="{Binding Codigo_libro}" Header="Codigo libro" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nombre_libroColumn" Binding="{Binding Nombre_libro}" Header="Nombre libro" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="editorialColumn" Binding="{Binding Editorial}" Header="Editorial" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="autorColumn" Binding="{Binding Autor}" Header="Autor" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="generoColumn" Binding="{Binding Genero}" Header="Genero" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pais_del_autorColumn" Binding="{Binding Pais_del_autor}" Header="Pais del autor" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numero_de_paginasColumn" Binding="{Binding Numero_de_paginas}" Header="Numero de paginas" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="ano_de_edicionColumn" Binding="{Binding Ano_de_edicion}" Header="Ano de edicion" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="precio_libroColumn" Binding="{Binding Precio_libro}" Header="Precio libro" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="prestamosDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource librosPrestamosViewSource}}" Margin="452,10,10,209" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="numero_pedidoColumn" Binding="{Binding Numero_pedido}" Header="Numero pedido" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="codigo_libroColumn1" Binding="{Binding Codigo_libro}" Header="Codigo libro" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="codigo_usuarioColumn" Binding="{Binding Codigo_usuario}" Header="Codigo usuario" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_salidaColumn" Binding="{Binding Fecha_salida}" Header="Fecha salida" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_max_devolucionColumn" Binding="{Binding Fecha_max_devolucion}" Header="Fecha max devolucion" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_devolucionColumn" Binding="{Binding Fecha_devolucion}" Header="Fecha devolucion" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="usuariosDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource usuariosViewSource}}" Margin="10,219,459,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="codigo_usuarioColumn1" Binding="{Binding Codigo_usuario}" Header="Codigo usuario" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nombreColumn" Binding="{Binding Nombre}" Header="Nombre" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="apellidosColumn" Binding="{Binding Apellidos}" Header="Apellidos" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="dNIColumn" Binding="{Binding DNI}" Header="DNI" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="domicilioColumn" Binding="{Binding Domicilio}" Header="Domicilio" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="poblacionColumn" Binding="{Binding Poblacion}" Header="Poblacion" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="provinciaColumn" Binding="{Binding Provincia}" Header="Provincia" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_nacimientoColumn" Binding="{Binding Fecha_nacimiento}" Header="Fecha nacimiento" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="prestamosDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource usuariosPrestamosViewSource}}" Margin="452,219,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="numero_pedidoColumn1" Binding="{Binding Numero_pedido}" Header="Numero pedido" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="codigo_libroColumn2" Binding="{Binding Codigo_libro}" Header="Codigo libro" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="codigo_usuarioColumn2" Binding="{Binding Codigo_usuario}" Header="Codigo usuario" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_salidaColumn1" Binding="{Binding Fecha_salida}" Header="Fecha salida" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_max_devolucionColumn1" Binding="{Binding Fecha_max_devolucion}" Header="Fecha max devolucion" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fecha_devolucionColumn1" Binding="{Binding Fecha_devolucion}" Header="Fecha devolucion" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

@@ -24,5 +24,26 @@ namespace Tema6_actividad3
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Tema6_actividad3.BibliotecaDataSet bibliotecaDataSet = ((Tema6_actividad3.BibliotecaDataSet)(this.FindResource("bibliotecaDataSet")));
+            // Cargar datos en la tabla Libros. Puede modificar este código según sea necesario.
+            Tema6_actividad3.BibliotecaDataSetTableAdapters.LibrosTableAdapter bibliotecaDataSetLibrosTableAdapter = new Tema6_actividad3.BibliotecaDataSetTableAdapters.LibrosTableAdapter();
+            bibliotecaDataSetLibrosTableAdapter.Fill(bibliotecaDataSet.Libros);
+            System.Windows.Data.CollectionViewSource librosViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("librosViewSource")));
+            librosViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla Prestamos. Puede modificar este código según sea necesario.
+            Tema6_actividad3.BibliotecaDataSetTableAdapters.PrestamosTableAdapter bibliotecaDataSetPrestamosTableAdapter = new Tema6_actividad3.BibliotecaDataSetTableAdapters.PrestamosTableAdapter();
+            bibliotecaDataSetPrestamosTableAdapter.Fill(bibliotecaDataSet.Prestamos);
+            System.Windows.Data.CollectionViewSource librosPrestamosViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("librosPrestamosViewSource")));
+            librosPrestamosViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla Usuarios. Puede modificar este código según sea necesario.
+            Tema6_actividad3.BibliotecaDataSetTableAdapters.UsuariosTableAdapter bibliotecaDataSetUsuariosTableAdapter = new Tema6_actividad3.BibliotecaDataSetTableAdapters.UsuariosTableAdapter();
+            bibliotecaDataSetUsuariosTableAdapter.Fill(bibliotecaDataSet.Usuarios);
+            System.Windows.Data.CollectionViewSource usuariosViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("usuariosViewSource")));
+            usuariosViewSource.View.MoveCurrentToFirst();
+        }
     }
 }

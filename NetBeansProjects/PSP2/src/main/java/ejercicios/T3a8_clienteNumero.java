@@ -5,7 +5,9 @@
  */
 package ejercicios;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -31,6 +33,17 @@ public class T3a8_clienteNumero {
         //pasamos el numero al servidor
         flujoSalida.write(num);
         
+        //recibimos la tabla de multiplicar
+        InputStream entrada = null;
+        entrada = Cliente.getInputStream();
+        DataInputStream flujoEntrada = new DataInputStream(entrada);
+        
+        //lo mostramos
+        System.out.println(flujoEntrada.readUTF());
+        
+        //cerramos
+        entrada.close();
+        flujoEntrada.close();
         flujoSalida.close();
         Cliente.close();
 	

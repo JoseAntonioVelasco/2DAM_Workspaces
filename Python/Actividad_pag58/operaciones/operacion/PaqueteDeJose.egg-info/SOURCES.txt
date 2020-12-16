@@ -1,0 +1,8 @@
+setup.py
+PaqueteDeJose.egg-info/PKG-INFO
+PaqueteDeJose.egg-info/SOURCES.txt
+PaqueteDeJose.egg-info/dependency_links.txt
+PaqueteDeJose.egg-info/top_level.txt
+aritmeticasBasicas/sumayresta.py
+aritmeticasBasicas2/multiplicacionydivision.py
+otrasOperaciones/raizcuadradaypotencias.py

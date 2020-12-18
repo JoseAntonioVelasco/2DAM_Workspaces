@@ -1,0 +1,24 @@
+﻿<Window x:Class="Tema6Actividad4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tema6Actividad4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:baloncestoDataSet x:Key="baloncestoDataSet"/>
+        <CollectionViewSource x:Key="equiposViewSource" Source="{Binding equipos, Source={StaticResource baloncestoDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource equiposViewSource}">
+        <DataGrid x:Name="equiposDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="235,116,157,103" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idEquipoColumn" Binding="{Binding idEquipo}" Header="id Equipo" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nombreColumn" Binding="{Binding nombre}" Header="nombre" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="abreviaturaColumn" Binding="{Binding abreviatura}" Header="abreviatura" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="ciudadColumn" Binding="{Binding ciudad}" Header="ciudad" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

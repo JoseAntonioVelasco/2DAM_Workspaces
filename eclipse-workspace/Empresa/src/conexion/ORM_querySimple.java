@@ -1,11 +1,16 @@
 package conexion;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-
+/**
+ * 
+ * @author JoseAntonioVelasco
+ *
+ */
 public class ORM_querySimple {
 
 
@@ -17,9 +22,10 @@ public class ORM_querySimple {
 			System.out.println("Nombre del departamento que quieres buscar: ");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String nomDepto = br.readLine();
-
-			Query q = s.createQuery("FROM Departamento WHERE nomDepto LIKE ?0"
-					).setParameter(0,nomDepto).setReadOnly(true);
+			ArrayList<String> nomDeptos = new ArrayList<>();
+			nomDeptos.add(nomDepto);
+			Query q = s.createQuery("FROM Departamento WHERE nomDepto IN (:nomDeptos)"
+					).setParameterList("nomDeptos",nomDeptos).setReadOnly(true);
 
 			List<modelos.Departamento> listaDep = (List<modelos.Departamento>) q.getResultList();
 

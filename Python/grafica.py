@@ -5,14 +5,12 @@ Created on Thu Dec 17 20:32:12 2020
 @author: JoseAntonioVelasco
 """
 
-
-
 import matplotlib.pyplot as plt
 import csv 
                   
 def mostrarMuertosPorProvincia():
     fecha=['2020-03-31','2020-04-30','2020-05-31','2020-06-30','2020-07-31','2020-08-31','2020-09-30','2020-10-31','2020-11-30','2020-12-08']
-    provincias =['Soria','Zamora','Valladolid','León','Palencia','Salamanca','Ávila','Segovia']                           
+    provincias =['Burgos','Soria','Zamora','Valladolid','León','Palencia','Salamanca','Ávila','Segovia']                           
     datos = []
                      
     with open('covid.csv',newline="",encoding='utf-8') as ficheroCSV:
@@ -65,7 +63,6 @@ def mostrarMuertosTotalesPorProvincia():
                 fallecimientos.append(int(elemento["fallecimientos"]))
    
     top3=sorted(zip(fallecimientos, provincias), reverse=True)[:3]
-    print(top3)
     for i in range(3):
         provincias.remove(top3[i][1])
         fallecimientos.remove(top3[i][0])

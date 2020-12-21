@@ -2,7 +2,11 @@ package conexion;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+/**
+ * 
+ * @author JoseAntonioVelasco
+ *
+ */
 public class ORM_conexion {
 
   public static void main(String[] args) {
@@ -15,18 +19,19 @@ public class ORM_conexion {
 
         modelos.Sede sede = new modelos.Sede();
         sede.setNomSede("MÃ�LAGA");
-        s.save(sede);
+        s.saveOrUpdate(sede);
 
         modelos.Departamento depto = new modelos.Departamento();
         depto.setNomDepto("INVESTIGACIÃ“N Y DESARROLLO");
         depto.setSede(sede);
-        s.save(depto);
+        s.saveOrUpdate(depto);
 
+        
         modelos.Empleado emp = new modelos.Empleado();
-        emp.setDni("56789012B");
-        emp.setNomEmp("SAMPER");
-        emp.setDepartamento(depto);
-        s.save(emp);
+		emp.setDni("56789012B");
+		emp.setNomEmp("Marco");
+		emp.setDepartamento(depto);
+		s.saveOrUpdate(emp);
 
         t.commit();
 

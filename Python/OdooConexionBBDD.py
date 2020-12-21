@@ -26,8 +26,14 @@ def editSomeData(name,toName,contact_name,email_normalized):
 
 def deleteOportunity(name):
     cur = conn.cursor()
-    cur.execute("DELETE FROM {} WHERE name={}".format("crm_lead",name))
+    cur.execute("DELETE FROM {} WHERE name='{}'".format("crm_lead",name))
     conn.commit()
+    
+    
+    
+    
+    
+    
     
 connectToDB("172.16.0.57","odoo_db","postgres")
 
@@ -42,3 +48,5 @@ print("===SEGUNDA CONSULTA====")
 records = getSomeData("Pruebas2")
 for resultados in records:
     print(resultados)
+    
+deleteOportunity("Pruebas2")

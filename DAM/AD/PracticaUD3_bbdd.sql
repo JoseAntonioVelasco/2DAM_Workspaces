@@ -26,7 +26,7 @@ CREATE TABLE Tareas(
 	id INTEGER PRIMARY KEY,
 	id_proyecto INTEGER NOT NULL,
 	nombre CHAR(20) NOT NULL,
-	estado DOMAIN
+	estado VARCHAR(20) CHECK(estado='planificado' or estado='empezado' or estado='finalizado'),
 	horas INTEGER NOT NULL,
 	FOREIGN KEY (id_proyecto) REFERENCES Proyectos(id)
 );

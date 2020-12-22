@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 22-dic-2020 9:10:51 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="emp_software" dynamic-insert="false" dynamic-update="false" mutable="true" name="orm.EmpleadoProyecto" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="empleado_proyecto">
+        <composite-id class="orm.EmpleadoProyectoId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="idEmpleado" type="int">
+                <column name="id_empleado"/>
+            </key-property>
+            <key-property name="idProyecto" type="int">
+                <column name="id_proyecto"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="orm.Empleados" embed-xml="true" fetch="select" insert="false" name="empleados" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_empleado" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="orm.Proyectos" embed-xml="true" fetch="select" insert="false" name="proyectos" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_proyecto" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

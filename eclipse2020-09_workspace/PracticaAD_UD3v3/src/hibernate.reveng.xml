@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="emp_software" match-name=".*"/>
+  <table-filter match-catalog="emp_software" match-name="empleado"/>
+  <table-filter match-catalog="emp_software" match-name="empleado_proyecto"/>
+  <table-filter match-catalog="emp_software" match-name="empleado_tarea"/>
+  <table-filter match-catalog="emp_software" match-name="proyecto"/>
+  <table-filter match-catalog="emp_software" match-name="tarea"/>
+</hibernate-reverse-engineering>

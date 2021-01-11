@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 dic. 2020 19:45:34 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="emp_software" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Tarea" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="tarea">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="empresa.Proyecto" embed-xml="true" fetch="select" insert="true" name="proyecto" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="id_proyecto" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="estado" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="estado"/>
+        </property>
+        <property generated="never" lazy="false" name="horas" optimistic-lock="true" type="int" unique="false">
+            <column name="horas" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empleadoTareas" optimistic-lock="true" sort="unsorted" table="empleado_tarea">
+            <key on-delete="noaction">
+                <column name="id_tarea" not-null="true"/>
+            </key>
+            <one-to-many class="empresa.EmpleadoTarea" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

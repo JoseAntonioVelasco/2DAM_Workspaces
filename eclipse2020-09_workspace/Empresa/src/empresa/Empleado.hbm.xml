@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 29 dic. 2020 19:47:50 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="empresa" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Empleado" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="empleado">
+        <id name="dni" type="string">
+            <column length="9" name="dni"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="empresa.Departamento" embed-xml="true" fetch="select" insert="true" name="departamento" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="id_depto" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nomEmp" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="nom_emp" not-null="true"/>
+        </property>
+        <one-to-one class="empresa.EmpleadoDatosProf" constrained="false" embed-xml="true" name="empleadoDatosProf"/>
+    </class>
+</hibernate-mapping>

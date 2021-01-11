@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 dic. 2020 19:45:34 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="emp_software" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Proyecto" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="proyecto">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="duracion" optimistic-lock="true" type="int" unique="false">
+            <column name="duracion" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="fechIn" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fech_in" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="fechFin" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fech_fin"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="tareas" optimistic-lock="true" sort="unsorted" table="tarea">
+            <key on-delete="noaction">
+                <column name="id_proyecto" not-null="true"/>
+            </key>
+            <one-to-many class="empresa.Tarea" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empleadoProyectos" optimistic-lock="true" sort="unsorted" table="empleado_proyecto">
+            <key on-delete="noaction">
+                <column name="id_proyecto" not-null="true"/>
+            </key>
+            <one-to-many class="empresa.EmpleadoProyecto" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

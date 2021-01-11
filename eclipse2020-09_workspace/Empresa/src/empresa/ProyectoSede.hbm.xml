@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 29 dic. 2020 19:47:50 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="empresa" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.ProyectoSede" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="proyecto_sede">
+        <composite-id class="empresa.ProyectoSedeId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="idProy" type="int">
+                <column name="id_proy"/>
+            </key-property>
+            <key-property name="idSede" type="int">
+                <column name="id_sede"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="empresa.Proyecto" embed-xml="true" fetch="select" insert="false" name="proyecto" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_proy" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="empresa.Sede" embed-xml="true" fetch="select" insert="false" name="sede" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_sede" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="FInicio" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="f_inicio" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="FFin" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="f_fin"/>
+        </property>
+    </class>
+</hibernate-mapping>

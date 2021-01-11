@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 29 dic. 2020 19:47:50 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="empresa" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Proyecto" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="proyecto">
+        <id name="idProy" type="int">
+            <column name="id_proy"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="FInicio" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="f_inicio" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="FFin" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="f_fin"/>
+        </property>
+        <property generated="never" lazy="false" name="nomProy" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="nom_proy" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="proyectoSedes" optimistic-lock="true" sort="unsorted" table="proyecto_sede">
+            <key on-delete="noaction">
+                <column name="id_proy" not-null="true"/>
+            </key>
+            <one-to-many class="empresa.ProyectoSede" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

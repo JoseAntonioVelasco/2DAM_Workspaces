@@ -28,7 +28,6 @@ public class GenerarDatos {
 		creacionProyectos();
 		creacionEmpleados();
 		creacionTareas();
-		validacionDatos();
 		poblarBase();
 	}
 	public static void creacionProyectos() {
@@ -78,12 +77,12 @@ public class GenerarDatos {
 			int index_apellido = (int)(Math.random() * ((9 - 0) + 1)) + 0;
 			
 			int num_dni = (int)(Math.random() * ((99999999 - 0) + 1)) + 0;
-			String strNum_dni = String.format("%8d", num_dni);
+			String strNum_dni = String.format("%08d", num_dni);
 			int index_letra = (int)(Math.random() * ((abcd.length-1 - 0) + 1)) + 0;
 			strNum_dni = strNum_dni + abcd[index_letra];
 			
 			int num_tlfno = (int)(Math.random() * ((999999999 - 0) + 1)) + 0;
-			String str_tlfno = String.format("%9d", num_tlfno);
+			String str_tlfno = String.format("%09d", num_tlfno);
 			
 
 			nuevo_empleado.setDni(strNum_dni);
@@ -128,6 +127,9 @@ public class GenerarDatos {
 					//añadimos a la tarea el empleado
 					tarea.getEmpleados().add(empleados.get(index_empleado));
 				}
+				if(nombreTareaRepetido(tarea.getNombre())) {
+					
+				}
 				tareas.add(tarea);
 				//añadir la tarea al proyecto
 				proyecto.getTareas().add(tarea);
@@ -137,52 +139,46 @@ public class GenerarDatos {
 		
 	}
 	
-	public static void validacionDatos() {
-		//Comprobamos que no haya empleados con el mismo DNI
+	public static boolean dniRepetido(String dni) {
 		for(int i=0; i<empleados.size(); i++) {
 			Empleado emp = empleados.get(i);
-			int contador = 0;
-			for(int j=0; j<empleados.size();j++) {
-				if(emp.getDni()==empleados.get(j).getDni()){
-					contador++;
-					if(contador>=2) {
-						empleados.remove(j);
-					}
-				}
-				
+			if(emp.getDni().equals(dni)) {
+				return true;
+			}	
+		}
+		return false;
+	}
+	public static boolean nombreProyectoRepetido(String nombre) {
+		for(int i=0; i<proyectos.size(); i++) {
+			Proyecto pryct = proyectos.get(i);
+			if(pryct.getNombre().equals(nombre)) {
+				return true;
 			}
 		}
-		//Comprobamos que no haya proyectos con el mismo nombre
-		for(int i=0; i<proyectos.size();i++) {
-			Proyecto pryct = proyectos.get(i);
-			int contador = 0;
-			for(int j=0; j<proyectos.size();j++) {
-				if(pryct.getNombre()==proyectos.get(j).getNombre()) {
-					contador++;
-					if(contador>=2) {
-						proyectos.get(j).setNombre(proyectos.get(j).getNombre().concat(".1"));
-					}
-				}
-			}
-		}
-		//Comprobamos que no haya tareas con el mismo nombre en el mismo proyecto
-		for(int i =0; i<proyectos.size(); i++) {
-			Proyecto pryct = proyectos.get(i);
-			Tarea[] tareas = new Tarea[pryct.getTareas().size()];
-			pryct.getTareas().toArray(tareas);
-			for(int j=0; j<tareas.length; j++) {
-				int contador = 0;
-				for(int k=0;k<tareas.length; k++) {
-					if(tareas[j].getNombre()==tareas[k].getNombre()) {
-						contador++;
-						if(contador>=2) {
-							tareas[k].setNombre(tareas[k].getNombre().concat(" Fase 2"));
-						}
-					}
-				}
-			}
+		return false;
+	}
+	public static void renombrarProyecto(Proyecto proy) {
+		proy.setNombre(proy.getNombre().concat(".1"));
+		if(nombreProyectoRepetido(proy.getNombre())) {
+			renombrarProyecto(proy);
 		}
 	}
+	public static boolean nombreTareaProyRepetido(String nombre,Proyecto proy) {
+		for(int i=0; i<tareas.size(); i++) {
+			Tarea tar = tareas.get(i);
+			if(tar.getNombre().equals(nombre)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static void renombrarTarea(Tarea tar,Proyecto proy) {
+		tar.setNombre(tar.getNombre().concat(" Fase 2"));
+		if(nombreTareaProyRepetido(tar.getNombre(),proy)) {
+			renombrarTarea(tar,proy);
+		}
+	}
+	
 	public static void poblarBase() {
 		//añadir proyectos
 		//añadir empleados

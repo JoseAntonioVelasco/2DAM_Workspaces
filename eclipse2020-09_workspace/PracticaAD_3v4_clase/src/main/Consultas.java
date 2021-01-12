@@ -20,20 +20,21 @@ public class Consultas {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		listadoDetallado();
+		//listadoDetallado();
 		
 		Tarea tar_prueba = new Tarea();
-		tar_prueba.setId(6);
-		listadoEmpleadosTarea(tar_prueba);
+		tar_prueba.setId(19);
+		//listadoEmpleadosTarea(tar_prueba);
 		//borrarEmpleado("52238279G");
 		//borrarTarea(tar_prueba);
-		insertarTarea(tar_prueba);
-		Empleado emp_prueba = new Empleado();
-		insertarEmpleado(emp_prueba);
-		buscarEmpleado();
-		buscarProyecto();
-		actualizarTareas();
-		eliminarEmpleado();
+		//insertarTarea(tar_prueba);
+		//Empleado emp_prueba = new Empleado();
+		//emp_prueba.setDni("00000000A");
+		//insertarEmpleado(emp_prueba);
+		//buscarEmpleado("99902730R");
+		//buscarProyecto("Proyecto 1");
+		//actualizarTareas("Prueba","Pruebas");
+		//eliminarEmpleado("Mediavilla");
 	}
 	public static void listadoDetallado() {
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -270,7 +271,7 @@ public class Consultas {
 
 			t = s.beginTransaction();
 
-			Query q = s.createQuery("DELETE FROM Empleado WHERE apellido LIKE :apellido"
+			Query q = s.createQuery("DELETE FROM Empleado WHERE apellidos LIKE :apellido"
 					).setParameter("apellido",apellido);
 
 			q.executeUpdate();

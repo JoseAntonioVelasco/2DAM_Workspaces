@@ -36,6 +36,9 @@ public class Consultas {
 		//actualizarTareas("Prueba","Pruebas");
 		//eliminarEmpleado("Mediavilla");
 	}
+	/**
+	* Muestra toda la informacion de un proyecto y las tareas que tiene
+	*/
 	public static void listadoDetallado() {
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -68,9 +71,13 @@ public class Consultas {
 		}
 	}
 	//SQL
+	/**
+	* Muestra los dni de los empleados asignados a esa tarea
+	* 
+	* @param tarea tarea de lo que queremos ver los dni de los empleados
+	*/
 	public static void listadoEmpleadosTarea(Tarea tarea) {
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
-
 
 			Query q = s.createSQLQuery("SELECT DNI FROM Empleado e "
 					+ "INNER JOIN empleado_tarea et ON et.DNI_empleado=e.DNI "
@@ -87,6 +94,11 @@ public class Consultas {
 		}
 	}
 	//SQL
+	/**
+	 * Borra la tarea que se pase por parametro a la funcion
+	 * 
+	 * @param tarea tarea que quieres borrar
+	 */
 	public static void borrarTarea(Tarea tarea) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -108,6 +120,11 @@ public class Consultas {
 		} 
 	}
 	//SQL
+	/**
+	 * Borra el empleado que tenga dicho dni
+	 * 
+	 * @param dni dni del empleado que queremos borrar
+	 */
 	public static void borrarEmpleado(String dni) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -130,6 +147,11 @@ public class Consultas {
 		
 	}
 	//SQL
+	/**
+	 * Inserta una tarea a la base de datos
+	 * 
+	 * @param tarea tarea que quieres insertar
+	 */
 	public static void insertarTarea(Tarea tarea) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -148,6 +170,11 @@ public class Consultas {
 		} 
 	}
 	//SQL
+	/**
+	 * Inserta un empleado a la base de datos
+	 * 
+	 * @param empleado empleado que quieres insertar
+	 */
 	public static void insertarEmpleado(Empleado empleado) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -167,6 +194,12 @@ public class Consultas {
 		
 	}
 	//HQL
+	/**
+	 * Busca empleados con el dni indicado y muestra la informacion sobre ellos y
+	 * si tienen tareas asignadas las muestra tambien.
+	 * 
+	 * @param dni dni del empleado que queremos buscar
+	 */
 	public static void buscarEmpleado(String dni) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -205,6 +238,12 @@ public class Consultas {
 		
 	}
 	//HQL
+	/**
+	 * Muestra si es el proyecto esta finalizado y si no lo esta muestra informacion
+	 * sobre sus tareas
+	 * 
+	 * @param nombre nombre del proyecto que queremos buscar
+	 */
 	public static void buscarProyecto(String nombre) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -245,18 +284,25 @@ public class Consultas {
 		} 
 			
 	}
-	//HQL TODO
-	public static void actualizarTareas(String nombreActual,String nombreNuevo) {
+	//HQL
+	/**
+	 * Cambia el numero de horas de las tareas que tengan el nombre que se indique
+	 * 
+	 * @param nombre nombre actual de la tarea
+	 * @param horas numero de horas que quieres que tenga la tarea
+	 */
+	public static void actualizarTareas(String nombre,Integer horas) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
 
 			t = s.beginTransaction();
 
-			Query q = s.createQuery("UPDATE Tarea SET nombre = :nombreNuevo WHERE nombre LIKE :nombreActual"
-					).setParameter("nombreActual",nombreActual).setParameter("nombreNuevo", nombreNuevo);
+			Query q = s.createQuery("UPDATE Tarea SET horas = :horas WHERE nombre LIKE :nombre"
+					).setParameter("nombre",nombre).setParameter("horas", horas);
 
-			q.executeUpdate();
-
+			Integer num=q.executeUpdate();
+			System.out.println("Han ocurrido "+num+" cambios");
+			
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 			if (t != null) {
@@ -265,6 +311,11 @@ public class Consultas {
 		} 
 	}
 	//HQL
+	/**
+	 * Elimina todos los empleados que tengan ese apellido
+	 * 
+	 * @param apellido apellido de los empleado/s que queremos borrar
+	 */
 	public static void eliminarEmpleado(String apellido) {
 		Transaction t = null;
 		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -274,7 +325,8 @@ public class Consultas {
 			Query q = s.createQuery("DELETE FROM Empleado WHERE apellidos LIKE :apellido"
 					).setParameter("apellido",apellido);
 
-			q.executeUpdate();
+			Integer num=q.executeUpdate();
+			System.out.println("Han ocurrido "+num+" cambios");
 
 		} catch (Exception e) {
 			e.printStackTrace(System.err);

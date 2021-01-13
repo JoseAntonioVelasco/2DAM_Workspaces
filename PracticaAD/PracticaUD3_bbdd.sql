@@ -24,7 +24,7 @@ CREATE TABLE empleado_proyecto(
 CREATE TABLE Tarea(
 	id INTEGER PRIMARY KEY,
 	nombre_proyecto CHAR(20) NOT NULL,
-	nombre CHAR(20) NOT NULL,
+	nombre CHAR(200) NOT NULL,
 	estado VARCHAR(20) CHECK(estado='planificado' or estado='empezado' or estado='finalizado'),
 	horas INTEGER NOT NULL,
 	FOREIGN KEY (nombre_proyecto) REFERENCES Proyecto(nombre)

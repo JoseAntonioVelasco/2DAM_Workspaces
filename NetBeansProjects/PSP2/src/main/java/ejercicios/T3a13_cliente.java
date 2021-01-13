@@ -63,7 +63,7 @@ public class T3a13_cliente {
         }
         
         byte[] hh = recibo.getData();
-        System.out.println("len: "+hh.length);
+        //System.out.println("len: "+hh.length);
         
         String mensaje = new String(hh,StandardCharsets.UTF_8);
         

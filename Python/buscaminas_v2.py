@@ -6,6 +6,8 @@ Created on Thu Nov 26 09:16:41 2020
 from random import randrange
 import sys
 
+#PAINT FUNCTIONS BEGIN
+
 def paintTop(size):
     print(u'\u250C', end='')
     for i in range(size):
@@ -68,6 +70,10 @@ def paintBoard(board,rowLetter,score,combo,lifes,mines,minesFound):
     print("|  Puntuacion: %2d      Combo: %2d      Vidas: %2d |" % (score,combo,lifes))
     print("|  Bombas descubiertas: %2d   Bombas ocultas: %2d |" % (minesFound,mines-minesFound))
     print("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-")
+    
+#PAINT FUNCTIONS END
+
+#initialize the board with the given char
 def initBoardList(size,char):
     board = []
     for i in range(size):
@@ -77,6 +83,7 @@ def initBoardList(size,char):
         board.append(row)
     return board
 
+#add mines to a board
 def addMines(board,num_mines):
     numrows = len(board)
     numcols = len(board[0])
@@ -94,6 +101,7 @@ def addMine(board,numrows,numcols):
         board[x][y] = "1"
     return board
 
+#reveals the cell and updates the score
 def showSurrounding(hiddenBoard,visibleBoard,row,col,combo,score,minesFound,mines,lifes):
     if hiddenBoard[row][col] == "1":
         hiddenBoard[row][col] = "3"
@@ -113,23 +121,28 @@ def showSurrounding(hiddenBoard,visibleBoard,row,col,combo,score,minesFound,mine
         lifes = lifes - 1
 
     return [combo,score,minesFound,mines,lifes]
-letters = ["A","B","C","D","E","F","G","H","I","J"]
+letters = ["A","B","C","D","E","F","G","H","I","J"] #letters for the coordinates
+
+#creates a new game
 def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
     #calculate rowLetter bi-direct dictionary outside while loop
     rowLetter = {}
     for i in range(difficulty):
         rowLetter[i] = letters[i]
         rowLetter[letters[i]] = i
+    
     while(True):  
-      #paintBoard(hiddenBoard,rowLetter,score,combo,lifes,mines,minesFound)
+      #paintBoard(hiddenBoard,rowLetter,score,combo,lifes,mines,minesFound) #undo comment for debugging
       visibleBoard = calculateVisibleBoard(hiddenBoard)
       paintBoard(visibleBoard,rowLetter,score,combo,lifes,mines,minesFound)
+      
+      #check if game finished
       if minesFound == mines:
         scores = readScoreboard()
         sorted_scores = sorted(scores, key=lambda x: x[2])
   
         if len(sorted_scores)==0 or (int(sorted_scores[0][2]) > score)==False:
-            #yes scoreboard
+            #yes scoreboard new record
             name = input("Introduce nombre: ")
             if name == "":
                 name = "DESCONOCIDO"
@@ -153,7 +166,7 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
             return
             
         else:
-            #no scoreboard
+            #no scoreboard no record
             print("No has superado el record.")
             print("Tu puntuacion es: ",score)
             secondMenu()
@@ -163,9 +176,11 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
           print("Te has quedado sin vidas! ")
           secondMenu()
           return
-         
+      
+      #if game didnt finish continues here
       optionLetter = input("Elija una opcion: (C)oordenada, (G)uardar o (S)alir: ")
       if optionLetter == "C":
+          #ASK COORDINATES
           coord = input("Introduce coordenada <Letra><Numero>: ")
           while (len(coord)==2 and coord[0] in rowLetter and int(coord[1]) in rowLetter) == False:
             coord = input("Introduce coordenada <Letra><Numero>: ")
@@ -179,6 +194,7 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
           
  
       elif optionLetter == "G":
+          #SAVE
           name = input("Nombre de la partida: ")
           saveGame = open(name + ".txt", "a") 
           saveGame.write(str(difficulty)+";"+str(lifes)+";"+str(score)+"\n")
@@ -193,7 +209,10 @@ def newGame(hiddenBoard,difficulty,lifes,score,combo,mines,minesFound):
           sys.exit()
           
       elif optionLetter == "S":
+          #EXIT
           sys.exit()
+          
+#returns the visible board from the hiddenboard
 def calculateVisibleBoard(hiddenBoard):
     size = len(hiddenBoard)
     visibleBoard = initBoardList(size,u'\u2593')
@@ -205,6 +224,7 @@ def calculateVisibleBoard(hiddenBoard):
                 visibleBoard[i][j] = u'\u25c7'
     return visibleBoard            
 
+#first menu
 def menu():
     print("**************************************************************")
     print("******************** BIENVENIDO AL JUEGO *********************")
@@ -262,6 +282,7 @@ def menu():
     else:
          sys.exit()
          
+#read the scoreboard file and returns scores
 def readScoreboard():
     scoreboard = open("ficheroMaximasPuntuaciones.txt","r")
     scores = []
@@ -274,18 +295,22 @@ def readScoreboard():
     scoreboard.close()
     return scores
 
+#writes the scores to the scoreboard file
 def writeScoreboard(scores):
     scoreboard = open("ficheroMaximasPuntuaciones.txt","a")
     for i in range(len(scores)):
         scoreboard.write(str(scores[i][0])+","+scores[i][1]+","+str(scores[i][2]))
     scoreboard.close()
-    
+
+#prints second menu
 def secondMenu():
     print("Elija una opcion: (M)enu o (S)alir: ")
     option = input()
     if option == "S":
         sys.exit()
-        
+
+
+#THE GAME STARTS HERE        
 f = open("ficheroMaximasPuntuaciones.txt", "w")
 f.close()
 while(True):

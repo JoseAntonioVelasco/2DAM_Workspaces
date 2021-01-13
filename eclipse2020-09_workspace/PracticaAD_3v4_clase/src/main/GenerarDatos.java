@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,6 +31,9 @@ public class GenerarDatos {
 		creacionTareas();
 		poblarBase();
 	}
+	/**
+	 * Crea y guarda los proyectos en el arraylist de proyectos
+	 */
 	public static void creacionProyectos() {
 		Integer numProyectos = (int)(Math.random() * ((6 - 3) + 1)) + 3;
 		long week_ms = 604800000;
@@ -56,10 +60,19 @@ public class GenerarDatos {
 			proyectoNuevo.setNombre(nombre);
 			proyectoNuevo.setDuracion(duracion);
 			proyectoNuevo.setFechIn(fechIn);
-			proyectos.add(proyectoNuevo);
+			
+			if(nombreProyectoRepetido(proyectoNuevo.getNombre())) {
+				renombrarProyecto(proyectoNuevo);
+				proyectos.add(proyectoNuevo);
+			}else {
+				proyectos.add(proyectoNuevo);
+			}
 		}
 		
 	}
+	/**
+	 * rellena los arraylist que sirven para generar informacion aleatoria
+	 */
 	public static void llenarNombresApellidosTareas() {
 		nombres.add("Adrian");nombres.add("Gonzalo");nombres.add("Juan");nombres.add("Marco");nombres.add("Diego");
 		nombres.add("Maria");nombres.add("Paula");nombres.add("Jose");nombres.add("Elisa");nombres.add("Marina");
@@ -68,6 +81,9 @@ public class GenerarDatos {
 		nombres_tareas.add("Analisis");nombres_tareas.add("Diseno");nombres_tareas.add("Codificacion");nombres_tareas.add("Pruebas");nombres_tareas.add("Documentacion");
 		estados_tarea.add("planificado");estados_tarea.add("empezado");estados_tarea.add("finalizado");
 	}
+	/**
+	 * crea empleados y los guarda en el arraylist de empleados
+	 */
 	public static void creacionEmpleados() {
 		for(int j=0; j<100; j++) {
 			Empleado nuevo_empleado = new Empleado();
@@ -95,10 +111,15 @@ public class GenerarDatos {
 				int index_proyecto = (int)(Math.random() * ((proyectos.size()-1 - 0) + 1)) + 0;
 				nuevo_empleado.getProyectos().add(proyectos.get(index_proyecto));
 			}
+			if(dniRepetido(nuevo_empleado.getDni())) {
+				return;
+			}
 			empleados.add(nuevo_empleado);
 		}
 	}
-	
+	/**
+	 * crea tareas y los guarda en el arraylist de tareas
+	 */
 	public static void creacionTareas() {
 		for(int i=0; i<proyectos.size(); i++) {
 			int num_tareas = (int)(Math.random() * ((8 - 5) + 1)) + 5;
@@ -127,10 +148,12 @@ public class GenerarDatos {
 					//añadimos a la tarea el empleado
 					tarea.getEmpleados().add(empleados.get(index_empleado));
 				}
-				if(nombreTareaRepetido(tarea.getNombre())) {
-					
+				if(nombreTareaProyRepetido(tarea.getNombre(),proyecto)) {
+					renombrarTarea(tarea, proyecto);
+					tareas.add(tarea);
+				}else {
+					tareas.add(tarea);
 				}
-				tareas.add(tarea);
 				//añadir la tarea al proyecto
 				proyecto.getTareas().add(tarea);
 			}
@@ -139,6 +162,12 @@ public class GenerarDatos {
 		
 	}
 	
+	/**
+	 * detecta si un dni esta repetido en los arraylist
+	 * 
+	 * @param dni dni a buscar si esta repetido
+	 * @return true si esta repetido, false si no esta repetido
+	 */
 	public static boolean dniRepetido(String dni) {
 		for(int i=0; i<empleados.size(); i++) {
 			Empleado emp = empleados.get(i);
@@ -148,6 +177,12 @@ public class GenerarDatos {
 		}
 		return false;
 	}
+	/**
+	 * detecta si un nombre de proyecta esta repetido en los arraylist
+	 * 
+	 * @param nombre nombre a buscar si esta repetido
+	 * @return true si esta repetido, false si no esta repetido
+	 */
 	public static boolean nombreProyectoRepetido(String nombre) {
 		for(int i=0; i<proyectos.size(); i++) {
 			Proyecto pryct = proyectos.get(i);
@@ -157,28 +192,51 @@ public class GenerarDatos {
 		}
 		return false;
 	}
+	/**
+	 * renombra un proyecto recursivamente hasta que no este repetido
+	 * 
+	 * @param proy proyecto que queremos renombrar
+	 */
 	public static void renombrarProyecto(Proyecto proy) {
 		proy.setNombre(proy.getNombre().concat(".1"));
 		if(nombreProyectoRepetido(proy.getNombre())) {
 			renombrarProyecto(proy);
 		}
 	}
+	/**
+	 * detecta si el nombre de la tarea esta repetido dentro de dicho proyecto
+	 * 
+	 * @param nombre nombre de la tarea
+	 * @param proy proyecto al que pertenece esa tarea
+	 * @return true si esta repetido, false si no esta repetido
+	 */
 	public static boolean nombreTareaProyRepetido(String nombre,Proyecto proy) {
-		for(int i=0; i<tareas.size(); i++) {
-			Tarea tar = tareas.get(i);
+		Iterator<Tarea> it = proy.getTareas().iterator();
+		while(it.hasNext()) {
+			Tarea tar = it.next();
 			if(tar.getNombre().equals(nombre)) {
 				return true;
 			}
 		}
 		return false;
 	}
+	/**
+	 * renombra una tarea recursivamente hasta que no este repetido esa tarea
+	 * de ese proyecto.
+	 * 
+	 * @param tar tarea a renombrar
+	 * @param proy proyecto al que pertenece esa tarea
+	 */
 	public static void renombrarTarea(Tarea tar,Proyecto proy) {
 		tar.setNombre(tar.getNombre().concat(" Fase 2"));
 		if(nombreTareaProyRepetido(tar.getNombre(),proy)) {
 			renombrarTarea(tar,proy);
 		}
 	}
-	
+	/**
+	 * Con los arraylist previamente rellenados, los va recorriendo y
+	 * guardando en la base de datos
+	 */
 	public static void poblarBase() {
 		//añadir proyectos
 		//añadir empleados

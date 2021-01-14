@@ -1,5 +1,5 @@
 package empresa;
-// Generated 14-ene-2021 9:43:59 by Hibernate Tools 5.4.21.Final
+// Generated 14-ene-2021 9:44:48 by Hibernate Tools 5.4.21.Final
 
 import java.util.HashSet;
 import java.util.Set;

@@ -28,7 +28,7 @@ def suma(n1,n2):
     15
     
     SUMA DE LISTAS
-    >>> suma([1, 2, 3][4, 4, 4])
+    >>> suma([1, 2, 3],[4, 4, 4])
     [1, 2, 3, 4, 4, 4]
     
     SUMA DE CADENAS

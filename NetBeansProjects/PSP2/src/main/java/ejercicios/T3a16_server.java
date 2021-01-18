@@ -6,9 +6,14 @@
 package ejercicios;
 
 import ejemplos.Alumno;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,23 +23,47 @@ import java.net.Socket;
  */
 public class T3a16_server {
     public static void main(String[] arg) throws IOException, ClassNotFoundException{
-        int numeroPuerto=6000;
-        ServerSocket servidor = new ServerSocket(numeroPuerto);
-        System.out.println("Esperando al cliente.....");
-        Socket cliente = servidor.accept();
+        //creamos server
+        byte[] bufer = new byte[1024];
+        DatagramSocket socket = new DatagramSocket(12345);
         
-        ObjectOutputStream alumnoSaliente = new ObjectOutputStream(cliente.getOutputStream());
-        Alumno alumnoServidor = new Alumno("Pepe",20);
-        alumnoSaliente.writeObject(alumnoServidor);
-        System.out.println("Envio: "+alumnoServidor.getNombre()+"*"+alumnoServidor.getEdad());
+        //esperamos a que llegue el paquete
+        DatagramPacket recibo = new DatagramPacket(bufer, bufer.length);
+        System.out.println("Esperando el mensaje...");
+        socket.receive(recibo);
         
-        ObjectInputStream alumnoEntrante = new ObjectInputStream(cliente.getInputStream());
-        Alumno dato = (Alumno) alumnoEntrante.readObject();
-        System.out.println("Recibo: "+dato.getNombre()+"*"+dato.getEdad());
+        //recibimos los bytes del objeto y lo transformamos a un alumno
+        ByteArrayInputStream bais = new ByteArrayInputStream(recibo.getData());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Alumno alumno = (Alumno)ois.readObject();
+        ois.close();
         
-        alumnoSaliente.close();
-        alumnoEntrante.close();
-        cliente.close();
-        servidor.close();
+        //mostramos el alumno que ha llegado
+        System.out.println("Ha llegado est alumno: ");
+        System.out.println("Nombre: "+alumno.getNombre());
+        System.out.println("Edad: "+alumno.getEdad());
+        
+        //modificamos el objeto
+        alumno.setEdad(43);
+        alumno.setNombre("Castro");
+        
+        
+        //convertimos el objeto a bytes
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(alumno);
+        oos.close();
+        byte[] bytes = baos.toByteArray();
+        
+        
+        //enviamos el objeto en bytes de vuelta al cliente
+        InetAddress IPOrigen = recibo.getAddress();
+        int puerto = recibo.getPort();
+        DatagramPacket envio = new DatagramPacket(bytes, bytes.length, IPOrigen, puerto);
+        socket.send(envio);
+        
+        
+        //cerramos servidor
+        socket.close();
     }
 }

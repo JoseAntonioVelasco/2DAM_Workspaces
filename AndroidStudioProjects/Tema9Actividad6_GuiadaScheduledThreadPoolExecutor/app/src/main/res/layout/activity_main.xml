@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/mensaje"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginT=""
-        android:text="TAREAS"
-     />
+        android:text="Boton Iniciar"
+        android:layout_gravity="center"></TextView>
+    <Button
+        android:id="@+id/iniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="iniciar"
+        android:layout_gravity="center"></Button>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Boton Parar"
+        android:layout_gravity="center"></TextView>
+    <Button
+        android:id="@+id/parar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="parar"
+        android:layout_gravity="center"></Button>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</ScrollView>
+        <TextView
+            android:id="@+id/mensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:text="TAREAS"
+            android:textSize="18dp"
+         />
+
+    </ScrollView>
+
+</LinearLayout>

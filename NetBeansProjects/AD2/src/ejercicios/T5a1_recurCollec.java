@@ -17,29 +17,16 @@ import org.xmldb.api.base.XMLDBException;
  * @author JoseAntonioVelasco
  */
 public class T5a1_recurCollec {
-   private static Collection obtenColeccion(String nomCol) throws Exception {
+    private static Collection obtenColeccion(String nomCol) throws Exception {
         Database dbDriver;
         Collection col;
         dbDriver = (Database) Class.forName("org.exist.xmldb.DatabaseImpl").newInstance();
         DatabaseManager.registerDatabase(dbDriver);
-        col = DatabaseManager.getCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db" + nomCol, "admin", "ROOT");
-        
-        int numHijas = col.getChildCollectionCount();
-        
-        if (numHijas > 0) {
-                String nomHijas[] = col.listChildCollections();
-                for (int i = 0; i < numHijas; i++) {
-                    col = obtenColeccion(col.getName()+"/"+nomHijas[i]);
-                }
-        }
-  
+        col = DatabaseManager.getCollection("xmldb:exist://localhost:8080/exist/xmlrpc" + nomCol, "admin", "ROOT");
         return col;
     }
-
-    public static void main(String[] args) {
-        Collection col = null;
+    public static void mostrarDatos(Collection col){
         try {
-            col = obtenColeccion("/apps/shared-resources");
             System.out.println("Colección actual: " + col.getName());
 
             int numHijas = col.getChildCollectionCount();
@@ -76,4 +63,18 @@ public class T5a1_recurCollec {
             }
         }
     }
+    public static void recur(String nomCol) throws XMLDBException, Exception{
+        Collection col = obtenColeccion(nomCol);
+        if(col.getChildCollectionCount()>=0){
+            mostrarDatos(col);
+            String[] hijos = col.listChildCollections();
+            for(String hijo : hijos){
+                recur(col.getChildCollection(hijo).getName());
+            }
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        recur("/db/apps/shared-resources"); 
+    }
 }
+

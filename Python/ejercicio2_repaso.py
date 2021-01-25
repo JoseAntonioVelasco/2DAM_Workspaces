@@ -84,8 +84,10 @@ for equipo in listaEquipos:
         genDataJug(jugador)
         jugador.nombreCompletoEquipo=equipo.nombre
         listaJugadoresEquipo.append(jugador)
-    print(id(equipo.jugadores))
-    print(id(listaJugadoresEquipo))
+    print("id equipo.jugadores: "+str(id(equipo.jugadores)))
+    print("id listaJugadores: "+str(id(listaJugadoresEquipo)))
+    print("id equipo: "+str(id(equipo)))
+    print()
     equipo.jugadores = listaJugadoresEquipo
 
 def indiceRepetido(listaIndices,indice):

@@ -57,9 +57,9 @@ listaNombres = ["Diego","Juan","Sancho","Pablo","Gonzalo","Merlin","Paula","Carl
 listaApellidos = ["Velasco","Veganzones","Perez","Garcia","Mediavilla","Vaquerizo","Blanca","Rojo","Crespo","Diez","Diaz","Ojeda","Monje","Justo","Marques"]
 
 def genDataJug(jugador):
-    jugador.nombre = random.randint(0,len(listaNombres)-1)
-    jugador.apellido1 = random.randint(0,len(listaApellidos)-1)
-    jugador.apellido2 = random.randint(0,len(listaApellidos)-1)
+    jugador.nombre = listaNombres[random.randint(0,len(listaNombres)-1)]
+    jugador.apellido1 = listaApellidos[random.randint(0,len(listaApellidos)-1)]
+    jugador.apellido2 = listaApellidos[random.randint(0,len(listaApellidos)-1)]
     jugador.PJ = random.randint(0,38)
     jugador.PT = random.randint(0,jugador.PJ)
 
@@ -75,11 +75,18 @@ with open('equipos.csv') as csv_file:
             equipo = Equipo(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
             listaEquipos.append(equipo)
             line_count += 1
+
+#meto jugadores al equipo
 for equipo in listaEquipos:
-    for i in range(equipo.n_jugadores):
+    listaJugadoresEquipo = []
+    for i in range(int(equipo.n_jugadores)):
         jugador = Jugador()
         genDataJug(jugador)
-        equipo.jugadores.append(jugador)
+        jugador.nombreCompletoEquipo=equipo.nombre
+        listaJugadoresEquipo.append(jugador)
+    print(id(equipo.jugadores))
+    print(id(listaJugadoresEquipo))
+    equipo.jugadores = listaJugadoresEquipo
 
 def indiceRepetido(listaIndices,indice):
     for index in listaIndices:
@@ -89,7 +96,7 @@ def indiceRepetido(listaIndices,indice):
 
 
 def genIndice():
-    indice = random.randint(0,len(equipo.jugadores)-1)
+    indice = random.randint(0,int(equipo.n_jugadores)-1)
     if(indiceRepetido(listaIndices,indice)):
         indice = genIndice()
     return indice
@@ -104,16 +111,41 @@ for equipo in listaEquipos:
         for j in range(njugadores_juegan):
             indice = genIndice()
             listaIndices.append(indice)
+            
         for indice in listaIndices:
             equipo.jugadores[indice].puntos = equipo.jugadores[indice].puntos + random.randint(0,30)
-            equipo.jugadores[indice].asistencias = equipo.jugadores[indice].asistencias + random.randint(0,15)
-            equipo.jugadores[indice].rebotes = equipo.jugadores[indice].rebotes + random.randint(0,15)
-            equipo.jugadores[indice].tapones = equipo.jugadores[indice].tapones + random.randint(0,5)
+            equipo.jugadores[indice].asis = equipo.jugadores[indice].asis + random.randint(0,15)
+            equipo.jugadores[indice].reb = equipo.jugadores[indice].reb + random.randint(0,15)
+            equipo.jugadores[indice].tap = equipo.jugadores[indice].tap + random.randint(0,5)
             equipo.jugadores[indice].vN.append(random.randint(-30,40)) 
         #jugadores que no han jugado el partido
-        for i in range(equipo.n_jugadores):
-            if i not in listaIndices:
+        for j in range(int(equipo.n_jugadores)):
+            if j not in listaIndices:
                 equipo.jugadores[indice].vN.append(0)
+
+#relleno la lista jugadores para crear el csv con todos los jugadores de todos
+#los equipos
+listaJugadores = []
+for equipo in listaEquipos:
+    jugadores = equipo.jugadores
+    for jugador in jugadores:
+        listaJugadores.append(jugador)
+
+with open('jugadores.csv','w',newline='') as file:
+    writer = csv.writer(file,delimiter=';')
+    listaNombresColumna = ["nombre", "apellido1", "apellido2", "nombreCompletoEquipo",
+                     "PJ","PT","puntos","asis", "reb", "tap"]
+    for i in range(38):
+        listaNombresColumna.append("v"+str((i+1)))
+    writer.writerow(listaNombresColumna)
+    
+    for jugador in listaJugadores:
+        listaFila = [jugador.nombre,jugador.apellido1,jugador.apellido2,
+                         jugador.nombreCompletoEquipo,jugador.PJ,jugador.PT,
+                         jugador.puntos,jugador.asis,jugador.reb,jugador.tap]
+        for n in jugador.vN:
+            listaFila.append(n)
+        writer.writerow(listaFila)
         
         
         

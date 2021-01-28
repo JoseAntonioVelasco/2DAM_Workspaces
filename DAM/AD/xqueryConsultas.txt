@@ -1,3 +1,4 @@
+==============================EJERCICIO3.1==============================
 a)
 for $cod_zona in distinct-values(/productos/produc/cod_zona)
 let $cu:=count(/productos/produc[cod_zona = $cod_zona])
@@ -6,15 +7,11 @@ return concat('zona ',$cod_zona, ', productos: ', $cu)
 
 
 
-b)//Sale mal
+b)
 for $prod in /productos/produc
 let $cod_zona:= $prod/cod_zona
 let $denominacion: = $prod/denominacion
-return concat('<zona','$cod_zona','>',$denominacion,'</zona$cod_zona>')
-
-
-<zona{$cod_zona}>{$denominacion}</zona{$cod_zona}>
-
+return concat('<zona',$cod_zona,'>',$denominacion,'</zona',$cod_zona,'>')
 
 
 
@@ -33,7 +30,52 @@ d)
 for $denominacion in /productos/produc/denominacion
 return if(contains($denominacion/text(),"Placa Base"))
 	then <Placa>{$denominacion/text()}</Placa>
-	else 
-return if(contains($denominacion/text(),"Memoria"))
+	else (if(contains($denominacion/text(),"Memoria"))
 	then <Memoria>{$denominacion/text()}</Memoria>
-	else 
+	else ())
+
+	
+==============================EJERCICIO3.2==============================
+
+a)
+for $sucursal in /sucursales/sucursal
+	let $codigo := data($sucursal/@codigo)
+	let $cu_ahorro := count($sucursal/cuenta[@tipo="AHORRO"])
+	let $cu_pens := count($sucursal/cuenta[@tipo="PENSIONES"])
+return concat('codigo: ',$codigo,' cuentas ahorro: ',$cu_ahorro,' cuentas pensionas: ',$cu_pens)
+
+
+
+b)
+for $sucursal in /sucursales/sucursal
+	let $cod := data($sucursal/@codigo)
+	let $cu := count($sucursal/cuenta)
+	let $di := $sucursal/director
+	let $po := $sucursal/poblacion
+	let $sumhaber := sum($sucursal/cuenta/saldohaber)
+	let $sumdebe := sum($sucursal/cuenta/saldodebe)
+return concat('codigo sucursal: ',$cod,' nºcuentas: ',$cu,' director: ',$di,' poblacion: ',$po,' suma haber: ',$sumhaber,' suma debe: ',$sumdebe)
+
+
+
+
+c)
+for $sucursal in /sucursales/sucursal
+	let $cu := count($sucursal/cuenta)
+	return if($cu > 3) then
+		let $dir := $sucursal/director
+		let $cod := data($sucursal[@codigo])
+		let $po := $sucursal/poblacion
+		concat('director: ',$dir,' cod_sucur: ',$cod,' poblacion: ',$po)
+	else()
+
+<director>{$dir}</director><cod_sucur>{$cod}</cod_sucur><poblacion>{$po}</poblacion>
+
+for $sucursal in /sucursales/sucursal
+	let $dir := $sucursal/director
+	let $cod := data($sucursal[@codigo])
+	let $po := $sucursal/poblacion
+	let $cu := count($sucursal/cuenta)
+	return if($cu > 3) then
+		concat('director: ',$dir,' cod_sucur: ',$cod,' poblacion: ',$po)
+	else()

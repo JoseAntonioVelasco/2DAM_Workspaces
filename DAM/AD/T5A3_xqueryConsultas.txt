@@ -61,21 +61,31 @@ return concat('codigo sucursal: ',$cod,' nºcuentas: ',$cu,' director: ',$di,' p
 
 c)
 for $sucursal in /sucursales/sucursal
-	let $cu := count($sucursal/cuenta)
-	return if($cu > 3) then
-		let $dir := $sucursal/director
-		let $cod := data($sucursal[@codigo])
-		let $po := $sucursal/poblacion
-		concat('director: ',$dir,' cod_sucur: ',$cod,' poblacion: ',$po)
-	else()
-
-<director>{$dir}</director><cod_sucur>{$cod}</cod_sucur><poblacion>{$po}</poblacion>
-
-for $sucursal in /sucursales/sucursal
 	let $dir := $sucursal/director
-	let $cod := data($sucursal[@codigo])
+	let $cod := data($sucursal/[@codigo])
 	let $po := $sucursal/poblacion
 	let $cu := count($sucursal/cuenta)
 	return if($cu > 3) then
 		concat('director: ',$dir,' cod_sucur: ',$cod,' poblacion: ',$po)
+	else()
+	
+	
+	
+	
+d)
+for $sucursal in /sucursales/sucursal
+	let $max := max($sucursal/cuenta/saldodebe)
+	for $cuenta in $sucursal/cuenta
+		return if($cuenta/saldodebe eq xs:string($max)) then
+			concat('nombre: ',$cuenta/nombre,' num_cuenta: ',$cuenta/numero)
+		else()
+
+	
+e)
+let $max := max(/sucursales/sucursal/cuenta/aportacion)
+for $cuenta in /sucursales/sucursal/cuenta
+	let $nombre := $cuenta/nombre
+	let $numero := $cuenta/numero
+	return if($cuenta/aportacion eq xs:string($max)) then
+		concat('nombre: ',$nombre,' num_cuenta: ',$numero)
 	else()

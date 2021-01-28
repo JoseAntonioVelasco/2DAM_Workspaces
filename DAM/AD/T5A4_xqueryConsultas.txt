@@ -1,0 +1,62 @@
+=============================EJERCICIO 4=============================
+a)????
+for $emp in /EMPLEADOS/EMP_ROW
+return if($emp/OFICIO eq "DIRECTOR") then
+	<DIRECTOR>{$emp/APELLIDO/text()}</DIRECTOR>
+	else(<EMPLEADO>{$emp/APELLIDO/text()}</EMPLEADO>)
+
+
+
+b)
+let $depA :=(
+	for $dep in /universidad/departamento
+		return if($dep[@tipo="A"]) then
+			$dep
+		else())
+for $emp in $depA/empleado
+	return if($emp/puesto/text() eq "Profesor") then
+		concat('nombre: ',$emp/nombre)
+	else()
+
+
+
+
+c)
+for $dep in /universidad/departamento
+	return if($dep[@tipo="A"]) then
+		<TIPOA>{$dep/nombre/text()}</TIPOA>
+	else(
+		<OTROTIPO>{$dep/nombre/text()}</OTROTIPO>
+	)
+	
+
+
+
+d)
+for $dep in /universidad/departamento
+	let $cu := count($dep/empleado)
+	return <DEPARTAMENTO>{$dep/nombre/text()}<N_EMPLEADOS>{$cu}</N_EMPLEADOS></DEPARTAMENTO>
+	
+
+
+
+
+e)
+for $dep in /universidad/departamento
+	let $cu := count($dep/empleado)
+	let $emps := $dep/empleado
+	let $av := avg(data($emps/[@salario]))
+	return <DEPARTAMENTO>{$dep/nombre/text()}<N_EMPLEADOS>{$cu}</N_EMPLEADOS><MEDIASALARIO>{$av}</MEDIASALARIO></DEPARTAMENTO>
+
+
+
+
+f)
+for $dep in /universidad/departamento
+	let $cu := count($dep/empleado)
+	let $emps := $dep/empleado
+	let $av := avg(data($emps/[@salario]))
+	let $max := max(data($emps/[@salario]))
+	return <DEPARTAMENTO>{$dep/nombre/text()}<N_EMPLEADOS>{$cu}</N_EMPLEADOS><MEDIASALARIO>{$av}</MEDIASALARIO><EMPLEADOSALARIOMAX>{$max}</EMPLEADOSALARIOMAX></DEPARTAMENTO>
+
+

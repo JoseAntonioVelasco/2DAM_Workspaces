@@ -1,0 +1,36 @@
+#tablero{
+	width: 1100px;
+	height: 800px;
+	border: 3px solid black;
+	table-layout: fixed;
+	text-align: center;
+	
+}
+#tablero, th, td {
+	border: 3px solid black;
+	font-size: 40px;
+	font-weight: bold;
+	overflow:hidden;
+	table-layout:fixed;
+	word-wrap:break-word;
+	margin-bottom:10px;
+}
+#tablero tr {
+  height: 70px;
+}
+p.fichaX{
+	color:red;
+}
+p.fichaO{
+	color:#ffa500
+}
+#cont_begin{
+    margin: auto;
+    text-align: center;
+}
+#restart{
+	margin-top: 4px;
+}
+td.success{
+	background-color: #d4edda;
+}

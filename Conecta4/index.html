@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Conecta4</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-sm-12">
+				<h1><center><strong>Conecta 4</strong></center></h1><br>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group" id="IA1">
+				  <label for="sel1">Selecciona oponente <strong>X</strong>:</label>
+				  <select class="form-control" id="sel_IA1">
+					<option value="humano">humano</option>
+					<option value="jugadorAI1">col4AI</option>
+					<option value="randomAI">randomAI</option>
+					<option value="randomPlusAI">randomPlusAI</option>
+					<option value="minimaxAI">minimaxAI</option>
+				  </select>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="form-group" id="IA2">
+				  <label for="sel1">Selecciona oponente <strong>O</strong>:</label>
+				  <select class="form-control" id="sel_IA2">
+					<option value="humano">humano</option>
+					<option value="jugadorAI1">col4AI</option>
+					<option value="randomAI">randomAI</option>
+					<option value="randomPlusAI">randomPlusAI</option>
+					<option value="minimaxAI">minimaxAI</option>
+				  </select>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>Temporizador:</label>
+					<input class="form-control" type="text" value="1000" id="timer">
+				</div>
+			</div>
+			
+			<div class="col-sm-3" id="cont_begin">
+				<button type="button" class="btn btn-primary" id="begin" onclick="empezar()">Empezar</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-9" id="winner_msg">
+				<div class="alert alert-success">
+				  <strong>Ganador!</strong> Ha ganado el jugador <strong id="winner"></strong>. 
+				</div>
+			</div>
+			<div class="col-sm-9" id="draw_msg">
+				<div class="alert alert-warning">
+				  <strong>Empate!</strong> Ninguno gana.   
+				</div>
+			</div>
+			<div class="col-sm-3" id="restart">
+				<button type="button" class="btn btn-primary" onclick="reiniciar()" >Reiniciar</button>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<table class="fixed" id="tablero">
+				<thead>
+					<tr>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(1)">col1</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(2)">col2</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(3)">col3</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(4)">col4</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(5)">col5</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(6)">col6</button></th>
+						<th><button type="button" class="btn btn-danger" onclick="poner_fichaHTML(7)">col7</button></th>
+					</tr>
+				</thead>
+				<!--Le he tenido que meter estas etiquetas para que no redimensionara la tabla-->
+				<col width="40px" />
+				<col width="40px" />
+				<col width="40px" />
+				<col width="40px" />
+				<col width="40px" />
+				<col width="40px" />
+				<col width="40px" />
+				<tr class="fil1">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+				
+				<tr class="fil2">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+				
+				<tr class="fil3">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+				
+				<tr class="fil4">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+				
+				<tr class="fil5">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+				
+				<tr class="fil6">
+					<td class="col1"></td>
+					<td class="col2"></td>
+					<td class="col3"></td>
+					<td class="col4"></td>
+					<td class="col5"></td>
+					<td class="col6"></td>
+					<td class="col7"></td>
+				</tr>
+			</table>
+		</div>
+		
+		
+	</div>
+	<input type="hidden" id="jugador_actual"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="AIs/simpleAIs.js"></script>
+	<script src="AIs/complexAIs.js"></script>
+	<script>
+		//console.log($("tr"));
+		
+		//mensajes de win, draw y boton de restart escondidos
+		$("#winner_msg").hide();	
+		$("#draw_msg").hide();
+		$("#restart").hide();
+		
+		var ficha="X"; //empieza siempre por la ficha X 
+		var clase_ficha="fichaX";
+		
+		function poner_fichaHTML(col){
+			for(var i=6; i>0; i--){
+				if($( "tr.fil"+i ).children("td.col"+col).text()!=="X" && $( "tr.fil"+i ).children("td.col"+col).text()!=="O"){
+					//pone ficha
+					$( "tr.fil"+i ).children("td.col"+col).html("<p class=\""+clase_ficha+"\">"+ficha+"</p>");
+					//desactivamos botones al final de su turno
+					$("#tablero thead tr th").children("button").prop("disabled",true);
+					//cambio de jugador
+					siguiente_ficha(ficha);
+					break;
+				}
+			}	
+		}
+		
+		function siguiente_ficha(player){
+			//comprobamos tablero
+			if(comprobar_ganador(player) || comprobar_empate()){
+					console.log("ha ganado 1");
+					return;
+			}
+			
+			//cambiamos jugador
+			if(player=="X"){
+				ficha="O";
+				clase_ficha="fichaO";
+				$(".btn-danger").css("background-color", "#ffa500");
+			}
+			else if(player=="O"){
+				ficha="X";
+				clase_ficha="fichaX";
+				$(".btn-danger").css("background-color", "red");
+			}
+			
+			//triggear change a jugador actual
+			setTimeout(function(){
+				$("#jugador_actual").change();
+			}, $("#timer").val());
+		}
+		
+		
+		function haGanado(player){
+			//disablear botones de poner fichas
+			$("#tablero thead tr th").children("button").prop("disabled",true);
+			//mostrar mensaje de victoria
+			$("#winner").text(player);
+			$("#winner_msg").show();
+			$("#restart").show();
+		}
+		
+		
+		function comprobar_empate(){
+			var contador=0;
+			for(var i=1; i<8;i++){
+				if($( "tr.fil1").children("td.col"+i).text()=="X" || $( "tr.fil1").children("td.col"+i).text()=="O"){
+					contador++;
+					
+					if(contador==7){
+						$("#draw_msg").show();
+						$("#restart").show();
+						return true;
+					}
+				}
+				else{break;}
+			}
+		}
+		
+		
+		function reiniciar(){
+			//limpiar tablero
+			for(var i=1; i<7; i++){
+				for(var j=1; j<8; j++){
+					$( "tr.fil"+i ).children("td.col"+j).text("");
+				}
+			}
+			//enablear los botones de poner fichas
+			$("#tablero thead tr th").children("button").prop("disabled",false);
+			//esconder mensaje de victoria
+			$("#winner_msg").hide();	
+			$("#draw_msg").hide();
+			$("#restart").hide();
+			$("#tablero td").removeClass("success");
+			ficha="X";
+			clase_ficha="fichaX";
+			$(".btn-danger").css("background-color", "red");
+		}
+		
+		
+		
+		function colorear_victoria(array_victoria){
+			for(i=0;i<4;i++){
+				$( "tr.fil"+array_victoria[i][0] ).children("td.col"+array_victoria[i][1]).addClass("success");
+			}
+		}
+		
+		//esta funcion hay que mejorarla
+		function comprobar_ganador(player){
+			var contador=0;
+			var array_victoria = [];
+			
+			//comprobar horizontales
+			for(var i=6;i>0;i--){//filas
+				for(var j=1;j<8;j++){//columnas
+				
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+						//console.log("Ha entrado hor "+player);
+						contador++;
+						array_victoria.push([i,j]);
+						if(contador==4){
+							console.log("GanadorHor "+player);
+							haGanado(player);
+							colorear_victoria(array_victoria);
+							return true;
+						}		
+					}else{contador=0; array_victoria = [];}
+				
+				}
+				contador=0; array_victoria = [];
+			}
+			
+			//comprobar verticales
+			for(var j=1;j<8;j++){//columnas
+				for(var i=6;i>0;i--){//filas
+				
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+						//console.log("Ha entrado ver "+player);
+						contador++;
+						array_victoria.push([i,j]);
+						if(contador==4){
+							console.log("GanadorVert "+player);
+							haGanado(player);
+							colorear_victoria(array_victoria);
+							return true;
+						}
+					}else{contador=0;array_victoria = [];}
+						
+				}
+				contador=0;array_victoria = [];
+			}
+			//comprobar diagonales
+			
+			//diagonales derechas ascendentes
+			for(var dh=0; dh<6; dh++){//diagonales de altura
+			
+				for(var i=6-dh,j=1; i>0,j<8; i--,j++){
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+						//console.log("Ha entrado "+player);
+						contador++;
+						array_victoria.push([i,j]);
+						if(contador==4){
+							console.log("Ganador11der "+player);
+							haGanado(player);
+							colorear_victoria(array_victoria);
+							return true;
+						}
+					}else{contador=0;array_victoria = [];}	
+					
+				}
+				contador=0;array_victoria = [];
+			}
+			for(var dx=0; dx<6; dx++){//diagonales de horizontal
+			
+				for(var i=6,j=1+dx; i>0,j<8; i--,j++){
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+								//console.log("Ha entrado "+player);
+								contador++;
+								array_victoria.push([i,j]);
+								if(contador==4){
+									console.log("Ganador22der");
+									haGanado(player);
+									colorear_victoria(array_victoria);
+									return true;
+								}
+					}else{contador=0;array_victoria = [];}
+					
+				}
+				contador=0;array_victoria = [];
+			}
+			//diagonales izquierdas ascendentes
+			for(var dh=0; dh<6; dh++){//diagonales de altura
+			
+				for(var i=6-dh,j=7; i>0,j>0; i--,j--){
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+						//console.log("Ha entrado" +player);
+						contador++;
+						array_victoria.push([i,j]);
+						if(contador==4){
+							console.log("Ganador11izqd");
+							haGanado(player);
+							colorear_victoria(array_victoria);
+							return true;
+						}
+					}else{contador=0;array_victoria = [];}
+					
+				}
+				contador=0;array_victoria = [];
+			}
+			for(var dx=0; dx<6; dx++){//diagonales de horizontal
+			
+				for(var i=6,j=7-dx; i>0,j>0; i--,j--){
+					if($( "tr.fil"+i ).children("td.col"+j).text()==player){
+						//console.log("Ha entrado");
+						contador++;
+						array_victoria.push([i,j]);
+						if(contador==4){
+							console.log("Ganador22izqd");
+							haGanado(player);
+							colorear_victoria(array_victoria);
+							return true;
+						}
+					}else{contador=0;array_victoria = [];}
+					
+					
+				}
+				contador=0;array_victoria = [];
+			}
+		}
+		
+		//cada vez que toca a un jugador humano se activan los botones
+		function humano(){
+			//activamos botones
+			$("#tablero thead tr th").children("button").prop("disabled",false);	
+		}
+		
+		var alg_jug1;
+		var alg_jug2;
+		function empezar(){
+				
+			//revisar los select y asignar las variables
+			var opcion1 = $("#sel_IA1 option:selected").val();
+			var opcion2 = $("#sel_IA2 option:selected").val();
+			
+			//se puede hacer mejor esta parte de los switch
+			switch(opcion1){
+				case "humano":{
+					alg_jug1=humano;
+					break;
+				}
+				case "jugadorAI1":{
+					alg_jug1=jugadorAI1;
+					break;
+				}
+				case "randomAI":{
+					alg_jug1=randomAI;
+					break;
+				}
+				case "randomPlusAI":{
+					alg_jug1=randomPlusAI;
+					break;
+				}
+				case "minimaxAI":{
+					alg_jug1=minimaxAI;
+					break;
+				}
+				default:{
+					alg_jug1=humano;
+					break;
+				}
+			}
+			switch(opcion2){
+				case "humano":{
+					alg_jug2=humano;
+					break;
+				}
+				case "jugadorAI1":{
+					alg_jug2=jugadorAI1;
+					break;
+				}
+				case "randomAI":{
+					alg_jug2=randomAI;
+					break;
+				}
+				case "randomPlusAI":{
+					alg_jug2=randomPlusAI;
+					break;
+				}
+				case "minimaxAI":{
+					alg_jug2=minimaxAI;
+					break;
+				}
+				default:{
+					alg_jug2=humano;
+					break;
+				}
+			}
+			
+			//se triggea el juego y empieza
+			$("#jugador_actual").change();
+			
+		}
+		
+		//desactivamos los botones por defecto
+		$("#tablero thead tr th").children("button").prop("disabled",true);
+		//siguiente jugador juega
+		$("#jugador_actual").change(function(){	
+			//ejecuta su funcion
+			if(ficha=="X"){
+				alg_jug1();
+			}else{
+				alg_jug2();
+			}	
+		});
+		
+	</script>
+	
+</body>
+</html>

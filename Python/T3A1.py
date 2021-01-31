@@ -17,6 +17,7 @@ p95s_cpu = []
 
 
 avgs_mem = []
+events_mem = []
 
 def parseLineToFloat(line,info):
     line = line.replace(info,"")
@@ -39,12 +40,15 @@ with open("prueba_cpu.txt") as fh:
         elif line.startswith("         sum:"):
             sums_cpu.append(parseLineToFloat(line,"         sum:"))
         
-plt.plot([1,2,3,4],events_cpu) 
+plt.plot([1,2,3,4],events_cpu,label='cpu') 
 
 with open("prueba_memoria.txt") as fh:
     for line in fh:
         if line.startswith("         avg:"):
             avgs_mem.append(parseLineToFloat(line,"         avg:"))
+        elif line.startswith("    total number of events:"):
+            events_mem.append(parseLineToInt(line,"    total number of events:")/1000)
  
 
-#plt.plot([1,2,3],avgs_mem) 
+plt.plot([1,2,3],events_mem,label="mem") 
+plt.legend()

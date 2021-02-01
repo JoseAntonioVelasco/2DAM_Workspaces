@@ -9,18 +9,18 @@ return concat('zona ',$cod_zona, ', productos: ', $cu)
 
 b)
 for $prod in /productos/produc
-let $cod_zona:= $prod/cod_zona
-let $denominacion: = $prod/denominacion
+	let $cod_zona:= $prod/cod_zona
+	let $denominacion: = $prod/denominacion
 return concat('<zona',$cod_zona,'>',$denominacion,'</zona',$cod_zona,'>')
 
 
 
 c)
 for $cod_zona in distinct-values(/productos/produc/cod_zona)
-let $prod := /productos/produc
-let $group := $prod[cod_zona=$cod_zona]
-let $max := max($group/precio)
-let $res := $group[precio=$max]
+	let $prod := /productos/produc
+	let $group := $prod[cod_zona=$cod_zona]
+	let $max := max($group/precio)
+	let $res := $group[precio=$max]
 return concat($res/denominacion,' precio: ',$res/precio, ' zona: ',$res/cod_zona)
 
 

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         reciclador.setHasFixedSize(true);
         adaptador = new Adaptador(datos);
         gestor = new LinearLayoutManager(this);
-        reciclador.setLayoutManager(gestor);
+        reciclador.setLayoutManager(gestor);//.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         reciclador.setAdapter(adaptador);
 
         reciclador.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {

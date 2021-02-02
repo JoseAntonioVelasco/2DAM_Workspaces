@@ -1,9 +1,8 @@
-package com.progmultimedia.tema8actividad7_recyclerview;
+package com.progmultimedia.practica2_v1;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,13 +18,11 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
     }
 
     public static class miHolder extends RecyclerView.ViewHolder{
-        public ImageView imagen;
         public TextView titulo;
         public TextView texto;
 
         public miHolder(@NonNull View vista) {
             super(vista);
-            imagen = (ImageView) vista.findViewById(R.id.imagen);
             titulo = (TextView) vista.findViewById(R.id.titulo);
             texto = (TextView) vista.findViewById(R.id.texto);
         }
@@ -40,9 +37,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull miHolder holder, final int position) {
-        holder.imagen.setImageResource(entradas.get(position).getIdimagen());
-        holder.titulo.setText(entradas.get(position).getTextoTitulo());
-        holder.texto.setText(String.valueOf(entradas.get(position).getTextoContenido()));
+        holder.titulo.setText(entradas.get(position).getTitulo());
+        holder.texto.setText(String.valueOf(entradas.get(position).getTexto()));
     }
 
     @Override

@@ -4,7 +4,7 @@ Created on Thu Jan 28 09:09:18 2021
 
 @author: JoseAntonioVelasco
 """
-
+import math as m
 import matplotlib.pyplot as plt
 
 mins_cpu = []
@@ -30,7 +30,7 @@ def parseLineToInt(line,info):
 with open("prueba_cpu.txt") as fh:
     for line in fh:
         if line.startswith("    total number of events:"):
-            events_cpu.append(parseLineToInt(line,"    total number of events:"))
+            events_cpu.append((parseLineToInt(line,"    total number of events:")))
         elif line.startswith("         min:"):
             mins_cpu.append(parseLineToFloat(line,"         min:"))
         elif line.startswith("         avg:"):
@@ -47,7 +47,7 @@ with open("prueba_memoria.txt") as fh:
         if line.startswith("         avg:"):
             avgs_mem.append(parseLineToFloat(line,"         avg:"))
         elif line.startswith("    total number of events:"):
-            events_mem.append(parseLineToInt(line,"    total number of events:")/1000)
+            events_mem.append((parseLineToInt(line,"    total number of events:"))/2700)
  
 
 plt.plot([1,2,3],events_mem,label="mem") 

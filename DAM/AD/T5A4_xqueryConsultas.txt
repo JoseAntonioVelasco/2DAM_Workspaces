@@ -1,5 +1,5 @@
 =============================EJERCICIO 4=============================
-a)????
+a)
 for $emp in /EMPLEADOS/EMP_ROW
 return if($emp/OFICIO eq "DIRECTOR") then
 	<DIRECTOR>{$emp/APELLIDO/text()}</DIRECTOR>

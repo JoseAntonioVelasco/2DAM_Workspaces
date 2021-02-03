@@ -26,7 +26,6 @@ import javax.crypto.SecretKey;
 public class Cliente {
     
     private static Cipher cifrador;
-    private static Cipher descifrador;
     private static SecretKey clave;
     
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException{
@@ -50,10 +49,8 @@ public class Cliente {
         //instanciamos el cifrador, descifrador y la clave con el algoritmo seleccionado
         clave = KeyGenerator.getInstance(cadena).generateKey();
         cifrador = Cipher.getInstance(cadena);
-        descifrador = Cipher.getInstance(cadena);
         
         cifrador.init(Cipher.ENCRYPT_MODE, clave);
-        descifrador.init(Cipher.DECRYPT_MODE, clave);
         
         
         

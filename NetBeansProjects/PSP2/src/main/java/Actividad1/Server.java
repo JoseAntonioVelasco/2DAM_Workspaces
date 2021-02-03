@@ -86,6 +86,7 @@ class hiloServidor extends Thread{
             
             //Instanciamos el descifrador y clave
             clave = KeyGenerator.getInstance(alg).generateKey();
+            
             descifrador = Cipher.getInstance(alg);
             descifrador.init(Cipher.DECRYPT_MODE, clave);
             
@@ -96,7 +97,8 @@ class hiloServidor extends Thread{
             String cadena = "";
             while(!cadena.trim().equals("*")){
                 cadena = fentrada.readLine();
-                System.out.println(cadena);
+                System.out.println("Mensaje cifrado: "+cadena);
+                System.out.println("Mensaje descifrado: "+desencriptar(cadena));
             }
 
 

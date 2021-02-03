@@ -1,0 +1,17 @@
+=============================EJERCICIO 5=============================
+a)
+update insert
+<empleado salario="3000">
+	<puesto>Tecnico</puesto>
+	<nombre>Pepe Perez</nombre>
+</empleado>
+following /universidad/departamento[2]/nombre
+
+b)
+for $emp in /universidad/departamento[codigo/text()="MAT1"]/empleado
+	let $newSal := data($emp/@salario) + 100
+	return update value $emp/@salario with $newSal
+	
+c)
+update rename doc("departamentos.xml")/departamentos/DEP_ROW
+as "FILA_DEPARTAMENTO"

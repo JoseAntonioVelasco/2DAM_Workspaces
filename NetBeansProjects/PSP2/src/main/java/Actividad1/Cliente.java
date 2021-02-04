@@ -51,7 +51,7 @@ public class Cliente {
         cifrador = Cipher.getInstance(cadena);
         
         cifrador.init(Cipher.ENCRYPT_MODE, clave);
-        
+        //le pasamos la clave al servidor
         
         
         //Escribimos mensajes

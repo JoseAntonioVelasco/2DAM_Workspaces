@@ -7,6 +7,7 @@ package Actividad1;
 
 
 
+import ejemplos.Alumno;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +86,10 @@ class hiloServidor extends Thread{
             }
             
             //Instanciamos el descifrador y clave
-            clave = KeyGenerator.getInstance(alg).generateKey();
+            
+            //El cliente nos pasa la clave con la que ha cifrado los mensajes
+            ObjectInputStream claveEntrante = new ObjectInputStream(socket.getInputStream());     
+            clave = (SecretKey) claveEntrante.readObject();
             
             descifrador = Cipher.getInstance(alg);
             descifrador.init(Cipher.DECRYPT_MODE, clave);
@@ -114,6 +118,7 @@ class hiloServidor extends Thread{
             fsalida.close();
             fentrada.close();
             socket.close();
+            claveEntrante.close();
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,6 +127,8 @@ class hiloServidor extends Thread{
         } catch (NoSuchPaddingException ex) {
             Logger.getLogger(hiloServidor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeyException ex) {
+            Logger.getLogger(hiloServidor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(hiloServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

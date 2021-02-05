@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView reciclador;
     private RecyclerView.Adapter adaptador;
     private RecyclerView.LayoutManager gestor;
+    public static ArrayList<Encapsulador> datos = new ArrayList<>();;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,22 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ArrayList<Encapsulador> datos = new ArrayList<>();
-        //CARGAR DATOS DESDE PERSISTENCIA
-        SharedPreferences prefs = getSharedPreferences("meta", Context.MODE_PRIVATE);
-        Integer numNotas = prefs.getInt("numNotas",0);
-        for(int i=0; i<numNotas; i++){
-            String nota = "nota".concat(String.valueOf(i));
-            SharedPreferences notaN = getSharedPreferences(nota,Context.MODE_PRIVATE);
-            //sacamos los datos de la nota y los
-            String titulo = notaN.getString("titulo","");
-            String texto = notaN.getString("texto","");
-            datos.add(new Encapsulador(titulo,texto));
 
-        }
+        //CARGAR DATOS DESDE PERSISTENCIA
+        datos = cargarDatos(datos);
         //DATOS DE EJEMPLO
-        datos.add(new Encapsulador( "DONUTS", "El 15 de septiembre de 2009, fue lanzado el SDK de Android 1.6 Donut, basado en el núcleo Linux 2.6.29. En la actualización se incluyen numerosas características nuevas."));
-        datos.add(new Encapsulador( "FROYO", "El 20 de mayo de 2010, El SDK de Android 2.2 Froyo (Yogur helado) fue lanzado, basado en el núcleo Linux 2.6.32."));
+        datos.add(new Encapsulador( "0","DONUTS", "El 15 de septiembre de 2009, fue lanzado el SDK de Android 1.6 Donut, basado en el núcleo Linux 2.6.29. En la actualización se incluyen numerosas características nuevas."));
+        datos.add(new Encapsulador( "1","FROYO", "El 20 de mayo de 2010, El SDK de Android 2.2 Froyo (Yogur helado) fue lanzado, basado en el núcleo Linux 2.6.32."));
+
 
         reciclador = findViewById(R.id.reciclador);
         reciclador.setHasFixedSize(true);
@@ -75,8 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 View hijo = rv.findChildViewUnder(e.getX(),e.getY());
                 if(hijo != null && gestureDetector.onTouchEvent(e)){
                     int position = rv.getChildAdapterPosition(hijo);
-                    Toast.makeText(getApplicationContext(),datos.get(position).getTexto(),Toast.LENGTH_SHORT).show();
                     //abrir nota
+                    Encapsulador nota = new Encapsulador(datos.get(position).getId(),datos.get(position).getTitulo(),datos.get(position).getTexto());
+                    Intent intent = new Intent(MainActivity.this, NotaActivity.class);
+                    intent.putExtra("nota",nota);
+                    Integer MOSTRAR_NOTA = 0;
+                    startActivityForResult(intent,MOSTRAR_NOTA);
                 }
                 return false;
             }
@@ -93,4 +89,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public ArrayList<Encapsulador> cargarDatos(ArrayList<Encapsulador> datos){
+        SharedPreferences prefs = getSharedPreferences("meta", Context.MODE_PRIVATE);
+        Integer numNotas = prefs.getInt("numNotas",0);
+        for(int i=0; i<numNotas; i++){
+            String nota = "nota".concat(String.valueOf(i));
+            SharedPreferences notaN = getSharedPreferences(nota,Context.MODE_PRIVATE);
+            //sacamos los datos de la nota y los meto en el array
+            String id = notaN.getString("id","");
+            String titulo = notaN.getString("titulo","");
+            String texto = notaN.getString("texto","");
+            datos.add(new Encapsulador(id,titulo,texto));
+
+        }
+        return datos;
+    }
+    /*public void guardarDatos(Encapsulador n){
+        SharedPreferences prefs = getSharedPreferences("meta",Context.MODE_PRIVATE);
+        prefs.setInt("numNotas",datos.size());
+    }*/
+
 }

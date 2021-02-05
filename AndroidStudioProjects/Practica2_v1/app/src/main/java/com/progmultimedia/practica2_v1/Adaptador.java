@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
     private ArrayList<Encapsulador> entradas;
-
+    //20*4=80
     public Adaptador(ArrayList<Encapsulador> entradas) {
         this.entradas = entradas;
     }
@@ -38,7 +38,12 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
     @Override
     public void onBindViewHolder(@NonNull miHolder holder, final int position) {
         holder.titulo.setText(entradas.get(position).getTitulo());
-        holder.texto.setText(String.valueOf(entradas.get(position).getTexto()));
+        String txt=String.valueOf(entradas.get(position).getTexto());
+        if(txt.length()<=80) {
+            holder.texto.setText(txt);
+        }else{
+            holder.texto.setText(((String)txt.subSequence(0,77)).concat("..."));
+        }
     }
 
     @Override

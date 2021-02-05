@@ -9,6 +9,7 @@ import static Actividad1.EjemploCifradoV3.encriptar;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.security.InvalidKeyException;
@@ -48,6 +49,10 @@ public class Cliente {
         } while(!respuesta.equals("OK"));
         //instanciamos el cifrador, descifrador y la clave con el algoritmo seleccionado
         clave = KeyGenerator.getInstance(cadena).generateKey();
+        //le pasamos al server la clave
+        ObjectOutputStream claveSaliente = new ObjectOutputStream(Cliente.getOutputStream());
+        claveSaliente.writeObject(clave);
+        
         cifrador = Cipher.getInstance(cadena);
         
         cifrador.init(Cipher.ENCRYPT_MODE, clave);
@@ -59,8 +64,8 @@ public class Cliente {
             System.out.println("Introduce mensaje: ");
             cadena = in.readLine();
             fsalida.println(encriptar(cadena));
-            respuesta = fentrada.readLine();
-            System.out.println(" -> Respuesta : "+respuesta);
+            //respuesta = fentrada.readLine();
+            //System.out.println(" -> Respuesta : "+respuesta);
         } while(!cadena.trim().equals("*"));
         
         fsalida.close();
@@ -68,6 +73,7 @@ public class Cliente {
         System.out.println("Fin del envio... ");
         in.close();
         Cliente.close();
+        claveSaliente.close();
     }
     
     public static String encriptar(String mensaje) {

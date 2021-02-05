@@ -4,14 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <EditText
+        android:id="@+id/buscador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="  buscar notas"
+        android:drawablePadding="10dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclador"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="3dp"
         android:scrollbars="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:layout_below="@id/buscador">
 
     </androidx.recyclerview.widget.RecyclerView>
 

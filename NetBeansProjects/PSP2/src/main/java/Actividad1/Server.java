@@ -56,8 +56,8 @@ class hiloServidor extends Thread{
     PrintWriter fsalida;
     Socket socket = null;
     
-    private static Cipher descifrador;
-    private static SecretKey clave;
+    private Cipher descifrador;
+    private SecretKey clave;
     
     public hiloServidor(Socket s) throws IOException{
         socket = s;
@@ -102,7 +102,7 @@ class hiloServidor extends Thread{
             while(!cadena.trim().equals("*")){
                 cadena = fentrada.readLine();
                 System.out.println("Mensaje cifrado: "+cadena);
-                System.out.println("Mensaje descifrado: "+desencriptar(cadena));
+                System.out.println("Mensaje descifrado: "+desencriptar(cadena,descifrador));
             }
 
 
@@ -132,7 +132,7 @@ class hiloServidor extends Thread{
             Logger.getLogger(hiloServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static String desencriptar(String mensaje) {
+    public static String desencriptar(String mensaje,Cipher descifrador) {
         try {
             byte[] decoder = Base64.getDecoder().decode(mensaje.getBytes());
             byte[] formatoUTF8 = descifrador.doFinal(decoder);

@@ -1,13 +1,12 @@
-package com.progmultimedia.practica2_v1;
+package com.example.practica2_v2;
+
+import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
+import static com.example.practica2_v2.FragmentoPrincipal.bd;
 
-import static com.progmultimedia.practica2_v1.MainActivity.bd;
 
 public class NotaActivity extends AppCompatActivity {
     private EditText titulo;

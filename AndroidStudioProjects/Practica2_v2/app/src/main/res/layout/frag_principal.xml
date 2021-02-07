@@ -6,16 +6,6 @@
     android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#767667"
-        android:elevation="3dp"
-        app:tabIndicatorColor="#ff7700"
-        app:tabSelectedTextColor="#ff7700"
-        app:tabTextColor="#000" />
-
     <EditText
         android:id="@+id/buscador"
         android:layout_width="match_parent"
@@ -28,7 +18,6 @@
         android:maxLines="1"
         android:singleLine="true"
         android:drawablePadding="10dp"
-        android:layout_below="@id/tablayout"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclador"

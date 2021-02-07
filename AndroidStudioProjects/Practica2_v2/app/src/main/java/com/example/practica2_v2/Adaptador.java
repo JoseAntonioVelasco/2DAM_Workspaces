@@ -1,4 +1,4 @@
-package com.progmultimedia.practica2_v1;
+package com.example.practica2_v2;
 
 import android.view.LayoutInflater;
 import android.view.View;

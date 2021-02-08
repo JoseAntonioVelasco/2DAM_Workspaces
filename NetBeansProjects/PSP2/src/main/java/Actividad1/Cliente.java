@@ -25,7 +25,6 @@ import javax.crypto.SecretKey;
  * @author JoseAntonioVelasco
  */
 public class Cliente {
-    
     private static Cipher cifrador;
     private static SecretKey clave;
     
@@ -75,7 +74,11 @@ public class Cliente {
         Cliente.close();
         claveSaliente.close();
     }
-    
+    /**
+     * cifra el string que se le pasa por parametro con la clave del cliente
+     * @param mensaje string a cifrar
+     * @return mensaje cifrado
+     */
     public static String encriptar(String mensaje) {
         try {
             byte[] formatoUTF8 = mensaje.getBytes("UTF8");

@@ -99,11 +99,11 @@ class hiloServidor extends Thread{
             //Podemos empezar a recibir mensajes
             fsalida.println("Puede empezar a escribir mensajes");
             String cadena = "";
-            while(!cadena.trim().equals("*")){
+            do{
                 cadena = fentrada.readLine();
                 System.out.println("Mensaje cifrado: "+cadena);
                 System.out.println("Mensaje descifrado: "+desencriptar(cadena,descifrador));
-            }
+            }while(!desencriptar(cadena,descifrador).equals("*"));
 
 
             //cerramos
@@ -132,6 +132,12 @@ class hiloServidor extends Thread{
             Logger.getLogger(hiloServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * descifra el mensaje con la clave del cliente
+     * @param mensaje mensaje cifrado recibido del cliente
+     * @param descifrador descifrador que utiliza la clave pasada por el cliente
+     * @return el mensaje descifrado
+     */
     public static String desencriptar(String mensaje,Cipher descifrador) {
         try {
             byte[] decoder = Base64.getDecoder().decode(mensaje.getBytes());

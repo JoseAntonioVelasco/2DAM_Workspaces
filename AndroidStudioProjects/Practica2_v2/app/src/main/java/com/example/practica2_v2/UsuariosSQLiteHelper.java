@@ -7,20 +7,26 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class UsuariosSQLiteHelper extends SQLiteOpenHelper {
-    String sqlCreate = "CREATE TABLE Nota(id TEXT PRIMARY KEY, titulo TEXT, contenido TEXT)";
-    String sqlDelete = "DROP TABLE IF EXISTS nota";
+    String sqlCreateTableNota = "CREATE TABLE Nota(id TEXT PRIMARY KEY, titulo TEXT, contenido TEXT)";
+    String sqlCreateTableCheckbox = "CREATE TABLE Checkbox(id TEXT PRIMARY KEY, contenido TEXT, terminado INTEGER)";
+    String sqlDeleteNota = "DROP TABLE IF EXISTS nota";
+    String sqlDeleteCheckbox = "DROP TABLE IF EXISTS Checkbox";
     public UsuariosSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(sqlCreate);
+        db.execSQL(sqlCreateTableNota);
+        db.execSQL(sqlCreateTableCheckbox);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(sqlDelete);
-        db.execSQL(sqlCreate);
+        db.execSQL(sqlDeleteNota);
+        db.execSQL(sqlDeleteCheckbox);
+        db.execSQL(sqlCreateTableNota);
+        db.execSQL(sqlCreateTableCheckbox);
+        onCreate(db);
     }
 }

@@ -11,6 +11,10 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+/**
+ * 
+ * @author JoseAntonioVelasco
+ */
 public class EjemploCifradoV3 {
 
     private static Cipher cifrador;
@@ -20,6 +24,8 @@ public class EjemploCifradoV3 {
     public static void main(String[] args) {
 
         try {
+            //con la clave de encriptacion que utiliza el algoritmo DES
+            //se crean el cifrador y descifrador en DES
             clave = KeyGenerator.getInstance("DES").generateKey();
             cifrador = Cipher.getInstance("DES");
             descifrador = Cipher.getInstance("DES");
@@ -27,6 +33,7 @@ public class EjemploCifradoV3 {
             cifrador.init(Cipher.ENCRYPT_MODE, clave);
             descifrador.init(Cipher.DECRYPT_MODE, clave);
             
+            //se prueba a cifrar y descifrar el siguiente String
             String mensajeOriginal = "Esto es el colegio San Viator.";
             String mensajeEncriptado = encriptar(mensajeOriginal);
             String mensajeDesencriptado = desencriptar(mensajeEncriptado);
@@ -39,7 +46,11 @@ public class EjemploCifradoV3 {
             return; 
         } 
     }
-
+    /**
+     * cifra el mensaje con la clave establecida al principio del programa
+     * @param mensaje mensaje que quieres cifrar
+     * @return 
+     */
     public static String encriptar(String mensaje) {
         try {
             byte[] formatoUTF8 = mensaje.getBytes("UTF8");
@@ -48,11 +59,15 @@ public class EjemploCifradoV3 {
             String mensajeEncriptado = new String(encriptado);
             return mensajeEncriptado;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
         return null;
     }
-
+    /**
+     * descifra el mensaje con la clave establecida al principio del programa
+     * @param mensaje mensaje que quieres descifrar
+     * @return  mensaje ya cifrado
+     */
     public static String desencriptar(String mensaje) {
         try {
             byte[] decoder = Base64.getDecoder().decode(mensaje.getBytes());

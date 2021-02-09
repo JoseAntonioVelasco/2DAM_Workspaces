@@ -58,4 +58,31 @@ public class BaseDatos {
         }
         return notas;
     }
+
+    public void insertarCheckbox(Checkbox ck){
+        ContentValues nuevoRegistro = new ContentValues();
+        nuevoRegistro.put("id", ck.getId());
+        nuevoRegistro.put("contenido", ck.getContenido());
+        nuevoRegistro.put("terminado", ck.getTerminado());
+        db.insert("Checkbox",null, nuevoRegistro);
+    }
+    public void eliminarCheckbox(Checkbox ck){
+        db.execSQL("DELETE FROM Nota WHERE id ="+ck.getId());
+    }
+    public ArrayList<Checkbox> getCheckboxes(){
+        //Retorna todas los checkboxes
+        ArrayList<Checkbox> cks = new ArrayList<>();
+        Cursor miCursor = db.rawQuery("SELECT * FROM Checkbox",null);
+        if(miCursor.moveToFirst()){
+            do{
+                String id = miCursor.getString(0);
+                String contenido = miCursor.getString(1);
+                Integer bool = miCursor.getInt(2);
+                Boolean terminado = false;
+                terminado = (bool==1);
+                cks.add(new Checkbox(id,contenido,terminado));
+            }while(miCursor.moveToNext());
+        }
+        return cks;
+    }
 }

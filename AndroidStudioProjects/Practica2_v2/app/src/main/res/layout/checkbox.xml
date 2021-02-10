@@ -5,5 +5,14 @@
     <CheckBox android:id="@+id/checkbox_meat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="texto_de_ejemplo" />
+        android:text="texto_de_ejemplo"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="9"/>
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        android:contentDescription="opciones" />
 </LinearLayout>

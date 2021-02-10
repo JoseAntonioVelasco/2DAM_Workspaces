@@ -28,6 +28,11 @@ public abstract class AdaptadorLista extends BaseAdapter {
         onEntrada(entradas.get(posicion),view);
         return view;
     }
+    public void updateList(ArrayList<?> nuevas_entradas) {
+        entradas.clear();
+        entradas = nuevas_entradas;
+        this.notifyDataSetChanged();
+    }
     public abstract void onEntrada(Object entrada, View view);
     @Override
     public int getCount(){ return entradas.size(); }

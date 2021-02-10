@@ -66,7 +66,7 @@ public class BaseDatos {
         nuevoRegistro.put("terminado", ck.getTerminado());
         db.insert("Checkbox",null, nuevoRegistro);
     }
-    public void eliminarCheckbox(Checkbox ck){
+    public void borrarCheckbox(Checkbox ck){
         db.execSQL("DELETE FROM Checkbox WHERE id ="+ck.getId());
     }
     public ArrayList<Checkbox> getCheckboxes(){
@@ -84,22 +84,6 @@ public class BaseDatos {
             }while(miCursor.moveToNext());
         }
         return cks;
-    }
-    public Checkbox getCheckbox(Checkbox ck){
-        Checkbox got_ck = null;
-        String[] args = new String[] {ck.getId()};
-        Cursor miCursor = db.rawQuery("SELECT * FROM Checkbox WHERE id LIKE ?",args);
-        if(miCursor.moveToFirst()){
-            do{
-                String id = miCursor.getString(0);
-                String contenido = miCursor.getString(1);
-                Integer bool = miCursor.getInt(2);
-                Boolean terminado = false;
-                terminado = (bool==1);
-                got_ck = new Checkbox(id,contenido,terminado);
-            }while(miCursor.moveToNext());
-        }
-        return got_ck;
     }
     public void modificarCheckbox(Checkbox ck){
         Integer term = 0;

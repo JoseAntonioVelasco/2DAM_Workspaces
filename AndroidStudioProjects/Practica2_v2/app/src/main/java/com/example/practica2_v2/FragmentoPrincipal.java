@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,7 @@ public class FragmentoPrincipal extends Fragment {
 
         //CREAR NOTA
         FloatingActionButton fab = getView().findViewById(R.id.fab);
+        fab.setImageDrawable(ContextCompat.getDrawable(getContext(), android.R.drawable.ic_input_add));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,15 +5,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,6 +55,7 @@ public class FragmentoCheckBoxes extends Fragment{
 
         //CREAR CHECKBOX
         FloatingActionButton fab = getView().findViewById(R.id.fab_check);
+        fab.setImageDrawable(ContextCompat.getDrawable(getContext(), android.R.drawable.ic_input_add));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +77,7 @@ public class FragmentoCheckBoxes extends Fragment{
 
                         Checkbox new_ck = new Checkbox(id,contenido,false);
                         bd.insertarCheckbox(new_ck);
-                        checkboxes.add(new_ck);
+                        checkboxes = bd.getCheckboxes();
                         lista.setAdapter(crearAdaptador());
                     }
                 });
@@ -91,6 +98,9 @@ public class FragmentoCheckBoxes extends Fragment{
             @Override
             public void onEntrada(Object entrada, View view) {
                 CheckBox ck = view.findViewById(R.id.checkbox_meat);
+
+                ImageButton bt = view.findViewById(R.id.button);
+
                 Checkbox entr = (Checkbox) entrada;
                 ck.setText(entr.getContenido());
                 ck.setChecked(entr.getTerminado());
@@ -109,9 +119,35 @@ public class FragmentoCheckBoxes extends Fragment{
                     }
                 });
 
+                bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PopupMenu popup = new PopupMenu(view.getContext(), v);
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                Toast.makeText(view.getContext(), "Eliminado: " +entr.getContenido(), Toast.LENGTH_SHORT).show();
+                                switch (item.getItemId()) {
+                                    case R.id.elim:
+                                        // do your code
+                                        Checkbox ck_adel = new Checkbox(entr.getId(),entr.getContenido(),null);
+                                        bd.borrarCheckbox(ck_adel);
+                                        checkboxes = bd.getCheckboxes();
+                                        adaptadorLista.updateList(bd.getCheckboxes());
+                                        return true;
+                                    default:
+                                        return false;
+                                }
+                            }
+                        });
+                        popup.inflate(R.menu.menu_checkbox);
+                        popup.show();
+                    }
+                });
+
+
             }
         };
         return adaptadorLista;
     }
-
 }

@@ -104,7 +104,6 @@ public class FragmentoCheckBoxes extends Fragment{
 
                 Checkbox entr = (Checkbox) entrada;
                 ck.setText(entr.getContenido());
-                ck.setChecked(entr.getTerminado());
 
                 ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -118,9 +117,10 @@ public class FragmentoCheckBoxes extends Fragment{
                         }
                         bd.modificarCheckbox(ck_amod);
                         checkboxes = bd.getCheckboxes();
-                        adaptadorLista.updateList(bd.getCheckboxes());
+                        //adaptadorLista.updateList(bd.getCheckboxes());
                     }
                 });
+                ck.setChecked(entr.getTerminado());
 
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override

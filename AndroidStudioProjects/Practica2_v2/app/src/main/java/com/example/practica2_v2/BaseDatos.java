@@ -82,7 +82,9 @@ public class BaseDatos {
                 String contenido = miCursor.getString(1);
                 Integer bool = miCursor.getInt(2);
                 Boolean terminado = false;
-                terminado = (bool==1);
+                if(bool == 1){
+                    terminado = true;
+                }
                 cks.add(new Checkbox(id,contenido,terminado));
             }while(miCursor.moveToNext());
         }

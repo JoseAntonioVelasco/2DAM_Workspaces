@@ -20,6 +20,7 @@ public class BaseDatos {
         nuevoRegistro.put("id", nota.getId());
         nuevoRegistro.put("titulo", nota.getTitulo());
         nuevoRegistro.put("contenido", nota.getTexto());
+        nuevoRegistro.put("fecha", nota.getFech());
         db.insert("Nota",null, nuevoRegistro);
     }
     public void modificarNota(Encapsulador nota){
@@ -38,7 +39,8 @@ public class BaseDatos {
                 String id = miCursor.getString(0);
                 String titulo = miCursor.getString(1);
                 String contenido = miCursor.getString(2);
-                notas.add(new Encapsulador(id,titulo,contenido));
+                String fecha = miCursor.getString(3);
+                notas.add(new Encapsulador(id,titulo,contenido,fecha));
             }while(miCursor.moveToNext());
         }
         return notas;
@@ -53,7 +55,8 @@ public class BaseDatos {
                 String id = miCursor.getString(0);
                 String tit = miCursor.getString(1);
                 String contenido = miCursor.getString(2);
-                notas.add(new Encapsulador(id,tit,contenido));
+                String fecha = miCursor.getString(3);
+                notas.add(new Encapsulador(id,tit,contenido,fecha));
             }while(miCursor.moveToNext());
         }
         return notas;

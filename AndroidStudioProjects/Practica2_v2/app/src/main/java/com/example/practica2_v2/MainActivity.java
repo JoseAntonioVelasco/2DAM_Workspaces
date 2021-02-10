@@ -31,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
         final TabLayout tb = findViewById(R.id.tablayout);
         tb.addTab(tb.newTab().setText("NOTAS"));
         tb.addTab(tb.newTab().setText("TO-DO"));
-        tb.addTab(tb.newTab().setText("CONTS"));
         tb.getTabAt(0).setIcon(android.R.drawable.ic_media_play);
         tb.getTabAt(1).setIcon(android.R.drawable.ic_media_pause);
-        tb.getTabAt(2).setIcon(android.R.drawable.ic_media_previous);
         paginador = findViewById(R.id.contenedor2);
 
         tb.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

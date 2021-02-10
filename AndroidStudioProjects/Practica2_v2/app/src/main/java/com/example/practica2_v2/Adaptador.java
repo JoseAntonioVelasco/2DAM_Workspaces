@@ -19,11 +19,12 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
     public static class miHolder extends RecyclerView.ViewHolder{
         public TextView titulo;
         public TextView texto;
-
+        public TextView fecha;
         public miHolder(@NonNull View vista) {
             super(vista);
             titulo = (TextView) vista.findViewById(R.id.titulo);
             texto = (TextView) vista.findViewById(R.id.texto);
+            fecha = (TextView) vista.findViewById(R.id.fecha);
         }
     }
 
@@ -37,6 +38,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
     @Override
     public void onBindViewHolder(@NonNull miHolder holder, final int position) {
         holder.titulo.setText(entradas.get(position).getTitulo());
+        holder.fecha.setText(entradas.get(position).getFech());
         String txt=String.valueOf(entradas.get(position).getTexto());
         if(txt.length()<=80) {
             holder.texto.setText(txt);

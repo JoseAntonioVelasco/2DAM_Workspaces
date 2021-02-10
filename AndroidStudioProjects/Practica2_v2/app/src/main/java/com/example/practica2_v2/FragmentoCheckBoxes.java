@@ -73,12 +73,12 @@ public class FragmentoCheckBoxes extends Fragment{
                         // send data from the AlertDialog to the Activity
                         EditText editText = customLayout.findViewById(R.id.ck_cont);
                         String contenido = editText.getText().toString();
-                        String id = String.valueOf(checkboxes.size());
+                        String id = genId(0);
 
                         Checkbox new_ck = new Checkbox(id,contenido,false);
                         bd.insertarCheckbox(new_ck);
                         checkboxes = bd.getCheckboxes();
-                        lista.setAdapter(crearAdaptador());
+                        adaptadorLista.updateList(checkboxes);
                     }
                 });
                 // create and show the alert dialog
@@ -89,7 +89,8 @@ public class FragmentoCheckBoxes extends Fragment{
         });
 
         //LISTA CHECKBOXES
-        lista.setAdapter(crearAdaptador());
+        crearAdaptador();
+        lista.setAdapter(adaptadorLista);
 
 
     }
@@ -108,14 +109,16 @@ public class FragmentoCheckBoxes extends Fragment{
                 ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                        Checkbox ck_amod;
+                        System.out.println(entr.getId());
                         if (isChecked){
-                            // perform logic
-                            Checkbox ck_amod = new Checkbox(entr.getId(),entr.getContenido(),true);
-                            bd.modificarCheckbox(ck_amod);
+                            ck_amod = new Checkbox(entr.getId(), entr.getContenido(), true);
                         }else{
-                            Checkbox ck_amod = new Checkbox(entr.getId(),entr.getContenido(),false);
-                            bd.modificarCheckbox(ck_amod);
+                            ck_amod = new Checkbox(entr.getId(), entr.getContenido(), false);
                         }
+                        bd.modificarCheckbox(ck_amod);
+                        checkboxes = bd.getCheckboxes();
+                        adaptadorLista.updateList(bd.getCheckboxes());
                     }
                 });
 
@@ -149,5 +152,14 @@ public class FragmentoCheckBoxes extends Fragment{
             }
         };
         return adaptadorLista;
+    }
+    private String genId(Integer depth){
+        String id = String.valueOf(checkboxes.size()+depth);
+        for(int i=0; i<checkboxes.size(); i++){
+            if(checkboxes.get(i).getId().equals(id)){
+                id=genId(depth+1);
+            }
+        }
+        return id;
     }
 }

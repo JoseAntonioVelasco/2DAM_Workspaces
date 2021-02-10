@@ -16,15 +16,11 @@ public class AdaptadorTabLayout extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-
                 FragmentoPrincipal primero = new FragmentoPrincipal();
                 return primero;
             case 1:
                 FragmentoCheckBoxes segun = new FragmentoCheckBoxes();
                 return segun;
-            case 2:
-                FragmentoContadores tercer = new FragmentoContadores();
-                return tercer;
         }
         return null;
     }

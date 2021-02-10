@@ -31,9 +31,21 @@
                     android:id="@+id/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_weight="9"
                     android:padding="10dp"
                     android:text="Linea1\nLinea2\nLinea3" />
+                <View android:background="#E2E2E2"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:id="@+id/fecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:textSize="10dp"
+                    android:text="Fecha" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

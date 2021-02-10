@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class UsuariosSQLiteHelper extends SQLiteOpenHelper {
-    String sqlCreateTableNota = "CREATE TABLE Nota(id TEXT PRIMARY KEY, titulo TEXT, contenido TEXT)";
+    String sqlCreateTableNota = "CREATE TABLE Nota(id TEXT PRIMARY KEY, titulo TEXT, contenido TEXT, fecha TEXT)";
     String sqlCreateTableCheckbox = "CREATE TABLE Checkbox(id TEXT PRIMARY KEY, contenido TEXT, terminado INTEGER)";
     String sqlDeleteNota = "DROP TABLE IF EXISTS nota";
     String sqlDeleteCheckbox = "DROP TABLE IF EXISTS Checkbox";

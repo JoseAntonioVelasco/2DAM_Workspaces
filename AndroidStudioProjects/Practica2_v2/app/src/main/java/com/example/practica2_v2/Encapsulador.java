@@ -3,21 +3,33 @@ package com.example.practica2_v2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class Encapsulador implements Parcelable {
     private String titulo;
     private String texto;
     private String id;
+    private String fech;
 
-    public Encapsulador(String id,String titulo, String texto) {
-        this.id = id;
-        this.titulo = titulo;
-        this.texto = texto;
-    }
 
     protected Encapsulador(Parcel in) {
         titulo = in.readString();
         texto = in.readString();
         id = in.readString();
+        fech = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(titulo);
+        dest.writeString(texto);
+        dest.writeString(id);
+        dest.writeString(fech);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Encapsulador> CREATOR = new Creator<Encapsulador>() {
@@ -56,15 +68,22 @@ public class Encapsulador implements Parcelable {
         this.id = id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getFech() {
+        return fech;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(titulo);
-        dest.writeString(texto);
-        dest.writeString(id);
+    public void setFech(String fech) {
+        this.fech = fech;
+    }
+
+    public static Creator<Encapsulador> getCREATOR() {
+        return CREATOR;
+    }
+
+    public Encapsulador(String id, String titulo, String texto,  String fech) {
+        this.titulo = titulo;
+        this.texto = texto;
+        this.id = id;
+        this.fech = fech;
     }
 }

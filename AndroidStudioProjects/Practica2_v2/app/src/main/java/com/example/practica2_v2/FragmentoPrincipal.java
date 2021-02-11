@@ -76,6 +76,7 @@ public class FragmentoPrincipal extends Fragment {
         });
         //source: https://stackoverflow.com/questions/8063439/android-edittext-finished-typing-event
         EditText buscador = getView().findViewById(R.id.buscador);
+        buscador.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
         buscador.setOnEditorActionListener(
                 new EditText.OnEditorActionListener() {
                     @Override

@@ -109,7 +109,6 @@ public class FragmentoCheckBoxes extends Fragment{
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                         Checkbox ck_amod;
-                        System.out.println(entr.getId());
                         if (isChecked){
                             ck_amod = new Checkbox(entr.getId(), entr.getContenido(), true);
                         }else{

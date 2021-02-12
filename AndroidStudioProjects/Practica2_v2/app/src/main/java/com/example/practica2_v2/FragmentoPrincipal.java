@@ -48,6 +48,7 @@ public class FragmentoPrincipal extends Fragment {
             recargarNotas(bd.getNotas());
         }
     }
+
     public void recargarNotas(ArrayList<Encapsulador> notas){
         adaptador = new Adaptador(notas);
         reciclador.setAdapter(adaptador);
@@ -83,9 +84,7 @@ public class FragmentoPrincipal extends Fragment {
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                                 actionId == EditorInfo.IME_ACTION_DONE ||
-                                event != null &&
-                                        event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                                event != null ) {
                             if (event == null || !event.isShiftPressed()) {
                                 // the user is done typing. -> realizar busqueda de notas y mostrarlas
                                 String buscar = buscador.getText().toString();

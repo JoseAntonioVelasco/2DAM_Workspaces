@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class AdaptadorTabLayout extends FragmentStatePagerAdapter {
+    //Adaptador del tablayout
     int numTab;
     public AdaptadorTabLayout(@NonNull FragmentManager fm, int behavior, int numTab) {
         super(fm, behavior);
@@ -14,6 +15,7 @@ public class AdaptadorTabLayout extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        //Aqui dentro añadimos los fragmentos que contendra el tablayout
         switch (position){
             case 0:
                 FragmentoPrincipal primero = new FragmentoPrincipal();

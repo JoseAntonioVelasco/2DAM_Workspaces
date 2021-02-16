@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TabLayout tb = findViewById(R.id.tablayout);
+        //nombres de las diferentes pestañas
         tb.addTab(tb.newTab().setText("NOTAS"));
         tb.addTab(tb.newTab().setText("TO-DO"));
-        tb.getTabAt(0).setIcon(android.R.drawable.ic_media_play);
-        tb.getTabAt(1).setIcon(android.R.drawable.ic_media_pause);
+        //iconos de las pestañas
+        tb.getTabAt(0).setIcon(R.drawable.ic_baseline_note_add_24);
+        tb.getTabAt(1).setIcon(R.drawable.ic_baseline_assignment_turned_in_24);
         paginador = findViewById(R.id.contenedor2);
 
         tb.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        //se le asigna el adaptador al tablayout
         AdaptadorTabLayout adaptador = new AdaptadorTabLayout(getSupportFragmentManager(), 0, tb.getTabCount());
         paginador.setAdapter(adaptador);
         paginador.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tb));

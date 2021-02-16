@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
+    //Adaptador de las notas
     private ArrayList<Encapsulador> entradas;
     public Adaptador(ArrayList<Encapsulador> entradas) {
         this.entradas = entradas;
     }
 
     public static class miHolder extends RecyclerView.ViewHolder{
+        //los atributos de una nota
         public TextView titulo;
         public TextView texto;
         public TextView fecha;
@@ -40,6 +42,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.miHolder>{
         holder.titulo.setText(entradas.get(position).getTitulo());
         holder.fecha.setText(entradas.get(position).getFech());
         String txt=String.valueOf(entradas.get(position).getTexto());
+        //Si el contenido de una nota es mayor o igual a 80 caracteres solo se muestran los 77 primeros
         if(txt.length()<=80) {
             holder.texto.setText(txt);
         }else{

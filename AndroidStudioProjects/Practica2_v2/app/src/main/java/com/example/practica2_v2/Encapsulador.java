@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class Encapsulador implements Parcelable {
+    //POJO de las notas
     private String titulo;
     private String texto;
     private String id;

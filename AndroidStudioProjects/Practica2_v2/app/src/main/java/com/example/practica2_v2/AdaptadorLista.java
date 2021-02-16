@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 public abstract class AdaptadorLista extends BaseAdapter {
+    //Adaptador de la TO-DO list
     private ArrayList<?> entradas;
     private int R_layout_idView;
     private Context contexto;

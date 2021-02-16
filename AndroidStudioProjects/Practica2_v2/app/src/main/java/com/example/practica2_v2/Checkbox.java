@@ -1,6 +1,7 @@
 package com.example.practica2_v2;
 
 public class Checkbox {
+    //Pojo de la TO-DO list
     private String id;
     private String contenido;
     private Boolean terminado;

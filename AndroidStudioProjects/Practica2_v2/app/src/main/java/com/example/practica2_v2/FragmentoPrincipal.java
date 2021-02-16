@@ -65,7 +65,7 @@ public class FragmentoPrincipal extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //CREAR NOTA
+        //CREAR NOTA listener del fab
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setImageDrawable(ContextCompat.getDrawable(getContext(), android.R.drawable.ic_input_add));
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class FragmentoPrincipal extends Fragment {
                 startActivityForResult(intent,RECARGAR_NOTAS);
             }
         });
-        //source: https://stackoverflow.com/questions/8063439/android-edittext-finished-typing-event
+        //buscador de notas el edittext
         EditText buscador = getView().findViewById(R.id.buscador);
         buscador.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
         buscador.setOnEditorActionListener(
@@ -104,13 +104,14 @@ public class FragmentoPrincipal extends Fragment {
         //CARGAR DATOS DESDE PERSISTENCIA
         bd.crearBaseDatos(getActivity().getApplicationContext(),"Nota");
         try {
-            //DATOS DE EJEMPLO
+            //DATOS DE EJEMPLO si los datos de ejemplo ya habian sido cargados se throwea un error en la base de datos porque dicho id ya existe
             Date dat = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             String fecha = formatter.format(dat);
             bd.insertarNota(new Encapsulador("0", "DONUTS", "El 15 de septiembre de 2009, fue lanzado el SDK de Android 1.6 Donut, basado en el núcleo Linux 2.6.29. En la actualización se incluyen numerosas características nuevas.",fecha));
             bd.insertarNota(new Encapsulador("1", "FROYO", "El 20 de mayo de 2010, El SDK de Android 2.2 Froyo (Yogur helado) fue lanzado, basado en el núcleo Linux 2.6.32.",fecha));
         }catch(Exception e){}
+
 
         datos = bd.getNotas();
         reciclador = getView().findViewById(R.id.reciclador);
@@ -120,6 +121,7 @@ public class FragmentoPrincipal extends Fragment {
         reciclador.setLayoutManager(gestor);
         reciclador.setAdapter(adaptador);
 
+        //listener que detecta que nota ha sido tocada
         reciclador.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
                 @Override
@@ -132,7 +134,7 @@ public class FragmentoPrincipal extends Fragment {
                 View hijo = rv.findChildViewUnder(e.getX(),e.getY());
                 if(hijo != null && gestureDetector.onTouchEvent(e)){
                     int position = rv.getChildAdapterPosition(hijo);
-                    //abrir nota
+                    //abrir la nota que ha sido tocada
                     Encapsulador nota = new Encapsulador(datos.get(position).getId(),datos.get(position).getTitulo(),datos.get(position).getTexto(),datos.get(position).getFech());
                     Intent intent = new Intent(getActivity().getApplicationContext(), NotaActivity.class);
                     intent.putExtra("nota",nota);

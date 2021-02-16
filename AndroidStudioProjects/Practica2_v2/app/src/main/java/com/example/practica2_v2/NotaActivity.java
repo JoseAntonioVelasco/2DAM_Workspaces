@@ -41,6 +41,7 @@ public class NotaActivity extends AppCompatActivity {
             notaCargada = true;
         }catch (Exception e){}
 
+        //boton que se encuentra arriba a la derecha para poder borrar nota
         ImageButton bt = findViewById(R.id.button_nota);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,7 @@ public class NotaActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+    //genera un id unico para que la base de datos siga siendo integra
     private String genId(Integer depth){
         ArrayList<Encapsulador> datos = bd.getNotas();
         String id = String.valueOf(datos.size()+depth);

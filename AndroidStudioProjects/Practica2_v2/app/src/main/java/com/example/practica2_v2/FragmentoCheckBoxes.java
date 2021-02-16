@@ -59,7 +59,7 @@ public class FragmentoCheckBoxes extends Fragment{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Al crear un checkbox nos salta un dialogo personalizado que es lo siguiente
                 // create an alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());
                 builder.setTitle("Tarea");
@@ -105,6 +105,7 @@ public class FragmentoCheckBoxes extends Fragment{
                 Checkbox entr = (Checkbox) entrada;
                 ck.setText(entr.getContenido());
 
+                //listener para el checkbox
                 ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -121,6 +122,7 @@ public class FragmentoCheckBoxes extends Fragment{
                 });
                 ck.setChecked(entr.getTerminado());
 
+                //Listener para el boton que aparece a la derecha que despliega un menu con la opcion de borrar checkbox
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -131,7 +133,6 @@ public class FragmentoCheckBoxes extends Fragment{
                                 Toast.makeText(view.getContext(), "Eliminado: " +entr.getContenido(), Toast.LENGTH_SHORT).show();
                                 switch (item.getItemId()) {
                                     case R.id.elim:
-                                        // do your code
                                         Checkbox ck_adel = new Checkbox(entr.getId(),entr.getContenido(),null);
                                         bd.borrarCheckbox(ck_adel);
                                         checkboxes = bd.getCheckboxes();
@@ -152,6 +153,7 @@ public class FragmentoCheckBoxes extends Fragment{
         };
         return adaptadorLista;
     }
+    //Clase que genera un id unico para que la base de datos se mantenga integra
     private String genId(Integer depth){
         String id = String.valueOf(checkboxes.size()+depth);
         for(int i=0; i<checkboxes.size(); i++){

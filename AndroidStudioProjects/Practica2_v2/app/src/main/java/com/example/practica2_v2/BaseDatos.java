@@ -14,7 +14,11 @@ public class BaseDatos {
         usuariosBBDD = new UsuariosSQLiteHelper(contexto,nombre_basedatos,null,1);
         db = usuariosBBDD.getWritableDatabase();
     }
-    //TODO No SQL injection Safe en la siguiente update se parchea :)
+
+
+    //En esta clase van a almacenarse todas las consultas a las tablas
+
+
     public void insertarNota(Encapsulador nota){
         ContentValues nuevoRegistro = new ContentValues();
         nuevoRegistro.put("id", nota.getId());

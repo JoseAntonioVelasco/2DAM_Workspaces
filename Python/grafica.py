@@ -100,6 +100,6 @@ def mostrarPieChartMuertos():
     plt.show()
 
 
-#mostrarMuertosPorProvincia()
+mostrarMuertosPorProvincia()
 #mostrarMuertosTotalesPorProvincia()
-mostrarPieChartMuertos()
+#mostrarPieChartMuertos()

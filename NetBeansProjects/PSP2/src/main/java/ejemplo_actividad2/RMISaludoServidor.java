@@ -30,7 +30,6 @@ public class RMISaludoServidor implements RMISaludoInterface {
         System.out.println("Creando el registro de objetos remotos...");
         
         Registry r = null;
-        
         try {
             r = LocateRegistry.createRegistry(6000);
         } catch (RemoteException ex) {
@@ -46,9 +45,7 @@ public class RMISaludoServidor implements RMISaludoInterface {
             System.out.println("Error, no se ha podido incluir el objeto en el registro");
             e.printStackTrace();
         }
-        
-        
-        
+          
     }
 
 }

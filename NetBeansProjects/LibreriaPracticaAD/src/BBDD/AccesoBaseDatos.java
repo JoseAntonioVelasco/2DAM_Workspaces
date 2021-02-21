@@ -17,7 +17,10 @@ public class AccesoBaseDatos implements Serializable{
     static String usuario="root";
     static String contra="root";
     static Connection conexion;
-    
+    /**
+     * Al instanciarse la clase se instancia el atributo conexion con el que
+     * tendremos acceso a la base de datos
+     */
     public AccesoBaseDatos(){
         try {
             this.conexion = DriverManager.getConnection(urlConnection,usuario,contra);
@@ -25,11 +28,16 @@ public class AccesoBaseDatos implements Serializable{
             Logger.getLogger(AccesoBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Obtener conexion a la base de datos
+     * @return la conexion a la base de datos
+     */
     public static Connection getConexion(){
         return AccesoBaseDatos.conexion;
     }
-    
+    /**
+     * Cierra la conexion a la base de datos
+     */
     public static void cerrarConexion(){
         try {
             conexion.close();

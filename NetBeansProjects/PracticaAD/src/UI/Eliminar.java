@@ -5,6 +5,10 @@
  */
 package UI;
 
+import DTO.Planeta;
+import IMPL.PlanetaImpl;
+import static UI.NewJFrame.planetas;
+import static UI.NewJFrame.recargarTabla;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class Eliminar extends javax.swing.JFrame {
 
@@ -22,6 +26,7 @@ public class Eliminar extends javax.swing.JFrame {
      */
     public Eliminar() {
         initComponents();
+        this.setTitle("Eliminar");
     }
 
     /**
@@ -92,9 +97,21 @@ public class Eliminar extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    /**
+     * Listener del boton eliminar
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //lee el textfield y elimina el planeta que tenga ese nombre
+        String valor=(String)jComboBox1.getSelectedItem();
+        if(valor.equals("Planeta")){
+            String nomBusc=jTextField1.getText();
+            Planeta plan = new Planeta();
+            plan.setNombre(nomBusc);
+            PlanetaImpl p = new PlanetaImpl();
+            p.eliminarPlaneta(plan);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

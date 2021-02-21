@@ -5,10 +5,8 @@ import java.io.Serializable;
 public class Cumulo implements Serializable{
     private String nombre;
     private String tipo;
-
     public Cumulo() {
     }
-
     public Cumulo(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo = tipo;

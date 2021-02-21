@@ -5,6 +5,8 @@
  */
 package UI;
 
+import DTO.Planeta;
+import IMPL.PlanetaImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class Anadir extends javax.swing.JFrame {
 
@@ -22,6 +24,7 @@ public class Anadir extends javax.swing.JFrame {
      */
     public Anadir() {
         initComponents();
+        this.setTitle("Añadir");
     }
 
     /**
@@ -156,9 +159,23 @@ public class Anadir extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    /**
+     * Listener del boton añadir
+     * @param evt 
+     */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        //lee los datos de los textfield y crea un objeto planeta y lo inserta a
+        //la base de datos
+        String nombre = jTextField1.getText();
+        String str_masa = jTextField2.getText();
+        Double masa = Double.valueOf(str_masa);
+        String str_volumen = jTextField3.getText();
+        Double volumen = Double.valueOf(str_volumen);
+        String sistema = jTextField4.getText();
+        Planeta plan = new Planeta(nombre,masa,volumen,sistema);
+        PlanetaImpl p = new PlanetaImpl();
+        p.insertarPlaneta(plan);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

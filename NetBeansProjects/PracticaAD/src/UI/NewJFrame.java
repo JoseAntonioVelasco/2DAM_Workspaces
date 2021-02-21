@@ -5,23 +5,32 @@
  */
 package UI;
 
+import DTO.Planeta;
+import IMPL.PlanetaImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class NewJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
+    public static ArrayList<Planeta> planetas;
+    
     public NewJFrame() {
         initComponents();
+        planetas = new ArrayList<Planeta>();
+        this.setTitle("Universo");
     }
 
     /**
@@ -148,40 +157,80 @@ public class NewJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Listener de boton pulsado "Ver"
+     * @param evt evento de boton pulsado
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
+        //Consulta la tabla planeta y los muestra en el jtable
+        String seleccionado = (String)jComboBox1.getSelectedItem();
+        if(seleccionado.equals("Planeta")){
+            PlanetaImpl p = new PlanetaImpl();
+            planetas = p.consultarPlanetas();
+            recargarTabla(jTable1);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    /**
+     * Listener de boton "Eliminar"
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //Abre un nuevo jframe que tiene el menu de eliminar planeta
         Eliminar eliminar = new Eliminar();
         eliminar.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Listener de boton "Modificar"
+     * @param evt 
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        //Abre un nuevo jframe que tiene el menu de modificar planeta
         Modificar modificar = new Modificar();
         modificar.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    /**
+     * Listener del boton "Consultar"
+     * @param evt 
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Consultar consultas = new Consultar();
+        //Abre un nuevo jframe que tiene el menu de consultar planeta
+        Consultar consultas = new Consultar(jTable1);
         consultas.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    /**
+     * Listener del boton "Añadir"
+     * @param evt 
+     */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        //Abre un nuevo jframe que tiene el menu de añadir planeta
         Anadir anadir = new Anadir();
         anadir.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    /**
+     * Recarga las filas del jtable con los datos del arraylist planetas
+     * @param tabla jtable que queremos recargar sus filas
+     */
+    public static void recargarTabla(JTable tabla){
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        model.setRowCount(0);
+        for(int i=0; i<planetas.size(); i++){
+            Planeta plan = planetas.get(i);
+            String nombre = plan.getNombre();
+            Double masa = plan.getMasa();
+            Double vol = plan.getVolumen();
+            String sis = plan.getNombre_sistema();
+            Object[] row = {nombre,masa,vol,sis};
+            model.addRow(row);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -211,6 +260,7 @@ public class NewJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);

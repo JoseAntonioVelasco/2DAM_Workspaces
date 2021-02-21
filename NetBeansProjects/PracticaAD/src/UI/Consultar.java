@@ -5,23 +5,31 @@
  */
 package UI;
 
+import DTO.Planeta;
+import IMPL.PlanetaImpl;
+import static UI.NewJFrame.planetas;
+import static UI.NewJFrame.recargarTabla;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
- * @author ADMIN
+ * @author JoseAntonioVelasco
  */
 public class Consultar extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Consultar() {
+    private static JTable tabla;
+    public Consultar(JTable jtable) {
+        tabla=jtable;
         initComponents();
+        this.setTitle("Consultar");
     }
 
     /**
@@ -102,9 +110,25 @@ public class Consultar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Listener del boton "Consultar"
+     * @param evt 
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        //lee el nombre del textfield y hace la consulta con el y recarga la tabla
+        //con el resultado obtenido
+        String valor=(String)jComboBox2.getSelectedItem();
+        if(valor.equals("Planeta")){
+            String nomBusc=jTextField1.getText();
+            Planeta plan = new Planeta();
+            plan.setNombre(nomBusc);
+            PlanetaImpl p = new PlanetaImpl();
+            Planeta plan2 = p.consultarPlaneta(plan);
+            planetas.clear();
+            planetas.add(plan2);
+            recargarTabla(tabla);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -148,7 +172,7 @@ public class Consultar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Consultar().setVisible(true);
+                new Consultar(tabla).setVisible(true);
             }
         });
     }
